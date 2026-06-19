@@ -127,3 +127,106 @@ print(list1 is not list3)
 # 9. or                  Logical OR
 
 # */
+
+
+
+
+
+# EXAMPLE 1
+
+result = 2 + 3 * 4
+
+print(result)
+
+# Output:
+# 14
+
+# Explanation:
+# 3 * 4 = 12
+# 2 + 12 = 14
+
+
+# EXAMPLE 2 - USING PARENTHESES
+
+result = (2 + 3) * 4
+
+print(result)
+
+# Output:
+# 20
+
+# Explanation:
+# Parentheses have highest priority.
+# 2 + 3 = 5
+# 5 * 4 = 20
+
+
+# EXAMPLE 3
+
+result = 10 - 2 * 3
+
+print(result)
+
+# Output:
+# 4
+
+# Explanation:
+# 2 * 3 = 6
+# 10 - 6 = 4
+
+
+# EXAMPLE 4
+
+result = 10 / 2 + 3
+
+print(result)
+
+# Output:
+# 8.0
+
+# Explanation:
+# 10 / 2 = 5.0
+# 5.0 + 3 = 8.0
+
+
+# EXAMPLE 5 - POWER OPERATOR
+
+result = 2 + 3 ** 2
+
+print(result)
+
+# Output:
+# 11
+
+# Explanation:
+# 3 ** 2 = 9
+# 2 + 9 = 11
+
+
+# EXAMPLE 6 - COMPARISON
+
+result = 5 + 3 > 6
+
+print(result)
+
+# Output:
+# True
+
+# Explanation:
+# 5 + 3 = 8
+# 8 > 6 = True
+
+
+# EXAMPLE 7 - LOGICAL OPERATORS
+
+result = True or False and False
+
+print(result)
+
+# Output:
+# True
+
+# Explanation:
+# and runs before or
+# False and False = False
+# True or False = True
