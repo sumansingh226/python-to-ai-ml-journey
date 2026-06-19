@@ -101,3 +101,29 @@ print(list1 is list2)
 print(list1 is list3)
 
 print(list1 is not list3) 
+
+
+# /*OPERATOR PRECEDENCE IN PYTHON
+
+# What is Operator Precedence?
+# ----------------------------
+# Operator precedence determines the order in which
+# operations are evaluated in an expression.
+
+# Why Do We Need It?
+# ------------------
+# When an expression contains multiple operators,
+# Python needs rules to decide which operation
+# should be performed first.
+
+# 1. ()                  Parentheses
+# 2. **                  Exponent (Power)
+# 3. +x, -x              Unary Plus/Minus
+# 4. *, /, //, %         Multiplication, Division
+# 5. +, -                Addition, Subtraction
+# 6. ==, !=, >, <, >=, <= Comparison
+# 7. not                 Logical NOT
+# 8. and                 Logical AND
+# 9. or                  Logical OR
+
+# */
