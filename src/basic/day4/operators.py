@@ -44,3 +44,17 @@ print("Power:", a ** b)
 
 
 
+
+# 2. COMPARISON OPERATORS
+# =========================================================
+# Used to compare two values.
+# Returns True or False.
+
+print("=== Comparison Operators ===")
+
+print("Equal:", a == b)                # False
+print("Not Equal:", a != b)            # True
+print("Greater Than:", a > b)          # True
+print("Less Than:", a < b)             # False
+print("Greater or Equal:", a >= b)     # True
+print("Less or Equal:", a <= b)        # False
