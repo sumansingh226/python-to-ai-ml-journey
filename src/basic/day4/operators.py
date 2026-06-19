@@ -77,3 +77,13 @@ num /= 2
 print("/= :", num)        
 
 print()
+
+# 5. MEMBERSHIP OPERATORS
+# Used to check if a value exists in a collection.
+print("=== Membership Operators ===")
+
+skills = ["Python", "AI", "ML"]
+
+print("Python" in skills)
+print("java" in skills)
+print("java" not in skills)
