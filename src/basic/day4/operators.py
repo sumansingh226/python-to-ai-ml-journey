@@ -25,3 +25,22 @@ Types of Operators:
 5. Membership Operators
 6. Identity Operators
 """
+
+# 1. ARITHMETIC OPERATORS
+# Used for mathematical calculations.
+
+a = 10
+b= 3
+
+print("Arithmetic operations")
+
+print("addition : " ,  a+b)
+print("Subtraction : " ,  a -b)
+print("Multiplication : ", a*b)
+print("division : " ,a /b)
+print("Floor Division:", a // b)   
+print("Modulus:", a % b)           
+print("Power:", a ** b)            
+
+
+
