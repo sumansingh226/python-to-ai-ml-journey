@@ -87,3 +87,17 @@ skills = ["Python", "AI", "ML"]
 print("Python" in skills)
 print("java" in skills)
 print("java" not in skills)
+
+# 6. IDENTITY OPERATORS
+# Used to check whether two variables refer
+# to the same object in memory.
+
+list1 = [1, 2, 3]
+list2 = list1
+list3 = [1, 2, 3]
+
+print("=== Identity Operators ===")
+print(list1 is list2)
+print(list1 is list3)
+
+print(list1 is not list3) 
