@@ -46,7 +46,6 @@ print("Power:", a ** b)
 
 
 # 2. COMPARISON OPERATORS
-# =========================================================
 # Used to compare two values.
 # Returns True or False.
 
@@ -58,3 +57,23 @@ print("Greater Than:", a > b)          # True
 print("Less Than:", a < b)             # False
 print("Greater or Equal:", a >= b)     # True
 print("Less or Equal:", a <= b)        # False
+
+print()
+
+#3 Assignment operator
+
+# Used to assign and update values.
+
+num = 10
+num +=5
+print("+=",num)
+num -= 2
+print("-= :", num)
+
+num *=2
+print("*= :", num)
+
+num /= 2
+print("/= :", num)        
+
+print()
