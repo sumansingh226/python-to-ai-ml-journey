@@ -95,5 +95,12 @@ language = "Python"
 
 print(language[0])
 print(language[1])
-print(language(-1))
+print(language[-1])
+
+#slicing - Extract part of the string 
+
+print(language[0:3])
+print(language[2:5])
+print(language[:4])
+print(language[4:])
 
