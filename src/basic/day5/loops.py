@@ -82,3 +82,19 @@ for i in range(3):
 
     print(i)
 
+
+# 8. Nested Loops
+print("\nNested Loops:")
+
+for i in range(3):
+    for j in range(3):
+        print(f"i={i}, j={j}")
+
+
+# 9. Loop through a string
+print("\nString Loop:")
+
+name = "Python"
+
+for char in name:
+    print(char)
