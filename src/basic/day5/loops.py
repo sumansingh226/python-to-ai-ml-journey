@@ -38,3 +38,13 @@ print("\n using range(start, end)")
 
 for i in range(1,6):
     print(i)
+
+#  while loop
+print("\n while loop")
+
+count = 1
+while count <=5:
+   print(count)
+   count += 1
+
+
