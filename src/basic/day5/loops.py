@@ -57,3 +57,17 @@ for i in range(10):
         break
 
     print(i)
+
+# Loop stops when i becomes 5
+
+
+# 6. continue
+print("\nContinue Example:")
+
+for i in range(5):
+    if i == 2:
+        continue
+
+    print(i)
+
+# Skips 2
