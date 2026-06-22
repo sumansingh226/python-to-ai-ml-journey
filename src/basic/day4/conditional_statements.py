@@ -66,3 +66,9 @@ is_admin = False
 
 if(is_admin or is_owner):
    print("Access granted ")
+
+# 7. Using NOT
+
+is_blocked = False
+if not is_blocked:
+   print("Login allowed.")
