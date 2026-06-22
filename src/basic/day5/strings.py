@@ -17,3 +17,60 @@ Why do we use Strings?
 - Data processing
 - NLP and AI applications
 """
+
+
+len()
+# Returns the total number of characters/items in an object.
+# Used to count the length of strings, lists, tuples, etc.
+
+upper()
+# Converts all characters in a string to uppercase.
+# Used when you want text in capital letters.
+
+lower()
+# Converts all characters in a string to lowercase.
+# Useful for case-insensitive comparisons.
+
+title()
+# Converts the first letter of each word to uppercase.
+# Commonly used for formatting names and titles.
+
+capitalize()
+# Converts the first character of the string to uppercase.
+# Makes the rest of the string lowercase.
+
+strip()
+# Removes leading and trailing whitespace from a string.
+# Useful for cleaning user input.
+
+replace()
+# Replaces one substring with another substring.
+# Used to modify or update text.
+
+split()
+# Splits a string into a list using a separator.
+# Useful for processing CSV data, names, and sentences.
+
+startswith()
+# Checks whether a string begins with a specific value.
+# Returns True or False.
+
+endswith()
+# Checks whether a string ends with a specific value.
+# Returns True or False.
+
+find()
+# Returns the index of the first occurrence of a substring.
+# Returns -1 if the value is not found.
+
+count()
+# Counts how many times a substring appears in a string.
+# Useful for frequency checks.
+
+join()
+# Combines elements of an iterable into a single string.
+# Commonly used to merge lists into text.
+
+isalpha()
+# Checks whether all characters are alphabetic letters.
+# Returns True if only letters are present.
