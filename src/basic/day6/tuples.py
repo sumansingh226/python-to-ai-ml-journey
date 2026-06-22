@@ -121,3 +121,10 @@ print("Tuples are immutable")
 # Immutable
 # Fewer methods
 # Cannot change
+
+# When to Use a Tuple
+# Coordinates
+# RGB Colors
+# Database Records
+# Configuration Values
+# Fixed Settings
