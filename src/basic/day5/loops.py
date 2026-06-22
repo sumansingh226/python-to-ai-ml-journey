@@ -26,3 +26,9 @@ Types of Loops:
 print("For loop")
 for i in range(5):
     print(i)
+
+#for loop with list 
+print("\nLooping through a list: ")
+skills = ["Python", "AI","ML"]
+for  skill in skills:
+    print(skill)
