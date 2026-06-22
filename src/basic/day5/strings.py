@@ -117,3 +117,53 @@ print("upper",text.upper())
 print("lower",text.lower())
 print("title",text.title())
 print("capitalize", text.capitalize())
+
+
+# Remove spaces
+
+name = " Chandan "
+print("\n\n normal",name)
+
+print("stripe",name.strip())
+
+#replace 
+str = "i love java"
+print("\n\n str",str)
+print("replace : ", str.replace("java", "Python"))
+
+# Check contents
+
+text = "Python"
+print(text.startswith("Py"))
+print(text.endswith("on"))
+
+
+# String concatenation
+
+first_name = "Rahul"
+last_name = " Sharma"
+full_name = first_name +  last_name
+
+print(full_name)
+
+
+# f-strings (Recommended)
+
+name = "Rahul"
+age = 25
+
+print(f"my name is {name} and i am {age}  years old.")
+
+
+# Loop through a string
+
+for char in "Python":
+    print(char)
+
+
+# Membership operators
+
+text = "Machine learning "
+print("Machine" in text)
+print("java" in text)
+print("java"  not in (text))
