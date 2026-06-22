@@ -38,3 +38,24 @@ elif marks >= 40:
 else:
    print("failed")
     
+# 4. Nested if
+age=25
+has_license = True 
+
+if age>=18:
+   if has_license:
+      print("Can drive")
+   else:
+      print("Need a license")
+
+else :
+   print("underage")
+
+
+# 5. Using AND
+
+age=25
+salary=50000
+
+if age>=25 and salary >=30000:
+  print("eligible for load")
