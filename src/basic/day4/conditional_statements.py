@@ -85,3 +85,6 @@ age = 17
 
 status = "Adult" if age>=18 else "minor"
 print("status", status)
+
+
+
