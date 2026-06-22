@@ -32,3 +32,9 @@ print("\nLooping through a list: ")
 skills = ["Python", "AI","ML"]
 for  skill in skills:
     print(skill)
+
+#range 
+print("\n using range(start, end)")
+
+for i in range(1,6):
+    print(range)
