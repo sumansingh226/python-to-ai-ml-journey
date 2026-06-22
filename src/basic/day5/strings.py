@@ -104,3 +104,16 @@ print(language[2:5])
 print(language[:4])
 print(language[4:])
 
+
+# len()-String length
+print(len(language))
+
+
+#strings methods 
+
+text = "Python ai ml"
+print("\n\nnormal text : \n",text)
+print("upper",text.upper())
+print("lower",text.lower())
+print("title",text.title())
+print("capitalize", text.capitalize())
