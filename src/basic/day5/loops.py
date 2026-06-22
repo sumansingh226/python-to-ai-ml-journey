@@ -71,3 +71,14 @@ for i in range(5):
     print(i)
 
 # Skips 2
+
+
+ # pass
+print("\nPass Example:")
+
+for i in range(3):
+    if i == 1:
+        pass
+
+    print(i)
+
