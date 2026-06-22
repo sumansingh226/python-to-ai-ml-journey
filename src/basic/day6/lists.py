@@ -5,7 +5,9 @@ Lists in Python
 
 What is a List?
 A list is an ordered collection of items.
-
+mutable (changeable) collection of items.
+Think of a list as a container that can hold multiple values
+inside a single variable.
 Why do we use Lists?
 - Store multiple values in one variable
 - Manage collections of data
