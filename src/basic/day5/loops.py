@@ -48,3 +48,12 @@ while count <=5:
    count += 1
 
 
+
+ #break
+print("\nBreak Example:")
+
+for i in range(10):
+    if i == 5:
+        break
+
+    print(i)
