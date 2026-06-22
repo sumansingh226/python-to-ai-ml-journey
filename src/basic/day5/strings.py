@@ -19,35 +19,35 @@ Why do we use Strings?
 """
 
 
-len()
+#len()
 # Returns the total number of characters/items in an object.
 # Used to count the length of strings, lists, tuples, etc.
 
-upper()
+#upper()
 # Converts all characters in a string to uppercase.
 # Used when you want text in capital letters.
 
-lower()
+#lower()
 # Converts all characters in a string to lowercase.
 # Useful for case-insensitive comparisons.
 
-title()
+#title()
 # Converts the first letter of each word to uppercase.
 # Commonly used for formatting names and titles.
 
-capitalize()
+#capitalize()
 # Converts the first character of the string to uppercase.
 # Makes the rest of the string lowercase.
 
-strip()
+#strip()
 # Removes leading and trailing whitespace from a string.
 # Useful for cleaning user input.
 
-replace()
+#replace()
 # Replaces one substring with another substring.
 # Used to modify or update text.
 
-split()
+#split()
 # Splits a string into a list using a separator.
 # Useful for processing CSV data, names, and sentences.
 
@@ -74,3 +74,26 @@ split()
 #isalpha()
 # Checks whether all characters are alphabetic letters.
 # Returns True if only letters are present.
+
+
+
+#creating strings 
+
+name = "Raj"
+city =  "Delhi"
+
+print(name)
+print(city)
+
+#type of string 
+print(type(name))
+
+
+#indexing - Accessing individual characters
+
+language = "Python"
+
+print(language[0])
+print(language[1])
+print(language(-1))
+
