@@ -37,4 +37,4 @@ for  skill in skills:
 print("\n using range(start, end)")
 
 for i in range(1,6):
-    print(range)
+    print(i)
