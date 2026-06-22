@@ -1,6 +1,10 @@
 #!/bin/bash
 
+echo "SCRIPT RUNNING FOR: $1"
+
 FILE="$1"
+FILE="$1"
+
 
 if [ -z "$FILE" ]; then
     echo "Usage: $0 <file>"
