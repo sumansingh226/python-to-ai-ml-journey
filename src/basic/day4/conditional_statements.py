@@ -59,3 +59,10 @@ salary=50000
 
 if age>=25 and salary >=30000:
   print("eligible for load")
+
+# 6. Using OR
+is_owner = True
+is_admin = False 
+
+if(is_admin or is_owner):
+   print("Access granted ")
