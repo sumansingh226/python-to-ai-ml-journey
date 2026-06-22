@@ -104,3 +104,20 @@ print(matrix[1])
 # TypeError
 
 print("Tuples are immutable")
+
+
+
+
+# List
+# -----
+# []
+# Mutable
+# More methods
+# Can change
+
+# Tuple
+# ------
+# ()
+# Immutable
+# Fewer methods
+# Cannot change
