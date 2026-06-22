@@ -51,26 +51,26 @@ split()
 # Splits a string into a list using a separator.
 # Useful for processing CSV data, names, and sentences.
 
-startswith()
+#startswith()
 # Checks whether a string begins with a specific value.
 # Returns True or False.
 
-endswith()
+#endswith()
 # Checks whether a string ends with a specific value.
 # Returns True or False.
 
-find()
+#find()
 # Returns the index of the first occurrence of a substring.
 # Returns -1 if the value is not found.
 
-count()
+#count()
 # Counts how many times a substring appears in a string.
 # Useful for frequency checks.
 
-join()
+#join()
 # Combines elements of an iterable into a single string.
 # Commonly used to merge lists into text.
 
-isalpha()
+#isalpha()
 # Checks whether all characters are alphabetic letters.
 # Returns True if only letters are present.
