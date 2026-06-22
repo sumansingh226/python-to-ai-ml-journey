@@ -46,3 +46,61 @@ print(numbers[0])
 print(numbers[1])
 print(numbers[-1])
 
+
+# Slicing
+
+print(numbers[1:3])
+
+
+# Length
+
+print(len(numbers))
+
+
+# Looping Through Tuple
+
+for num in numbers:
+    print(num)
+
+
+# Count occurrences
+
+values = (1, 2, 3, 2, 2)
+
+print("occurrences",values.count(2))
+
+# Find index
+
+print(values.index(3))
+
+
+# Tuple Packing
+
+student = ("Rahul", 25, "Delhi")
+
+print(student)
+
+#  Tuple Unpacking
+
+name, age, city = student
+
+print(name)
+print(age)
+print(city)
+
+# Nested Tuple
+
+matrix = (
+    (1, 2),
+    (3, 4)
+)
+
+print(matrix[0])
+print(matrix[1])
+
+# Cannot Modify Tuple
+
+# numbers[0] = 100
+# TypeError
+
+print("Tuples are immutable")
