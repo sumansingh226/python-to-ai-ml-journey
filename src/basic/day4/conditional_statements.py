@@ -87,4 +87,16 @@ status = "Adult" if age>=18 else "minor"
 print("status", status)
 
 
+# 10. Match-Case (Python 3.10+)
+day = 2
+
+match day:
+      case 1:
+        print("monday")
+      case 2:
+        print("tuesday")
+      case 3 : 
+         ("wednesday")
+      case _:
+        print("Invalid day")
 
