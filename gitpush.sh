@@ -12,7 +12,7 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 
-COMMENT=$(grep '^#' "$FILE" | head -n 1 | sed 's/^# *//')
+COMMENT=$(grep '^#' "$FILE" | tail -n 1 | sed 's/^# *//')
 
 if [ -z "$COMMENT" ]; then
     COMMENT="Auto commit"
