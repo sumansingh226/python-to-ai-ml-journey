@@ -167,3 +167,44 @@ text = "Machine learning "
 print("Machine" in text)
 print("java" in text)
 print("java"  not in (text))
+
+
+# Escape characters
+print("Hello\nWorld")
+print("Python\tAI\tML")
+print("He said \"Hello\"")
+
+
+
+
+
+# 1. Print the first character of your name
+
+name = "raj"
+print(name[:1])
+# 2. Print the last character of your name
+
+print(name[-1:])
+# 3. Count the length of your name
+
+print(len(name))
+# 4. Convert your name to uppercase
+
+print(name.upper())
+# 5. Replace a word in a sentence
+print(name.replace("raj","my name is raj"))
+# 6. Reverse a string using slicing
+print(name[::-1])
+# 7. Check if "Python" exists in a string
+str = "This is python"
+print("python" in str)
+# 8. Count vowels in a string
+text = "Artificial Intelligence"
+
+vowel_count = 0
+for char in text.lower():
+    if char in "aeiou":
+        vowel_count += 1
+print("Number of vowels :", vowel_count)
+
+#practice question
