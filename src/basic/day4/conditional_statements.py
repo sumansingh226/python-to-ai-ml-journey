@@ -72,3 +72,16 @@ if(is_admin or is_owner):
 is_blocked = False
 if not is_blocked:
    print("Login allowed.")
+
+# 8. Short-hand if
+age = 20
+
+if age >= 18:
+    print("Adult")
+
+# 9. Ternary Operator (Short-hand if-else)
+
+age = 17
+
+status = "Adult" if age>=18 else "minor"
+print("status", status)
