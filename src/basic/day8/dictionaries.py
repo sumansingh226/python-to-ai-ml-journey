@@ -94,3 +94,20 @@ print(student.items())
 #copy Dictionary
 student_copy = student.copy()
 print(student_copy)
+
+# Nested Dictionary
+
+employees = {
+    "emp1": {
+        "name": "Rahul",
+        "age": 25
+    },
+    "emp2": {
+        "name": "Amit",
+        "age": 30
+    }
+}
+
+print(employees)
+
+print(employees["emp1"]["name"])
