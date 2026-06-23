@@ -96,3 +96,14 @@ numbers = {1, 2, 3, 4}
 print(skills)
 print(numbers)
 print(len(skills))
+
+
+#add item 
+skills.add("Deep learning")
+
+print(skills)
+
+#add multiple items
+
+skills.update("Git","docker")
+print("Skills",skills)
