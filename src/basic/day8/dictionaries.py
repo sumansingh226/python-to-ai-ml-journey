@@ -50,4 +50,42 @@ print(student["age"])
 
 
 #using get()
-print("city of student", student.get("city"))
+print("city of student :", student.get("city"))
+
+#add a new key 
+
+student["course"] = "AI/M"
+
+#update value
+
+student["age"]=26
+
+print(student)
+
+#remove item 
+student.pop("city")
+
+print(student)
+
+#check key exist
+
+print("name" in student)
+print("salary" in student)
+
+# Length
+
+print(len(student))
+
+#loop through keys
+
+for key in student:
+    print(key)
+
+
+# Dictionary Methods
+
+print(student.keys())
+
+print(student.values())
+
+print(student.items())
