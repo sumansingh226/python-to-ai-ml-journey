@@ -43,3 +43,11 @@ student = {
 }
 
 print(student)
+
+#access values 
+print(student["name"])
+print(student["age"])
+
+
+#using get()
+print("city of student", student.get("city"))
