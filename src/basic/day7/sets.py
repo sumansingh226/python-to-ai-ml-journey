@@ -76,3 +76,12 @@ names = {"Suman" , "Raj","Suman"}
 names2 = ["Suman" , "Raj","Suman"]
 names2 = set(names2)
 print(names,names2)
+
+#check in set 
+print("Suman" in names2)
+
+# Duplicate Removal
+
+data = {1, 2, 2, 3, 3, 4}
+
+print(data)
