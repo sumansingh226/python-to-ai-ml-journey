@@ -85,3 +85,14 @@ print("Suman" in names2)
 data = {1, 2, 2, 3, 3, 4}
 
 print(data)
+
+
+# Length
+
+skills = {"Python", "AI", "ML"}
+
+numbers = {1, 2, 3, 4}
+
+print(skills)
+print(numbers)
+print(len(skills))
