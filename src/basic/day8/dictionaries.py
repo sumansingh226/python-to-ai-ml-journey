@@ -32,3 +32,14 @@ Key Characteristics
 ✓ Keys must be unique
 ✓ Values can be duplicated
 """
+
+
+# Creating Dictionary
+
+student = {
+    "name": "Rahul",
+    "age": 25,
+    "city": "Delhi"
+}
+
+print(student)
