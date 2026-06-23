@@ -71,3 +71,8 @@ Key Characteristics
 ✓ Fast lookups
 ✓ Cannot contain mutable objects like lists
 """
+
+names = {"Suman" , "Raj","Suman"}
+names2 = ["Suman" , "Raj","Suman"]
+names2 = set(names2)
+print(names,names2)
