@@ -105,5 +105,32 @@ print(skills)
 
 #add multiple items
 
-skills.update("Git","docker")
+skills.update(["Git", "Docker"])
 print("Skills",skills)
+
+#remove items 
+skills.remove("Git")
+print(skills)
+
+
+#Discard items
+# discard() removes an item from a set if it exists.
+
+# If the item does not exist, Python does nothing and does not raise an error.
+skills.discard("java")
+
+print(skills)
+
+
+# Membership Check
+
+print("Python" in skills)
+
+print("Java" in skills)
+
+
+# Loop Through Set
+
+for skill in skills:
+    print(skill)
+
