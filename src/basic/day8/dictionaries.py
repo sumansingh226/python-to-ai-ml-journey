@@ -89,3 +89,8 @@ print(student.keys())
 print(student.values())
 
 print(student.items())
+
+
+#copy Dictionary
+student_copy = student.copy()
+print(student_copy)
