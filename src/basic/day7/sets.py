@@ -134,3 +134,68 @@ print("Java" in skills)
 for skill in skills:
     print(skill)
 
+
+# Union
+
+set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print("Union",set1.union(set2))
+
+# Intersection
+
+print("Intersection",set1.intersection(set2))
+
+
+# Difference
+
+print("Difference",set1.difference(set2))
+
+
+# Symmetric Difference
+
+print("Symmetric Difference",set1.symmetric_difference(set2))
+
+
+# Clear Set
+
+temp = {1, 2, 3}
+
+temp.clear()
+
+print(temp)
+
+
+
+# Most Important Set Methods
+
+# add()                  -> Add one item
+# update()               -> Add multiple items
+# remove()               -> Remove item
+# discard()              -> Remove safely
+# union()                -> Combine sets
+# intersection()         -> Common values
+# difference()           -> Unique values
+# symmetric_difference() -> Values not common
+# clear()                -> Remove everything
+
+List vs Tuple vs Set
+List
+-----
+Ordered
+Mutable
+Duplicates Allowed
+Indexing Available
+
+Tuple
+------
+Ordered
+Immutable
+Duplicates Allowed
+Indexing Available
+
+Set
+----
+Unordered
+Mutable
+Duplicates Not Allowed
+No Indexing
