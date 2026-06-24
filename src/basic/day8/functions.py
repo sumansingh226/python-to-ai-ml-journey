@@ -27,3 +27,10 @@ def hello():
     print("hello from simple function")
 
 hello()
+
+# Function with Parameters
+
+def printName(name):
+    print(f"hello {name}")
+
+printName("Suman singh")
