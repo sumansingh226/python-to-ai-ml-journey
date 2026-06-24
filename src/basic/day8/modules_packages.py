@@ -14,3 +14,19 @@ Why do we use Modules?
 - Avoid duplication
 - Use Python's built-in functionality
 """
+
+
+#import entire module
+
+import math
+
+print(math.sqrt(25))
+print(math.pi)
+
+#import  specific functions
+
+
+from math import sqrt,pi
+
+print(sqrt(30))
+print(pi)
