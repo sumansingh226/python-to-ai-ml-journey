@@ -30,3 +30,14 @@ from math import sqrt,pi
 
 print(sqrt(30))
 print(pi)
+
+
+
+# Import with alias
+
+import math as m
+
+print(m.sqrt(49))
+
+
+# Built-in modules
