@@ -178,24 +178,24 @@ print(temp)
 # symmetric_difference() -> Values not common
 # clear()                -> Remove everything
 
-List vs Tuple vs Set
-List
------
-Ordered
-Mutable
-Duplicates Allowed
-Indexing Available
+# List vs Tuple vs Set
+# List
+# -----
+# Ordered
+# Mutable
+# Duplicates Allowed
+# Indexing Available
 
-Tuple
-------
-Ordered
-Immutable
-Duplicates Allowed
-Indexing Available
+# Tuple
+# ------
+# Ordered
+# Immutable
+# Duplicates Allowed
+# Indexing Available
 
-Set
-----
-Unordered
-Mutable
-Duplicates Not Allowed
-No Indexing
+# Set
+# ----
+# Unordered
+# Mutable
+# Duplicates Not Allowed
+# No Indexing
