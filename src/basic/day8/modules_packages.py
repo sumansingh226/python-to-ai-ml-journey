@@ -41,3 +41,13 @@ print(m.sqrt(49))
 
 
 # Built-in modules
+import random
+
+print(random.randint(1, 10))
+
+
+# Another built-in module
+
+import datetime
+
+print(datetime.datetime.now())
