@@ -96,3 +96,18 @@ except ValueError:
 else:
     print("Valid input")
     print("Number:", number)
+
+
+
+
+
+# Example 7: finally Block
+
+try:
+    result = 10 / 2
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+finally:
+    print("This block always executes")
