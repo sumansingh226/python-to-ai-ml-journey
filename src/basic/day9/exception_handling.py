@@ -82,3 +82,17 @@ try:
 except Exception as e:
     print("Error:", e)
 
+
+
+
+# Example 6: else Block
+
+try:
+    number = int(input("Enter a number: "))
+
+except ValueError:
+    print("Invalid input")
+
+else:
+    print("Valid input")
+    print("Number:", number)
