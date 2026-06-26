@@ -36,4 +36,49 @@ Why do we use Exception Handling?
 
 # Example 2: try-except
 
+try:
+    number = int(input("Enter a number: "))
+    print("You entered:", number)
+
+except ValueError:
+    print("Please enter a valid number")
+
+
+
+# Example 3: Handling Division Error
+
+
+try:
+    result = 10 / 0
+    print(result)
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+
+# Example 4: Multiple Exceptions
+
+try:
+    number = int(input("Enter a number: "))
+    result = 100 / number
+
+    print(result)
+
+except ValueError:
+    print("Invalid number")
+
+except ZeroDivisionError:
+    print("Division by zero is not allowed")
+
+
+# Example 5: Generic Exception
+
+try:
+    x = 10
+    y = 0
+
+    print(x / y)
+
+except Exception as e:
+    print("Error:", e)
 
