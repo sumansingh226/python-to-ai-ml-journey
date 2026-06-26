@@ -35,3 +35,5 @@ Why do we use Exception Handling?
 
 
 # Example 2: try-except
+
+
