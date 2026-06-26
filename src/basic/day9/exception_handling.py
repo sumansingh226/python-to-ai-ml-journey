@@ -20,3 +20,18 @@ Why do we use Exception Handling?
 3. Improve user experience
 4. Make applications more reliable
 """
+
+
+# Example 1: Error without exception handling
+
+# number = int(input("Enter a number: "))
+# print(number)
+
+# If user enters:
+# hello
+
+# Error:
+# ValueError
+
+
+# Example 2: try-except
