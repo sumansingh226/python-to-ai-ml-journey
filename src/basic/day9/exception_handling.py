@@ -111,3 +111,28 @@ except ZeroDivisionError:
 
 finally:
     print("This block always executes")
+
+
+
+# Example 8: Raising Exception
+
+age = -5
+
+try:
+    if age < 0:
+        raise ValueError("Age cannot be negative")
+
+except ValueError as e:
+    print(e)
+
+
+# Example 9: Real-world Example
+
+try:
+    username = input("Username: ")
+    age = int(input("Age: "))
+
+    print(f"{username} is {age} years old")
+
+except ValueError:
+    print("Age must be a number")
