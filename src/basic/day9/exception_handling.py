@@ -44,9 +44,7 @@ except ValueError:
     print("Please enter a valid number")
 
 
-
 # Example 3: Handling Division Error
-
 
 try:
     result = 10 / 0
@@ -83,8 +81,6 @@ except Exception as e:
     print("Error:", e)
 
 
-
-
 # Example 6: else Block
 
 try:
@@ -98,9 +94,6 @@ else:
     print("Number:", number)
 
 
-
-
-
 # Example 7: finally Block
 
 try:
@@ -111,7 +104,6 @@ except ZeroDivisionError:
 
 finally:
     print("This block always executes")
-
 
 
 # Example 8: Raising Exception
