@@ -20,3 +20,5 @@ Without file handling,
 all program data is lost after the program ends.
 """
 
+#open a file 
+file = open("sample.txt","r")
