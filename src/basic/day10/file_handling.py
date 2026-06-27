@@ -23,3 +23,8 @@ all program data is lost after the program ends.
 file = open("src/basic/day10/sample.txt", "r")
 print(file.read())
 file.close()
+
+#open file for writing 
+file = open("src/basic/day10/sampleWrite.txt","w")
+file.write("\n Hello world")
+file.close()
