@@ -19,6 +19,7 @@ Why do we use File Handling?
 Without file handling,
 all program data is lost after the program ends.
 """
-
-#open a file 
-file = open("sample.txt","r")
+# Open a file for reading
+file = open("sample.txt", "r")
+print(file.read())
+file.close()
