@@ -30,7 +30,7 @@ file.write("\n Hello world")
 file.close()
 
 # Read line by line
-file = open("sample.txt", "r")
+file = open("src/basic/day10/sample.txt", "r")
 for line in file:
     print(line)
 file.close()
@@ -38,6 +38,30 @@ file.close()
 
 #read first line of file 
 
-file = open("sample.txt", "r")
+file = open("src/basic/day10/sample.txt", "r")
 print(file.readline)
 file.close()
+
+
+# Read all lines
+file = open("sample.txt", "r")
+
+print(file.readlines())
+
+file.close()
+
+# File Exists Example
+
+
+import os
+
+if os.path.exists("sample.txt"):
+    print("File exists")
+else:
+    print("File not found")
+
+
+# Delete File
+
+# import os
+# os.remove("sample.txt")
