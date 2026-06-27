@@ -34,3 +34,10 @@ file = open("sample.txt", "r")
 for line in file:
     print(line)
 file.close()
+
+
+#read first line of file 
+
+file = open("sample.txt", "r")
+print(file.readline)
+file.close()
