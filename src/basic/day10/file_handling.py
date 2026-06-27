@@ -20,6 +20,6 @@ Without file handling,
 all program data is lost after the program ends.
 """
 # Open a file for reading
-file = open("../src/basic/day10/sample.txt", "r")
+file = open("src/basic/day10/sample.txt", "r")
 print(file.read())
 file.close()
