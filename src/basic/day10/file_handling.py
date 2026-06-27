@@ -28,3 +28,9 @@ file.close()
 file = open("src/basic/day10/sampleWrite.txt","w")
 file.write("\n Hello world")
 file.close()
+
+# Read line by line
+file = open("sample.txt", "r")
+for line in file:
+    print(line)
+file.close()
