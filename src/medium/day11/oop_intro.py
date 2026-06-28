@@ -69,4 +69,16 @@ self
 ----
 Represents the current object.
 
+Example : 
+
+Class
+-----
+Student
+
+Objects
+-------
+Rahul
+Amit
+Priya
+
 """
