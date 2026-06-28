@@ -47,3 +47,26 @@ student2 = Student()
 
 student1.greet()
 student2.greet()
+
+"""
+Class
+-----
+Blueprint or template.
+
+Object
+------
+A real instance created from the class.
+
+Attribute
+---------
+A variable inside a class.
+
+Method
+------
+A function inside a class.
+
+self
+----
+Represents the current object.
+
+"""
