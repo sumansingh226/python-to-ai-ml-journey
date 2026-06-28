@@ -31,3 +31,19 @@ but each has different values.
 """
 
 
+#create a class in python 
+
+class Student:
+    #method
+    def greet(self):
+        print("Welcome to Python class")
+
+#creating objects
+
+student1 = Student()
+student2 = Student()
+
+#calling methods 
+
+student1.greet()
+student2.greet()
