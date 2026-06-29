@@ -55,3 +55,21 @@ print()
 student2.display()
 
 
+# Another Example
+
+class Car:
+
+    def __init__(self, brand, model, price):
+        self.brand = brand
+        self.model = model
+        self.price = price
+
+    def details(self):
+        print(f"Brand : {self.brand}")
+        print(f"Model : {self.model}")
+        print(f"Price : {self.price}")
+
+
+car1 = Car("BMW", "X5", 8500000)
+
+car1.details()
