@@ -74,6 +74,10 @@ class Student:
     def greet(self):
         #self
         # Represents the current object.
+    # ✓ Used only inside class methods.
+    # ✓ Refers to the current object.
+    # ✓ Accesses the object's attributes and methods.
+    # ✓ Cannot be used outside the class.
         self.name = "suman"
         self.age = "24"
         print("Welcome to Python class", self.name,self.age)
