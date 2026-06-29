@@ -72,7 +72,9 @@ Priya
 class Student:
     #method
     def greet(self):
-        print("Welcome to Python class")
+        self.name = "suman"
+        self.age = "24"
+        print("Welcome to Python class", self.name,self.age)
 
 #creating objects
 
@@ -83,3 +85,8 @@ student2 = Student()
 
 student1.greet()
 student2.greet()
+
+#self
+# Represents the current object.
+
+
