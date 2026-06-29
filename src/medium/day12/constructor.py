@@ -29,3 +29,29 @@ Every student has:
 Instead of setting these manually every time,
 the constructor initializes them automatically.
 """
+
+# Constructor example 
+
+class Student:
+    def __init__(self,name,age,course):
+        self.name = name
+        self.age = age
+        self.course = course
+    
+    def display(self):
+        print(f"name : {self.name}")
+        print(f"age : {self.age}")
+        print(f"course : {self.course}")
+        
+# Creating Objects 
+student1 = Student("Suman" , 24 , "AI/ML")
+student2 = Student("Rahul" , 22 , "Python")
+
+#calling method 
+
+student1.display()
+print()
+
+student2.display()
+
+
