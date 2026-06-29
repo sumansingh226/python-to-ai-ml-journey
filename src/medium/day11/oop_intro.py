@@ -72,6 +72,8 @@ Priya
 class Student:
     #method
     def greet(self):
+        #self
+        # Represents the current object.
         self.name = "suman"
         self.age = "24"
         print("Welcome to Python class", self.name,self.age)
