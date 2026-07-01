@@ -80,3 +80,25 @@ car1 = Car("BMW", "X5", 8500000)
 
 car1.details()
 
+
+# Constructor with Default Value
+
+class Employee:
+
+    def __init__(self, name, salary=25000):
+        self.name = name
+        self.salary = salary
+
+    def show(self):
+        print(self.name)
+        print(self.salary)
+
+
+emp1 = Employee("Amit")
+emp2 = Employee("Rahul", 50000)
+
+emp1.show()
+
+print()
+
+emp2.show()
