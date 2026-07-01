@@ -30,26 +30,32 @@ Instead of setting these manually every time,
 the constructor initializes them automatically.
 """
 
-# Constructor example 
+
+# Constructor Example
 
 class Student:
-    def __init__(self,name,age,course):
+
+    def __init__(self, name, age, course):
         self.name = name
         self.age = age
         self.course = course
-    
-    def display(self):
-        print(f"name : {self.name}")
-        print(f"age : {self.age}")
-        print(f"course : {self.course}")
-        
-# Creating Objects 
-student1 = Student("Suman" , 24 , "AI/ML")
-student2 = Student("Rahul" , 22 , "Python")
 
-#calling method 
+    def display(self):
+        print(f"Name   : {self.name}")
+        print(f"Age    : {self.age}")
+        print(f"Course : {self.course}")
+
+
+# Creating Objects
+
+student1 = Student("Suman", 24, "AI/ML")
+student2 = Student("Rahul", 22, "Python")
+
+
+# Calling Method
 
 student1.display()
+
 print()
 
 student2.display()
@@ -73,3 +79,4 @@ class Car:
 car1 = Car("BMW", "X5", 8500000)
 
 car1.details()
+
