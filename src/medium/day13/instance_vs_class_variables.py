@@ -52,53 +52,15 @@ print(emp2.company)
 
 print(Employee.company)
 
-
-# Changing Class Variable
-
-Employee.company = "Google"
-
-print(emp1.company)
-print(emp2.company)
-print(Employee.company)
-
-
-# Changing Instance Variable
-
-student1.name = "Amit"
-
-print(student1.name)
-print(student2.name)
-
-
-# Example 3 : Different Objects
-
-class Car:
-
-    wheels = 4
-
-    def __init__(self, brand, color):
-        self.brand = brand
-        self.color = color
-
-
-car1 = Car("BMW", "Black")
-car2 = Car("Audi", "White")
-
-print(car1.brand)
-print(car2.brand)
-
-print(car1.color)
-print(car2.color)
-
-print(car1.wheels)
-print(car2.wheels)
-
-
-# Creating a New Instance Variable
-
-car1.price = 8000000
-
-print(car1.price)
-
-# print(car2.price)
-# AttributeError
+#example 3 class var
+class Student: 
+    grade = "11th"
+    def __init__(self,name):
+        self.name = name
+        
+stud1 = Student("suman")   
+stud2 = Student("Raj")   
+print("class var", stud1.name) 
+print("class var",stud1.grade)
+print("class var", stud2.name) 
+print("class var",stud2.grade)
