@@ -64,3 +64,23 @@ print("class var", stud1.name)
 print("class var",stud1.grade)
 print("class var", stud2.name) 
 print("class var",stud2.grade)
+
+
+
+# Example 1 : Instance Variables
+
+class Student:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+
+student1 = Student("Suman", 24)
+student2 = Student("Rahul", 22)
+
+print(student1.name)
+print(student2.name)
+
+print(student1.age)
+print(student2.age)
