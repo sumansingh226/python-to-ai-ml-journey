@@ -53,3 +53,24 @@ Student.show_school()
 print()
 
 Student.welcome()
+
+
+
+
+class Model:
+
+    framework = "PyTorch"
+
+    def __init__(self, name):
+        self.name = name
+
+    def train(self):
+        print(f"Training {self.name}")
+
+    @classmethod
+    def framework_name(cls):
+        print(cls.framework)
+
+    @staticmethod
+    def version():
+        print("PyTorch 2.0")
