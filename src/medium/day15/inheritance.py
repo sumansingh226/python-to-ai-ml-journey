@@ -35,4 +35,13 @@ A dog also:
 
 A cat also:
 - Meows
+
+
+Types of Inheritance
+1. Single Inheritance
+2. Multilevel Inheritance
+3. Multiple Inheritance
+4. Hierarchical Inheritance
+5. Hybrid Inheritance
+
 """
