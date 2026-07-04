@@ -68,3 +68,24 @@ Hierarchical Inheritance
      
 
 """
+
+
+#Example of inheritance 
+
+class Model: 
+    def train(self):
+        print("Model is on training mode.")
+    
+    def predict(self):
+        print("Making prediction")
+        
+
+class NaturalNetwork(Model):
+    def backPropagation(self):
+        print("Running backPropagation")
+
+model = NaturalNetwork()
+
+model.train()
+model.predict()
+model.backPropagation()
