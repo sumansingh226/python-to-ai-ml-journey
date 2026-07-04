@@ -44,4 +44,27 @@ Types of Inheritance
 4. Hierarchical Inheritance
 5. Hybrid Inheritance
 
+Single Inheritance
+
+Animal
+   │
+   ▼
+ Dog
+ 
+Multilevel Inheritance
+
+LivingThing
+      │
+      ▼
+   Animal
+      │
+      ▼
+     Dog
+Hierarchical Inheritance
+        Animal
+       /   |   \
+     Dog  Cat  Bird
+     
+     
+
 """
