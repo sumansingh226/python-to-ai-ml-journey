@@ -56,6 +56,23 @@ print(len("Python"))
 print(len([10, 20, 30, 40]))
 print(len((1, 2, 3)))
 
+#Polymorphism with Method Overriding
+class Bird:
+    def fly(self):
+        print("Bird can fly")
+
+class Sparrow(Bird):
+    def fly(self):
+        print("Sparrow flies high")
+
+class Penguin(Bird):
+    def fly(self):
+        print("Penguin cannot fly")
+
+birds = [Sparrow(), Penguin()]
+
+for bird in birds:
+    bird.fly()
 
 
 
