@@ -44,3 +44,10 @@ print(cat.sound())  # Meow
 # For example, this will raise an error:
 
 animal = Animal()   # Error
+
+
+# Benefits of Abstraction
+# Hides unnecessary implementation details.
+# Makes code easier to understand.
+# Improves code reusability.
+# Enforces a common interface for subclasses.
