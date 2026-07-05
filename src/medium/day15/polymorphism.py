@@ -52,6 +52,13 @@ animal_sound(cow)
 #Built-in Polymorphism
 #Python's built-in functions are also polymorphic.
 
+print(len("Python"))
+print(len([10, 20, 30, 40]))
+print(len((1, 2, 3)))
+
+
+
+
 
 
 
