@@ -7,3 +7,29 @@ For example, when you drive a car, you use the steering wheel, accelerator, and 
 Abstraction in Python
 
 Python provides abstraction using the abc (Abstract Base Class) module."""
+
+#example : 
+from abc import ABC, abstractmethod
+
+# Abstract class
+class Animal(ABC):
+
+    @abstractmethod
+    def sound(self):
+        pass
+
+# Child class
+class Dog(Animal):
+    def sound(self):
+        return "Bark"
+
+# Child class
+class Cat(Animal):
+    def sound(self):
+        return "Meow"
+
+dog = Dog()
+cat = Cat()
+
+print(dog.sound())  # Bark
+print(cat.sound())  # Meow
