@@ -23,3 +23,31 @@ dog.sound()   # Output: Dog barks
 cat.sound()   # Output: Cat meows
 
 
+#Polymorphism Using a Common Function
+class Dog:
+    def sound(self):
+        return "Bark"
+
+class Cat:
+    def sound(self):
+        return "Meow"
+
+class Cow:
+    def sound(self):
+        return "Moo"
+
+def animal_sound(animal):
+    print(animal.sound())
+
+# Objects
+dog = Dog()
+cat = Cat()
+cow = Cow()
+
+# Same function works with different objects
+animal_sound(dog)
+animal_sound(cat)
+animal_sound(cow)
+
+
+
