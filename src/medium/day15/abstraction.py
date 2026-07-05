@@ -33,3 +33,14 @@ cat = Cat()
 
 print(dog.sound())  # Bark
 print(cat.sound())  # Meow
+
+
+
+# Key Points
+# ABC is used to create an abstract class.
+# @abstractmethod declares a method that must be implemented by child classes.
+# You cannot create an object of an abstract class.
+
+# For example, this will raise an error:
+
+animal = Animal()   # Error
