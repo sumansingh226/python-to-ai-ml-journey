@@ -49,5 +49,10 @@ animal_sound(dog)
 animal_sound(cat)
 animal_sound(cow)
 
+#Built-in Polymorphism
+#Python's built-in functions are also polymorphic.
+
+
+
 
 
