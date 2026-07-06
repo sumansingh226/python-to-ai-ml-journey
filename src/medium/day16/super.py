@@ -28,3 +28,28 @@ Every student is also a person.
 Instead of writing Person's code again,
 we reuse it using super().
 """
+
+# Calling Parent Method
+
+class Animal:
+
+    def eat(self):
+        print("Animal is eating")
+
+
+class Dog(Animal):
+
+    def bark(self):
+        print("Dog is barking")
+
+    def show(self):
+
+        # Call Parent Method
+        super().eat()
+
+        print("Inside Child Class")
+
+
+dog = Dog()
+
+dog.show()
