@@ -53,3 +53,31 @@ class Dog(Animal):
 dog = Dog()
 
 dog.show()
+
+
+# Example 2 : Parent Constructor
+class Person:
+
+    def __init__(self, name):
+        self.name = name
+
+        print("Person Constructor")
+
+
+class Student(Person):
+
+    def __init__(self, name, age):
+
+        # Call Parent Constructor
+        super().__init__(name)
+
+        self.age = age
+
+        print("Student Constructor")
+
+
+student = Student("Suman", 24)
+
+print(student.name)
+print(student.age)
+
