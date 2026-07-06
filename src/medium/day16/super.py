@@ -81,3 +81,23 @@ student = Student("Suman", 24)
 print(student.name)
 print(student.age)
 
+
+# Example 3 : Without super()
+class Vehicle:
+
+    def __init__(self, brand):
+        self.brand = brand
+
+
+class Car(Vehicle):
+
+    def __init__(self, brand, model):
+
+        # Parent constructor NOT called
+
+        self.model = model
+
+
+car = Car("BMW", "X5")
+
+
