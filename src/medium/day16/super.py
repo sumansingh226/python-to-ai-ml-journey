@@ -1,3 +1,80 @@
+{
+ 
+    "body": {
+        "user": {
+            "userId": "3ba49d53-4621-4821-b2f9-b51f16ead4bd",
+            "email": "tarun.parswani@storapps.org",
+            "name": "Tarun test",
+            "timezone": "UTC",
+            "date_format": null,
+            "primary_currency": "USD",
+            "currency_symbol": "$",
+            "orgId": "999999999",
+            "spaceId": "1"
+        },
+        "metadata": {
+            "type": "measure",
+            "subtype": "single"
+        },
+        "data": {
+            "period": {
+                "current": {
+                    "startDate": "2026-07-01",
+                    "endDate": "2026-07-07"
+                },
+                "previous": {
+                    "startDate": "2026-06-24",
+                    "endDate": "2026-06-30"
+                }
+            },
+            "records": [
+                {
+                    "date": "2026-07-01",
+                    "value": 3273
+                },
+                {
+                    "date": "2026-07-02",
+                    "value": 2787
+                },
+                {
+                    "date": "2026-07-03",
+                    "value": 2820
+                },
+                {
+                    "date": "2026-07-04",
+                    "value": 2051
+                },
+                {
+                    "date": "2026-07-05",
+                    "value": 2072
+                },
+                {
+                    "date": "2026-07-06",
+                    "value": 2909
+                },
+                {
+                    "date": "2026-07-07",
+                    "value": 2939
+                }
+            ],
+            "fieldDescriptions": {
+                "date": "The date of the measure value observation",
+                "value": "The value of the Sessions by Channel on that date"
+            }
+        },
+        "dateRanges": {
+            "currentRange": {
+                "startDate": "2026-07-01",
+                "endDate": "2026-07-07"
+            },
+            "previousRange": {
+                "startDate": "2026-06-24",
+                "endDate": "2026-06-30"
+            }
+        }
+    }
+}
+
 """
 super() in Python
 
