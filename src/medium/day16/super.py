@@ -29,7 +29,10 @@ Instead of writing Person's code again,
 we reuse it using super().
 """
 
-# Calling Parent Method
+
+# ==========================================
+# Example 1 : Calling Parent Method
+# ==========================================
 
 class Animal:
 
@@ -55,7 +58,18 @@ dog = Dog()
 dog.show()
 
 
+"""
+Output
+
+Animal is eating
+Inside Child Class
+"""
+
+
+# ==========================================
 # Example 2 : Parent Constructor
+# ==========================================
+
 class Person:
 
     def __init__(self, name):
@@ -82,7 +96,21 @@ print(student.name)
 print(student.age)
 
 
+"""
+Output
+
+Person Constructor
+Student Constructor
+
+Suman
+24
+"""
+
+
+# ==========================================
 # Example 3 : Without super()
+# ==========================================
+
 class Vehicle:
 
     def __init__(self, brand):
@@ -100,4 +128,109 @@ class Car(Vehicle):
 
 car = Car("BMW", "X5")
 
+# print(car.brand)
 
+"""
+AttributeError
+
+brand was never created because
+Vehicle.__init__() was not called.
+"""
+
+
+# ==========================================
+# Example 4 : Using super()
+# ==========================================
+
+class Vehicle:
+
+    def __init__(self, brand):
+        self.brand = brand
+
+
+class Car(Vehicle):
+
+    def __init__(self, brand, model):
+
+        super().__init__(brand)
+
+        self.model = model
+
+
+car = Car("BMW", "X5")
+
+print(car.brand)
+print(car.model)
+
+
+"""
+Output
+
+BMW
+X5
+"""
+
+
+# ==========================================
+# Example 5 : Parent + Child Method
+# ==========================================
+
+class Employee:
+
+    def work(self):
+        print("Employee is working")
+
+
+class Developer(Employee):
+
+    def work(self):
+
+        super().work()
+
+        print("Developer is writing Python code")
+
+
+developer = Developer()
+
+developer.work()
+
+
+"""
+Output
+
+Employee is working
+Developer is writing Python code
+"""
+
+
+# ==========================================
+# Example 6 : AI/ML Example
+# ==========================================
+
+class Model:
+
+    def __init__(self, name):
+        self.name = name
+
+    def train(self):
+        print("Training Model")
+
+
+class NeuralNetwork(Model):
+
+    def __init__(self, name, layers):
+
+        super().__init__(name)
+
+        self.layers = layers
+
+    def show(self):
+        print(self.name)
+        print(self.layers)
+
+
+model = NeuralNetwork("ResNet", 50)
+
+model.train()
+
+model.show()
