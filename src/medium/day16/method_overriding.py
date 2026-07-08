@@ -63,3 +63,25 @@ dog = Dog()
 
 dog.eat()
 
+
+# Using super()
+
+class Animal:
+
+    def sound(self):
+        print("Animals make sounds")
+
+
+class Dog(Animal):
+
+    def sound(self):
+
+        super().sound()
+
+        print("Dog barks")
+
+
+dog = Dog()
+
+dog.sound()
+
