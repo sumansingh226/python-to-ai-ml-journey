@@ -68,3 +68,35 @@ cow.sound()
 
 
 print()
+
+
+
+#One Function, Many Objects
+class Dog:
+
+    def speak(self):
+        print("Dog barks")
+
+
+class Cat:
+
+    def speak(self):
+        print("Cat meows")
+
+
+class Bird:
+
+    def speak(self):
+        print("Bird chirps")
+
+
+def make_sound(animal):
+    animal.speak()
+
+
+make_sound(Dog())
+make_sound(Cat())
+make_sound(Bird())
+
+
+print()
