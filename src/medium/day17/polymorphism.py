@@ -129,3 +129,38 @@ for animal in animals:
 
 
 print()
+
+#AI/ML Example
+
+class Model:
+
+    def train(self):
+        print("Training generic model")
+
+
+class DecisionTree(Model):
+
+    def train(self):
+        print("Training Decision Tree")
+
+
+class RandomForest(Model):
+
+    def train(self):
+        print("Training Random Forest")
+
+
+class NeuralNetwork(Model):
+
+    def train(self):
+        print("Training Neural Network")
+
+
+models = [
+    DecisionTree(),
+    RandomForest(),
+    NeuralNetwork()
+]
+
+for model in models:
+    model.train()
