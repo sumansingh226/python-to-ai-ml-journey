@@ -107,3 +107,53 @@ account.show_balance()
 
 
 print()
+
+
+
+# Example 4 : Getter Method
+
+class Person:
+
+    def __init__(self, age):
+        self.__age = age
+
+    def get_age(self):
+        return self.__age
+
+
+person = Person(24)
+
+print(person.get_age())
+
+
+print()
+
+
+# Example 5 : Setter Method
+
+class Person:
+
+    def __init__(self):
+        self.__age = 0
+
+    def set_age(self, age):
+
+        if age >= 0:
+            self.__age = age
+        else:
+            print("Invalid age")
+
+    def get_age(self):
+        return self.__age
+
+
+person = Person()
+
+person.set_age(24)
+
+print(person.get_age())
+
+person.set_age(-10)
+
+
+print()
