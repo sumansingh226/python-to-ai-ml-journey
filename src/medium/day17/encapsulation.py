@@ -38,3 +38,25 @@ The ATM controls access to the balance.
 
 This is Encapsulation.
 """
+
+
+# Example 1 : Public Variable
+
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+
+student = Student("Suman")
+
+print(student.name)
+
+student.name = "Rahul"
+
+print(student.name)
+
+
+
+
+print()
