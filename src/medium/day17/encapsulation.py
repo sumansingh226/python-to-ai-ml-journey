@@ -60,3 +60,27 @@ print(student.name)
 
 
 print()
+
+
+
+
+# Example 2 : Protected Variable
+
+class Employee:
+
+    def __init__(self, salary):
+        self._salary = salary
+
+
+employee = Employee(50000)
+
+print(employee._salary)
+
+employee._salary = 70000
+
+print(employee._salary)
+
+
+
+
+print()
