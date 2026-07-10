@@ -84,3 +84,26 @@ print(employee._salary)
 
 
 print()
+
+
+
+
+
+# Example 3 : Private Variable
+
+class BankAccount:
+
+    def __init__(self, balance):
+        self.__balance = balance
+
+    def show_balance(self):
+        print("Balance:", self.__balance)
+
+
+account = BankAccount(10000)
+
+account.show_balance()
+
+
+
+print()
