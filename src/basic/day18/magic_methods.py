@@ -28,6 +28,27 @@ Why do we use Magic Methods?
 4. Improve readability.
 """
 
+"""
+Magic Method	Purpose
+__init__	Initialize an object
+__str__	String representation for print()
+__repr__	Official object representation
+__len__	Called by len()
+__add__	Called by +
+__sub__	Called by -
+__mul__	Called by *
+__truediv__	Called by /
+__eq__	Called by ==
+__lt__	Called by <
+__gt__	Called by >
+
+Why Are Magic Methods Important?
+
+Python's built-in types (list, dict, str, int) all use magic methods behind the scenes.
+By implementing them in your own classes, you can make your objects behave naturally with Python's syntax and built-in functions.
+
+
+"""
 
 # Example 1 : __init__
 
