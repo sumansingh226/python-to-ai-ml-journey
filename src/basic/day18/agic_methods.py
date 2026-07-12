@@ -27,3 +27,19 @@ Why do we use Magic Methods?
 3. Make objects behave like built-in types.
 4. Improve readability.
 """
+
+
+# Example 1 : __init__
+
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+
+student = Student("Suman")
+
+print(student.name)
+
+
+print()
