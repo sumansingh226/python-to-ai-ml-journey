@@ -62,3 +62,82 @@ print(student)
 
 
 print()
+
+
+# Example 3 : __len__
+
+class Book:
+
+    def __init__(self, pages):
+        self.pages = pages
+
+    def __len__(self):
+        return self.pages
+
+
+book = Book(350)
+
+print(len(book))
+
+
+print()
+
+
+# Example 4 : __add__
+
+class Number:
+
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return self.value + other.value
+
+
+num1 = Number(10)
+num2 = Number(20)
+
+print(num1 + num2)
+
+
+print()
+
+
+# Example 5 : __eq__
+
+class Student:
+
+    def __init__(self, age):
+        self.age = age
+
+    def __eq__(self, other):
+        return self.age == other.age
+
+
+s1 = Student(24)
+s2 = Student(24)
+
+print(s1 == s2)
+
+
+print()
+
+
+# Example 6 : AI/ML Example
+
+class Tensor:
+
+    def __init__(self, value):
+        self.value = value
+
+    def __add__(self, other):
+        return Tensor(self.value + other.value)
+
+    def __str__(self):
+        return f"Tensor({self.value})"
+
+
+t1 = Tensor(5)
+t2 = Tensor(10)
+
+print(t1 + t2)
