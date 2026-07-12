@@ -43,3 +43,22 @@ print(student.name)
 
 
 print()
+
+
+# Example 2 : __str__
+
+class Student:
+
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return f"Student(Name={self.name})"
+
+
+student = Student("Suman")
+
+print(student)
+
+
+print()
