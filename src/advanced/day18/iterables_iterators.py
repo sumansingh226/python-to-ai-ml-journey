@@ -52,3 +52,21 @@ Iterator
 ---------
 Object that fetches data one by one.
 """
+
+# Example 1 : Iterable
+
+numbers = [10, 20, 30, 40]
+
+for number in numbers:
+    print(number)
+
+
+"""
+List is an iterable.
+
+The for loop automatically creates
+an iterator behind the scenes.
+"""
+
+
+print()
