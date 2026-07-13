@@ -54,9 +54,9 @@ Object that fetches data one by one.
 """
 
 
-# ==========================================
+
 # Example 1 : Iterable
-# ==========================================
+
 
 numbers = [10, 20, 30, 40]
 
@@ -75,9 +75,9 @@ an iterator behind the scenes.
 print()
 
 
-# ==========================================
+
 # Example 2 : Creating Iterator
-# ==========================================
+
 
 numbers = [10, 20, 30]
 
@@ -96,9 +96,9 @@ Converts an iterable into an iterator.
 print()
 
 
-# ==========================================
+
 # Example 3 : next()
-# ==========================================
+
 
 numbers = [10, 20, 30]
 
@@ -123,9 +123,9 @@ Output
 print()
 
 
-# ==========================================
+
 # Example 4 : StopIteration
-# ==========================================
+
 
 numbers = [10, 20]
 
@@ -152,9 +152,9 @@ The iterator has no more elements.
 print()
 
 
-# ==========================================
+
 # Example 5 : Manual Iteration
-# ==========================================
+
 
 fruits = ["Apple", "Banana", "Mango"]
 
@@ -173,9 +173,9 @@ while True:
 print()
 
 
-# ==========================================
+
 # Example 6 : String Iterator
-# ==========================================
+
 
 text = "Python"
 
@@ -189,9 +189,9 @@ print(next(iterator))
 print()
 
 
-# ==========================================
+
 # Example 7 : Tuple Iterator
-# ==========================================
+
 
 numbers = (1, 2, 3)
 
@@ -204,9 +204,9 @@ for value in iterator:
 print()
 
 
-# ==========================================
+
 # Example 8 : Dictionary Iterator
-# ==========================================
+
 
 student = {
     "name": "Suman",
@@ -222,9 +222,9 @@ for key in iterator:
 print()
 
 
-# ==========================================
+
 # Example 9 : Set Iterator
-# ==========================================
+
 
 skills = {"Python", "AI", "ML"}
 
@@ -237,9 +237,9 @@ for skill in iterator:
 print()
 
 
-# ==========================================
+
 # Example 10 : File Iterator
-# ==========================================
+
 
 """
 with open("sample.txt", "r") as file:
@@ -253,9 +253,9 @@ They return one line at a time.
 """
 
 
-# ==========================================
+
 # Example 11 : AI/ML Example
-# ==========================================
+
 
 dataset = [
     "Image 1",
@@ -283,9 +283,9 @@ This saves memory.
 print()
 
 
-# ==========================================
+
 # Example 12 : Checking Types
-# ==========================================
+
 
 numbers = [1, 2, 3]
 
@@ -305,9 +305,10 @@ Output
 """
 
 
-# ==========================================
+
+
 # Example 13 : iter() Calls __iter__()
-# ==========================================
+
 
 numbers = [1, 2, 3]
 
@@ -318,9 +319,9 @@ print(next(iterator))
 print(next(iterator))
 
 
-# ==========================================
+
 # Example 14 : next() Calls __next__()
-# ==========================================
+
 
 numbers = [100, 200, 300]
 
