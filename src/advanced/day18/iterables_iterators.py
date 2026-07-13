@@ -317,3 +317,26 @@ print(next(iterator))
 print(next(iterator))
 print(next(iterator))
 
+
+# ==========================================
+# Example 14 : next() Calls __next__()
+# ==========================================
+
+numbers = [100, 200, 300]
+
+iterator = iter(numbers)
+
+print(iterator.__next__())
+print(iterator.__next__())
+print(iterator.__next__())
+
+
+"""
+Python internally does:
+
+next(iterator)
+
+↓
+
+iterator.__next__()
+"""
