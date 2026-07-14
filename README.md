@@ -1,10 +1,10 @@
-# Python to AI/ML Journey 🚀
+# Python to AI/ML Journey 
 
 A structured learning repository documenting my journey from Python fundamentals to Artificial Intelligence and Machine Learning, with daily practice, exercises, and hands-on projects.
 
 ---
 
-## 📌 About This Repository
+## About This Repository
 
 This repository is my personal learning log where I consistently practice and build skills starting from **Python basics** and gradually progressing into **Data Science, Machine Learning, and Artificial Intelligence**.
 
@@ -17,7 +17,7 @@ It includes:
 
 ---
 
-## 🎯 Goals
+## Goals
 
 - Build strong Python fundamentals
 - Learn data structures and problem solving
