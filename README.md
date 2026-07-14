@@ -26,6 +26,4 @@ It includes:
 - Work on real-world AI/ML projects
 - Maintain consistency through daily coding
 
----
 
-## 📅 Structure
