@@ -340,3 +340,45 @@ next(iterator)
 
 iterator.__next__()
 """
+
+"""
+Memory Representation
+
+List (Iterable)
+
+[10, 20, 30, 40]
+
+        │
+        │ iter()
+        ▼
+
+Iterator
+
+Position → 10
+
+next()
+
+↓
+
+Position → 20
+
+next()
+
+↓
+
+Position → 30
+
+next()
+
+↓
+
+Position → 40
+
+next()
+
+↓
+
+StopIteration
+
+
+"""
