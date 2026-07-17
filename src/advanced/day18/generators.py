@@ -40,4 +40,29 @@ Returns one value.
 Function pauses.
 Continues from where it stopped.
 """
+# ==========================================
 
+def numbers():
+
+    return [1, 2, 3]
+
+
+print(numbers())
+
+print()
+
+
+# ==========================================
+# Example 2 : Generator Function
+# ==========================================
+
+def numbers():
+
+    yield 1
+    yield 2
+    yield 3
+
+
+generator = numbers()
+
+print(generator)
