@@ -40,7 +40,8 @@ Returns one value.
 Function pauses.
 Continues from where it stopped.
 """
-# ==========================================
+
+
 
 def numbers():
 
