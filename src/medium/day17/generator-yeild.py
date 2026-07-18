@@ -31,3 +31,40 @@ Generator
 ----------
 Returns one value at a time.
 """
+
+
+# Example 1 : Normal Function
+# ==========================================
+
+def numbers():
+
+    return [1, 2, 3, 4, 5]
+
+
+print(numbers())
+
+
+print()
+
+
+# ==========================================
+# Example 2 : Generator Function
+# ==========================================
+
+def numbers():
+
+    yield 1
+    yield 2
+    yield 3
+    yield 4
+    yield 5
+
+
+generator = numbers()
+
+print(generator)
+
+
+print()
+
+
