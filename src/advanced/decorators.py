@@ -78,3 +78,47 @@ def outer():
 outer()
 
 print()
+
+# Example 3 : Returning a Function
+# ==========================================
+
+def outer():
+
+    def inner():
+        print("Hello from Inner Function")
+
+    return inner
+
+function = outer()
+
+function()
+
+print()
+
+
+# ==========================================
+# Example 4 : Basic Decorator
+# ==========================================
+
+def decorator(function):
+
+    def wrapper():
+
+        print("Before Function")
+
+        function()
+
+        print("After Function")
+
+    return wrapper
+
+
+def greet():
+    print("Hello Python")
+
+
+greet = decorator(greet)
+
+greet()
+
+print()
