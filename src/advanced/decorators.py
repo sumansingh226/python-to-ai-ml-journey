@@ -51,6 +51,7 @@ Decorator
 Enhanced Function
 """
 
+# ==========================================
 # Example 1 : Function as an Object
 # ==========================================
 
@@ -79,6 +80,8 @@ outer()
 
 print()
 
+
+# ==========================================
 # Example 3 : Returning a Function
 # ==========================================
 
@@ -124,7 +127,7 @@ greet()
 print()
 
 
-
+# ==========================================
 # Example 5 : @ Decorator Syntax
 # ==========================================
 
@@ -149,3 +152,144 @@ def welcome():
 welcome()
 
 print()
+
+
+# ==========================================
+# Example 6 : Decorator with Arguments
+# ==========================================
+
+def decorator(function):
+
+    def wrapper(name):
+
+        print("Before Function")
+
+        function(name)
+
+        print("After Function")
+
+    return wrapper
+
+
+@decorator
+def greet(name):
+    print("Hello", name)
+
+
+greet("Suman")
+
+print()
+
+
+# ==========================================
+# Example 7 : Logging Decorator
+# ==========================================
+
+def logger(function):
+
+    def wrapper():
+
+        print("Function Started")
+
+        function()
+
+        print("Function Finished")
+
+    return wrapper
+
+
+@logger
+def calculate():
+    print("Calculating...")
+
+
+calculate()
+
+print()
+
+
+# ==========================================
+# Example 8 : Execution Time Decorator
+# ==========================================
+
+import time
+
+def timer(function):
+
+    def wrapper():
+
+        start = time.time()
+
+        function()
+
+        end = time.time()
+
+        print("Execution Time:", end - start)
+
+    return wrapper
+
+
+@timer
+def task():
+
+    time.sleep(1)
+
+    print("Task Completed")
+
+
+task()
+
+print()
+
+
+# ==========================================
+# Example 9 : Authentication Example
+# ==========================================
+
+logged_in = True
+
+def login_required(function):
+
+    def wrapper():
+
+        if logged_in:
+            function()
+        else:
+            print("Access Denied")
+
+    return wrapper
+
+
+@login_required
+def dashboard():
+    print("Welcome to Dashboard")
+
+
+dashboard()
+
+print()
+
+
+# ==========================================
+# Example 10 : AI/ML Example
+# ==========================================
+
+def model_logger(function):
+
+    def wrapper():
+
+        print("Training Started")
+
+        function()
+
+        print("Training Finished")
+
+    return wrapper
+
+
+@model_logger
+def train_model():
+    print("Training Neural Network...")
+
+
+train_model()
