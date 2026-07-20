@@ -50,3 +50,31 @@ Decorator
 
 Enhanced Function
 """
+
+# Example 1 : Function as an Object
+# ==========================================
+
+def greet():
+    print("Hello")
+
+message = greet
+
+message()
+
+print()
+
+
+# ==========================================
+# Example 2 : Function Inside Function
+# ==========================================
+
+def outer():
+
+    def inner():
+        print("Inside Inner Function")
+
+    inner()
+
+outer()
+
+print()
