@@ -122,3 +122,30 @@ greet = decorator(greet)
 greet()
 
 print()
+
+
+
+# Example 5 : @ Decorator Syntax
+# ==========================================
+
+def decorator(function):
+
+    def wrapper():
+
+        print("Before Function")
+
+        function()
+
+        print("After Function")
+
+    return wrapper
+
+
+@decorator
+def welcome():
+    print("Welcome to Python")
+
+
+welcome()
+
+print()
