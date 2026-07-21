@@ -24,6 +24,6 @@ It includes:
 - Understand Data Science basics
 - Explore Machine Learning algorithms
 - Work on real-world AI/ML projects
-- Maintain consistency through daily coding
+- Maintain consistency through daily codingns
 
 
