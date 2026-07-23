@@ -51,9 +51,7 @@ Decorator
 Enhanced Function
 """
 
-# ==========================================
 # Example 1 : Function as an Object
-# ==========================================
 
 def greet():
     print("Hello")
@@ -65,9 +63,7 @@ message()
 print()
 
 
-# ==========================================
 # Example 2 : Function Inside Function
-# ==========================================
 
 def outer():
 
@@ -81,9 +77,7 @@ outer()
 print()
 
 
-# ==========================================
 # Example 3 : Returning a Function
-# ==========================================
 
 def outer():
 
@@ -99,9 +93,7 @@ function()
 print()
 
 
-# ==========================================
 # Example 4 : Basic Decorator
-# ==========================================
 
 def decorator(function):
 
@@ -127,9 +119,7 @@ greet()
 print()
 
 
-# ==========================================
 # Example 5 : @ Decorator Syntax
-# ==========================================
 
 def decorator(function):
 
@@ -154,9 +144,7 @@ welcome()
 print()
 
 
-# ==========================================
 # Example 6 : Decorator with Arguments
-# ==========================================
 
 def decorator(function):
 
@@ -181,9 +169,7 @@ greet("Suman")
 print()
 
 
-# ==========================================
 # Example 7 : Logging Decorator
-# ==========================================
 
 def logger(function):
 
@@ -208,9 +194,7 @@ calculate()
 print()
 
 
-# ==========================================
 # Example 8 : Execution Time Decorator
-# ==========================================
 
 import time
 
@@ -242,9 +226,7 @@ task()
 print()
 
 
-# ==========================================
 # Example 9 : Authentication Example
-# ==========================================
 
 logged_in = True
 
@@ -270,9 +252,7 @@ dashboard()
 print()
 
 
-# ==========================================
 # Example 10 : AI/ML Example
-# ==========================================
 
 def model_logger(function):
 
