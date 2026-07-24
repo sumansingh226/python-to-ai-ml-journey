@@ -44,3 +44,18 @@ Why do we use them?
 4. Used in Data Science.
 5. Used in AI/ML preprocessing.
 """
+
+from functools import reduce
+
+
+# ==========================================
+# Example 1 : map()
+# ==========================================
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = map(lambda x: x * x, numbers)
+
+print(list(squares))
+
+print()
