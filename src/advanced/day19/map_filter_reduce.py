@@ -74,3 +74,28 @@ result = map(cube, numbers)
 print(list(result))
 
 print()
+
+
+# Example 3 : Convert to Uppercase
+# ==========================================
+
+names = ["python", "java", "c++"]
+
+result = map(str.upper, names)
+
+print(list(result))
+
+print()
+
+
+# ==========================================
+# Example 4 : filter()
+# ==========================================
+
+numbers = [1,2,3,4,5,6,7,8,9,10]
+
+even = filter(lambda x: x % 2 == 0, numbers)
+
+print(list(even))
+
+print()
