@@ -59,3 +59,18 @@ squares = map(lambda x: x * x, numbers)
 print(list(squares))
 
 print()
+
+
+# Example 2 : map() with Function
+# ==========================================
+
+def cube(number):
+    return number ** 3
+
+numbers = [1, 2, 3, 4]
+
+result = map(cube, numbers)
+
+print(list(result))
+
+print()
