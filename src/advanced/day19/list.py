@@ -30,3 +30,18 @@ With Condition
 [expression for item in iterable if condition]
 """
 
+
+# ==========================================
+# Example 1 : Traditional Method
+# ==========================================
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = []
+
+for number in numbers:
+    squares.append(number * number)
+
+print(squares)
+
+print()
