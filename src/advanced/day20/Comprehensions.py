@@ -148,3 +148,23 @@ improved = [accuracy + 1 for accuracy in accuracies]
 print(improved)
 
 print()
+
+
+# Example 11 : Filter High Accuracy
+
+accuracies = [91, 95, 88, 97, 93]
+
+high_accuracy = [accuracy for accuracy in accuracies if accuracy >= 95]
+
+print(high_accuracy)
+
+print()
+
+
+# Example 12 : Square Only Even Numbers
+
+numbers = range(1, 11)
+
+result = [number ** 2 for number in numbers if number % 2 == 0]
+
+print(result)
