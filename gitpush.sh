@@ -3,8 +3,6 @@
 echo "SCRIPT RUNNING FOR: $1"
 
 FILE="$1"
-FILE="$1"
-
 
 if [ -z "$FILE" ]; then
     echo "Usage: $0 <file>"
@@ -16,10 +14,11 @@ if [ ! -f "$FILE" ]; then
     exit 1
 fi
 
-COMMENT=$(grep '^#' "$FILE" | tail -n 1 | sed 's/^# *//')
+# Extract the last line starting with # (ignoring leading whitespace)
+COMMENT=$(grep -E '^[[:space:]]*#' "$FILE" | tail -n 1 | sed 's/^[[:space:]]*#[[:space:]]*//')
 
 if [ -z "$COMMENT" ]; then
-    COMMENT="Auto commit"
+    COMMENT="Auto commit: update $(basename "$FILE")"
 fi
 
 echo "Commit message: $COMMENT"
