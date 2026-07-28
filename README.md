@@ -19,6 +19,7 @@ It includes:
 
 ## Goals
 
+
 - Build strong Python fundamentals
 - Learn data structures and problem solving
 - Understand Data Science basics
