@@ -29,3 +29,17 @@ With Condition
 
 {key : value for item in iterable if condition}
 """
+
+# Example 1 : Without Dictionary Comprehension
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = {}
+
+for number in numbers:
+    squares[number] = number ** 2
+
+print(squares)
+
+print()
+
