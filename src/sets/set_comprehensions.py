@@ -29,3 +29,17 @@ With Condition
 
 {expression for item in iterable if condition}
 """
+
+# Example 1 : Normal Way
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = set()
+
+for number in numbers:
+    squares.add(number ** 2)
+
+print(squares)
+
+
+print()
