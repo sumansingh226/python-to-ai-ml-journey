@@ -68,3 +68,19 @@ print(unique_numbers)
 
 
 print()
+
+
+# Example 4 : Even Numbers
+
+numbers = range(1, 11)
+
+even_numbers = {
+    number
+    for number in numbers
+    if number % 2 == 0
+}
+
+print(even_numbers)
+
+
+print()
