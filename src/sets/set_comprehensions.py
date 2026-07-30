@@ -1,0 +1,31 @@
+"""
+Set Comprehensions in Python
+
+What is a Set Comprehension?
+
+A set comprehension is a short and
+Pythonic way to create sets.
+
+It allows us to generate unique values
+using a single line of code.
+
+------------------------------------------------
+
+Why do we use Set Comprehensions?
+
+1. Create sets quickly.
+2. Remove duplicate values.
+3. Write shorter code.
+4. Improve readability.
+5. Useful in Data Science and AI/ML.
+
+------------------------------------------------
+
+Syntax
+
+{expression for item in iterable}
+
+With Condition
+
+{expression for item in iterable if condition}
+"""
