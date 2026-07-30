@@ -43,3 +43,28 @@ print(squares)
 
 
 print()
+
+
+# Example 2 : Set Comprehension
+# ==========================================
+
+numbers = [1, 2, 3, 4, 5]
+
+squares = {number ** 2 for number in numbers}
+
+print(squares)
+
+
+print()
+
+
+# Example 3 : Remove Duplicates
+
+numbers = [1, 2, 2, 3, 3, 4, 5, 5]
+
+unique_numbers = {number for number in numbers}
+
+print(unique_numbers)
+
+
+print()
