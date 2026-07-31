@@ -84,3 +84,30 @@ for name, age, city in zip(names, ages, cities):
     print(name, age, city)
 
 print()
+
+
+
+# Example 5 : enumerate() Start Index
+# ==========================================
+
+languages = ["Python", "Java", "C++"]
+
+for index, language in enumerate(languages, start=1):
+    print(index, language)
+
+print()
+
+
+# Example 6 : any()
+
+numbers = [False, False, True, False]
+
+print(any(numbers))
+
+"""
+Output
+
+True
+"""
+
+print()
