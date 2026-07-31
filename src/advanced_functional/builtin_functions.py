@@ -60,3 +60,27 @@ Output
 """
 
 print()
+
+
+
+# Example 2 : zip() with Loop
+
+names = ["Rahul", "Suman", "Amit"]
+ages = [22, 24, 21]
+
+for name, age in zip(names, ages):
+    print(name, age)
+
+print()
+
+
+# Example 3 : zip() Three Lists
+
+names = ["Rahul", "Suman", "Amit"]
+ages = [22, 24, 21]
+cities = ["Delhi", "Mumbai", "Pune"]
+
+for name, age, city in zip(names, ages, cities):
+    print(name, age, city)
+
+print()
