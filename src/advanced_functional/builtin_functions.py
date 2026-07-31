@@ -44,3 +44,19 @@ Why do we use them?
 4. Validate conditions.
 5. Used frequently in AI/ML.
 """
+# Example 1 : zip()
+
+names = ["Rahul", "Suman", "Amit"]
+marks = [90, 95, 85]
+
+result = zip(names, marks)
+
+print(list(result))
+
+"""
+Output
+
+[('Rahul', 90), ('Suman', 95), ('Amit', 85)]
+"""
+
+print()
