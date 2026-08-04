@@ -159,3 +159,14 @@ print(extension)
 
 print()
 
+
+# Example 14 : Environment Variable
+
+print(os.getenv("HOME"))
+
+print()
+
+
+# Example 15 : Execute System Command
+
+os.system("echo Hello from Python")
