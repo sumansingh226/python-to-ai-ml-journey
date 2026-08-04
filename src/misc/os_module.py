@@ -33,3 +33,129 @@ Import
 
 import os
 """
+
+import os
+
+
+# Example 1 : Current Working Directory
+
+print(os.getcwd())
+
+print()
+
+
+# Example 2 : List Files and Folders
+
+print(os.listdir())
+
+print()
+
+
+# Example 3 : Create Directory
+
+directory = "demo_folder"
+
+if not os.path.exists(directory):
+
+    os.mkdir(directory)
+
+    print("Folder Created")
+
+else:
+
+    print("Folder Already Exists")
+
+print()
+
+
+# Example 4 : Rename Directory
+
+if os.path.exists("demo_folder"):
+
+    os.rename("demo_folder", "python_folder")
+
+    print("Folder Renamed")
+
+print()
+
+
+# Example 5 : Remove Empty Directory
+
+if os.path.exists("python_folder"):
+
+    os.rmdir("python_folder")
+
+    print("Folder Deleted")
+
+print()
+
+
+# Example 6 : Check File Exists
+
+print(os.path.exists("student.json"))
+
+print()
+
+
+# Example 7 : File or Directory
+
+print(os.path.isfile("student.json"))
+
+print(os.path.isdir("src"))
+
+print()
+
+
+# Example 8 : Join Paths
+
+path = os.path.join("data", "train", "dataset.csv")
+
+print(path)
+
+print()
+
+
+# Example 9 : Absolute Path
+
+print(os.path.abspath("student.json"))
+
+print()
+
+
+# Example 10 : File Name
+
+path = "/home/admin1/project/student.json"
+
+print(os.path.basename(path))
+
+print()
+
+
+# Example 11 : Directory Name
+
+print(os.path.dirname(path))
+
+print()
+
+
+# Example 12 : Split Path
+
+directory, filename = os.path.split(path)
+
+print(directory)
+
+print(filename)
+
+print()
+
+
+# Example 13 : File Extension
+
+name, extension = os.path.splitext("student.json")
+
+print(name)
+
+print(extension)
+
+print()
+
