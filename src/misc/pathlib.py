@@ -161,3 +161,31 @@ for item in current.iterdir():
 
 print()
 
+
+# Example 16 : Find Python Files
+
+for file in Path(".").glob("*.py"):
+
+    print(file)
+
+print()
+
+
+# Example 17 : Recursive Search
+
+for file in Path(".").rglob("*.py"):
+
+    print(file)
+
+print()
+
+
+# Example 18 : Delete File
+
+temp = Path("temp.txt")
+
+temp.write_text("Temporary File")
+
+temp.unlink()
+
+print("File Deleted")
