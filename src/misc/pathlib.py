@@ -21,11 +21,6 @@ Why do we use pathlib?
 6. Find files using patterns.
 7. Cross-platform compatibility.
 
-------------------------------------------------
-
-Import
-
-from pathlib import Path
 """
 
 from pathlib import Path
