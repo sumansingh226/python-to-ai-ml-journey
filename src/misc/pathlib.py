@@ -64,3 +64,100 @@ print(file.exists())
 
 print()
 
+
+# Example 5 : File or Directory
+
+print(file.is_file())
+
+print(Path("src").is_dir())
+
+print()
+
+
+# Example 6 : Create Directory
+
+folder = Path("demo_folder")
+
+folder.mkdir(exist_ok=True)
+
+print("Folder Created")
+
+print()
+
+
+# Example 7 : Create Nested Directories
+
+nested = Path("data/train/images")
+
+nested.mkdir(parents=True, exist_ok=True)
+
+print("Nested Folders Created")
+
+print()
+
+
+# Example 8 : Write Text File
+
+text_file = Path("sample.txt")
+
+text_file.write_text("Hello Python")
+
+print("File Written")
+
+print()
+
+
+# Example 9 : Read Text File
+
+content = text_file.read_text()
+
+print(content)
+
+print()
+
+
+# Example 10 : File Name
+
+print(text_file.name)
+
+print()
+
+
+# Example 11 : File Stem
+
+print(text_file.stem)
+
+print()
+
+
+# Example 12 : File Extension
+
+print(text_file.suffix)
+
+print()
+
+
+# Example 13 : Parent Directory
+
+print(text_file.parent)
+
+print()
+
+
+# Example 14 : Absolute Path
+
+print(text_file.resolve())
+
+print()
+
+
+# Example 15 : List Files
+
+current = Path(".")
+
+for item in current.iterdir():
+
+    print(item)
+
+print()
+
