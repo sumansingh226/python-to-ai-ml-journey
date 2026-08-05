@@ -27,3 +27,40 @@ Import
 
 from pathlib import Path
 """
+
+from pathlib import Path
+
+
+# Example 1 : Current Working Directory
+
+path = Path.cwd()
+
+print(path)
+
+print()
+
+
+# Example 2 : Home Directory
+
+home = Path.home()
+
+print(home)
+
+print()
+
+
+# Example 3 : Create a Path
+
+file = Path("student.json")
+
+print(file)
+
+print()
+
+
+# Example 4 : Check File Exists
+
+print(file.exists())
+
+print()
+
