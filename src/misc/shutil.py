@@ -19,4 +19,28 @@ Why do we use shutil?
 5. Create archives.
 6. Extract archives.
 7. Manage datasets and backups.
+
 """
+
+import shutil
+from pathlib import Path
+
+
+# Example 1 : Create Sample Files
+
+source = Path("source.txt")
+
+source.write_text("Hello Python shutil")
+
+print("Source file created")
+
+
+# Example 2 : Copy File
+
+shutil.copy(
+    "source.txt",
+    "copy.txt"
+)
+
+print("File Copied")
+
