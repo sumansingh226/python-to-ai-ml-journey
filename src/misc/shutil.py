@@ -19,10 +19,4 @@ Why do we use shutil?
 5. Create archives.
 6. Extract archives.
 7. Manage datasets and backups.
-
-------------------------------------------------
-
-Import
-
-import shutil
 """
