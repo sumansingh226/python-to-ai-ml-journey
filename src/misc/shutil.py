@@ -44,3 +44,87 @@ shutil.copy(
 
 print("File Copied")
 
+
+# Example 3 : Copy File with Metadata
+
+shutil.copy2(
+    "source.txt",
+    "copy_metadata.txt"
+)
+
+print("File Copied with metadata")
+
+
+# Example 4 : Create Directory
+
+Path("backup").mkdir(exist_ok=True)
+
+
+# Example 5 : Copy File into Directory
+
+shutil.copy(
+    "source.txt",
+    "backup"
+)
+
+print("Copied into backup folder")
+
+
+# Example 6 : Copy Complete Directory
+
+Path("dataset").mkdir(exist_ok=True)
+
+Path("dataset/data.txt").write_text(
+    "Training Data"
+)
+
+
+shutil.copytree(
+    "dataset",
+    "dataset_backup",
+    dirs_exist_ok=True
+)
+
+print("Directory Copied")
+
+
+# Example 7 : Move File
+
+shutil.move(
+    "copy.txt",
+    "backup/copy.txt"
+)
+
+print("File Moved")
+
+
+# Example 8 : Remove Directory
+
+if Path("dataset_backup").exists():
+
+    shutil.rmtree(
+        "dataset_backup"
+    )
+
+print("Directory Removed")
+
+
+# Example 9 : Create ZIP Archive
+
+shutil.make_archive(
+    "project_backup",
+    "zip",
+    "backup"
+)
+
+print("ZIP Created")
+
+
+# Example 10 : Extract ZIP
+
+shutil.unpack_archive(
+    "project_backup.zip",
+    "extracted"
+)
+
+print("ZIP Extracted")
