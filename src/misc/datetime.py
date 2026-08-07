@@ -163,7 +163,6 @@ print(difference.days)
 print()
 
 
-
 # Example 14 : Calculate Age
 birth = date(2002, 6, 15)
 
@@ -176,6 +175,8 @@ print(age)
 print()
 
 
-
 # Example 15 : Timestamp
 print(datetime.now().timestamp())
+
+
+
