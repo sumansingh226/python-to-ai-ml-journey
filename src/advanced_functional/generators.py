@@ -42,9 +42,9 @@ Continues from where it stopped.
 """
 
 
-# ==========================================
+
 # Example 1 : Normal Function
-# ==========================================
+
 
 def numbers():
 
@@ -56,9 +56,9 @@ print(numbers())
 print()
 
 
-# ==========================================
+
 # Example 2 : Generator Function
-# ==========================================
+
 
 def numbers():
 
@@ -74,9 +74,9 @@ print(generator)
 print()
 
 
-# ==========================================
+
 # Example 3 : next()
-# ==========================================
+
 
 def numbers():
 
@@ -94,9 +94,9 @@ print(next(generator))
 print()
 
 
-# ==========================================
+
 # Example 4 : for Loop
-# ==========================================
+
 
 def colors():
 
@@ -112,9 +112,9 @@ for color in colors():
 print()
 
 
-# ==========================================
+
 # Example 5 : Generator Pauses
-# ==========================================
+
 
 def demo():
 
@@ -137,9 +137,9 @@ print(next(generator))
 print()
 
 
-# ==========================================
+
 # Example 6 : Generator Expression
-# ==========================================
+
 
 numbers = (x * x for x in range(5))
 
@@ -150,9 +150,9 @@ for number in numbers:
 print()
 
 
-# ==========================================
+
 # Example 7 : Large Dataset
-# ==========================================
+
 
 def dataset():
 
@@ -168,9 +168,9 @@ for image in dataset():
 print()
 
 
-# ==========================================
+
 # Example 8 : Infinite Generator
-# ==========================================
+
 
 def counter():
 
@@ -194,9 +194,9 @@ print(next(generator))
 print()
 
 
-# ==========================================
+
 # Example 9 : Reading File
-# ==========================================
+
 
 """
 with open("sample.txt") as file:
@@ -211,9 +211,9 @@ Files internally work like generators.
 print()
 
 
-# ==========================================
+
 # Example 10 : AI/ML Example
-# ==========================================
+
 
 def data_loader():
 

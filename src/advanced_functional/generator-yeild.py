@@ -33,9 +33,9 @@ Returns one value at a time.
 """
 
 
-# ==========================================
+
 # Example 1 : Normal Function
-# ==========================================
+
 
 def numbers():
 
@@ -48,9 +48,9 @@ print(numbers())
 print()
 
 
-# ==========================================
+
 # Example 2 : Generator Function
-# ==========================================
+
 
 def numbers():
 
@@ -69,9 +69,9 @@ print(generator)
 print()
 
 
-# ==========================================
+
 # Example 3 : next()
-# ==========================================
+
 
 generator = numbers()
 
@@ -85,9 +85,9 @@ print(next(generator))
 print()
 
 
-# ==========================================
+
 # Example 4 : Using for Loop
-# ==========================================
+
 
 generator = numbers()
 
@@ -98,9 +98,9 @@ for value in generator:
 print()
 
 
-# ==========================================
+
 # Example 5 : Generator with Loop
-# ==========================================
+
 
 def count():
 
@@ -117,9 +117,9 @@ for value in generator:
 print()
 
 
-# ==========================================
+
 # Example 6 : Generator Expression
-# ==========================================
+
 
 squares = (x * x for x in range(1, 6))
 
@@ -130,9 +130,9 @@ for square in squares:
 print()
 
 
-# ==========================================
+
 # Example 7 : StopIteration
-# ==========================================
+
 
 generator = numbers()
 
@@ -153,9 +153,9 @@ Calling next() again raises StopIteration.
 print()
 
 
-# ==========================================
+
 # Example 8 : Memory Efficient
-# ==========================================
+
 
 def huge_numbers():
 
@@ -181,9 +181,9 @@ only when needed.
 print()
 
 
-# ==========================================
+
 # Example 9 : Reading File Line by Line
-# ==========================================
+
 
 def read_file():
 
@@ -202,9 +202,9 @@ for line in read_file():
 print()
 
 
-# ==========================================
+
 # Example 10 : AI/ML Example
-# ==========================================
+
 
 def image_loader():
 
@@ -225,9 +225,9 @@ for image in image_loader():
 print()
 
 
-# ==========================================
+
 # Example 11 : Fibonacci Generator
-# ==========================================
+
 
 def fibonacci(limit):
 
@@ -248,9 +248,9 @@ for number in fibonacci(50):
 print()
 
 
-# ==========================================
+
 # Example 12 : Infinite Generator
-# ==========================================
+
 
 def infinite():
 

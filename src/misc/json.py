@@ -35,7 +35,7 @@ import json
 import json
 
 
-# ==========================================
+
 # Example 1 : Python Dictionary to JSON String
 student = {
     "name": "Suman",
@@ -52,7 +52,7 @@ print(type(json_data))
 print()
 
 
-# ==========================================
+
 # Example 2 : JSON String to Python Dictionary
 json_string = '{"name":"Rahul","age":25,"city":"Mumbai"}'
 
@@ -65,7 +65,7 @@ print(type(student))
 print()
 
 
-# ==========================================
+
 # Example 3 : Write JSON to File
 student = {
     "name": "Amit",
@@ -82,7 +82,7 @@ print("JSON written successfully.")
 print()
 
 
-# ==========================================
+
 # Example 4 : Read JSON File
 with open("student.json", "r") as file:
 
@@ -95,7 +95,7 @@ print(type(data))
 print()
 
 
-# ==========================================
+
 # Example 5 : Pretty Print JSON
 employee = {
     "id": 101,
@@ -108,7 +108,7 @@ print(json.dumps(employee, indent=4))
 print()
 
 
-# ==========================================
+
 # Example 6 : Sort Keys
 data = {
     "city": "Delhi",
@@ -121,7 +121,7 @@ print(json.dumps(data, indent=4, sort_keys=True))
 print()
 
 
-# ==========================================
+
 # Example 7 : List of Dictionaries
 students = [
 
@@ -142,7 +142,7 @@ print(json.dumps(students, indent=4))
 print()
 
 
-# ==========================================
+
 # Example 8 : Boolean and Null
 data = {
     "isStudent": True,
@@ -154,7 +154,7 @@ print(json.dumps(data, indent=4))
 print()
 
 
-# ==========================================
+
 # Example 9 : AI/ML Dataset
 dataset = [
 
@@ -179,7 +179,7 @@ print("Dataset Saved")
 print()
 
 
-# ==========================================
+
 # Example 10 : Read AI/ML Dataset
 with open("dataset.json", "r") as file:
 

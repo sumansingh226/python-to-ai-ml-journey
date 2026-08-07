@@ -35,9 +35,9 @@ Uses lambda keyword.
 """
 
 
-# ==========================================
+
 # Example 1 : Normal Function
-# ==========================================
+
 
 def square(number):
     return number * number
@@ -47,9 +47,9 @@ print(square(5))
 print()
 
 
-# ==========================================
+
 # Example 2 : Lambda Function
-# ==========================================
+
 
 square = lambda number: number * number
 
@@ -58,9 +58,9 @@ print(square(5))
 print()
 
 
-# ==========================================
+
 # Example 3 : Addition
-# ==========================================
+
 
 add = lambda a, b: a + b
 
@@ -69,9 +69,9 @@ print(add(10, 20))
 print()
 
 
-# ==========================================
+
 # Example 4 : Multiplication
-# ==========================================
+
 
 multiply = lambda a, b: a * b
 
@@ -80,9 +80,9 @@ print(multiply(5, 6))
 print()
 
 
-# ==========================================
+
 # Example 5 : Even or Odd
-# ==========================================
+
 
 is_even = lambda number: number % 2 == 0
 
@@ -92,9 +92,9 @@ print(is_even(9))
 print()
 
 
-# ==========================================
+
 # Example 6 : Maximum Number
-# ==========================================
+
 
 maximum = lambda a, b: a if a > b else b
 
@@ -103,9 +103,9 @@ print(maximum(20, 15))
 print()
 
 
-# ==========================================
+
 # Example 7 : Sorting
-# ==========================================
+
 
 students = [
 
@@ -122,9 +122,9 @@ print(students)
 print()
 
 
-# ==========================================
+
 # Example 8 : String Length
-# ==========================================
+
 
 words = [
 
@@ -141,9 +141,9 @@ print(words)
 print()
 
 
-# ==========================================
+
 # Example 9 : AI/ML Example
-# ==========================================
+
 
 models = [
 
@@ -160,9 +160,9 @@ print(models)
 print()
 
 
-# ==========================================
+
 # Example 10 : Multiple Arguments
-# ==========================================
+
 
 calculate = lambda a, b, c: a + b + c
 
