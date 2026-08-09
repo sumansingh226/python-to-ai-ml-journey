@@ -92,3 +92,54 @@ print(selected)
 
 print()
 
+
+# 7. Random Unique Items
+
+numbers = [1, 2, 3, 4, 5, 6]
+
+selected = random.sample(
+    numbers,
+    k=3
+)
+
+print(selected)
+
+print()
+
+
+# 8. Shuffle a List
+
+numbers = [1, 2, 3, 4, 5]
+
+random.shuffle(numbers)
+
+print(numbers)
+
+print()
+
+
+# 9. Random Seed
+
+random.seed(42)
+
+print(random.randint(1, 100))
+
+print(random.randint(1, 100))
+
+print()
+
+
+# 10. Simple Password Example
+
+characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+password = ""
+
+for i in range(6):
+
+    password += random.choice(characters)
+
+print(password)
+
+print()
+
