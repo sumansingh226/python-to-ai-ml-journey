@@ -18,3 +18,77 @@ random.sample()
 random.shuffle()
 random.seed()
 """
+
+import random
+
+
+# 1. Random Number Between 0 and 1
+
+number = random.random()
+
+print(number)
+
+print()
+
+
+# 2. Random Integer
+
+number = random.randint(1, 10)
+
+print(number)
+
+print()
+
+
+# 3. Random Number Using range
+
+number = random.randrange(1, 20, 2)
+
+print(number)
+
+print()
+
+
+# 4. Random Floating-Point Number
+
+number = random.uniform(10, 20)
+
+print(number)
+
+print()
+
+
+# 5. Random Choice
+
+languages = [
+    "Python",
+    "Java",
+    "C++",
+    "JavaScript"
+]
+
+language = random.choice(languages)
+
+print(language)
+
+print()
+
+
+# 6. Multiple Random Choices
+
+languages = [
+    "Python",
+    "Java",
+    "C++",
+    "JavaScript"
+]
+
+selected = random.choices(
+    languages,
+    k=3
+)
+
+print(selected)
+
+print()
+
