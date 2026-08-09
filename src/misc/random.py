@@ -143,3 +143,13 @@ print(password)
 
 print()
 
+
+# 11. AI/ML Example
+
+dataset = list(range(1, 11))
+
+random.shuffle(dataset)
+
+print("Shuffled dataset:")
+
+print(dataset)
