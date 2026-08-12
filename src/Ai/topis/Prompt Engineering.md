@@ -1,0 +1,2 @@
+The Ultimate Guide to Prompt Engineering
+Prompt engineering is the art and science of structuring text inputs (prompts) to effectively communicate with Large Language Models (LLMs) like Gemini, ChatGPT, and Claude. It involves crafting instructions that guide the AI to generate the most accurate, relevant, and high-quality output possible.
