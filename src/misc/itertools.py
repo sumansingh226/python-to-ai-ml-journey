@@ -14,9 +14,7 @@ Python version:
 import itertools
 
 
-# ============================================================
 # 1. COMBINATORIC ITERATORS
-# ============================================================
 
 def combinatoric_examples():
     """Demonstrate product(), permutations(), and combinations()."""
@@ -74,9 +72,7 @@ def combinatoric_examples():
     # [(1, 2), (1, 3), (2, 3)]
 
 
-# ============================================================
 # 2. TERMINATING ITERATORS
-# ============================================================
 
 def terminating_examples():
     """Demonstrate common terminating iterator functions."""
@@ -169,9 +165,7 @@ def terminating_examples():
         print(department, list(employees))
 
 
-# ============================================================
 # 3. INFINITE ITERATORS
-# ============================================================
 
 def infinite_examples():
     """Demonstrate count(), cycle(), and repeat()."""
@@ -247,9 +241,7 @@ def infinite_examples():
     # ['Python', 'Python', 'Python']
 
 
-# ============================================================
 # 4. FILTERING ITERATORS
-# ============================================================
 
 def filtering_examples():
     """Demonstrate filtering-related itertools functions."""
@@ -331,9 +323,7 @@ def filtering_examples():
     # [1, 2, 3, 4]
 
 
-# ============================================================
 # 5. ACCUMULATION
-# ============================================================
 
 def accumulation_examples():
     """Demonstrate accumulate()."""
@@ -373,9 +363,7 @@ def accumulation_examples():
     # [1, 2, 6, 24, 120]
 
 
-# ============================================================
 # 6. ZIP-LIKE ITERATORS
-# ============================================================
 
 def zip_examples():
     """Demonstrate zip_longest()."""
@@ -405,9 +393,7 @@ def zip_examples():
     # [('Alice', 90), ('Bob', 85), ('Charlie', 0)]
 
 
-# ============================================================
 # 7. REPEATED ITERATION
-# ============================================================
 
 def repeated_iteration_examples():
     """Demonstrate repeat() with map()."""
@@ -432,9 +418,7 @@ def repeated_iteration_examples():
     # [1, 4, 9, 16, 25]
 
 
-# ============================================================
 # 8. LAZY EVALUATION
-# ============================================================
 
 def lazy_evaluation_example():
     """
@@ -475,9 +459,7 @@ def lazy_evaluation_example():
     )
 
 
-# ============================================================
 # 9. PRACTICAL EXAMPLE
-# ============================================================
 
 def practical_example():
     """
@@ -504,9 +486,7 @@ def practical_example():
         print(username)
 
 
-# ============================================================
 # 10. COMBINING ITERTOOLS FUNCTIONS
-# ============================================================
 
 def combined_example():
     """
@@ -545,9 +525,7 @@ def combined_example():
     # [2, 4, 6, 8, 10]
 
 
-# ============================================================
 # MAIN PROGRAM
-# ============================================================
 
 def main():
     """Run all demonstrations."""
