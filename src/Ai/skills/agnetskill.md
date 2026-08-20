@@ -1,23 +1,31 @@
-###AI agent skill
-In an AI agent, a skill is a reusable capability that teaches the agent how to perform a specific type of task.
+# AI Agent Skill
+
+In an AI agent, a **skill** is a reusable capability that teaches the agent how to perform a specific type of task.
 
 For example, an agent might have these skills:
 
-web-search → search and summarize information
-email → read and send emails
-database → query a database
-customer-support → handle customer questions
-invoice-processing → extract information from invoices
+- **web-search** → Search and summarize information
+- **email** → Read and send emails
+- **database** → Query a database
+- **customer-support** → Handle customer questions
+- **invoice-processing** → Extract information from invoices
 
-A skill is often described in a .md file so the agent can understand what the skill does, when to use it, and how to use it.
+A skill is often described in a `.md` file so the agent can understand:
 
+- What the skill does
+- When to use it
+- What inputs it needs
+- How to perform the task
+- What rules to follow
+- What output to produce
 
-# Weather Search Skill
+---
+
+# Example: Weather Search Skill
 
 ## Description
 
-This skill allows the agent to find the current weather
-and forecast for a specified location.
+This skill allows the agent to find the current weather and forecast for a specified location.
 
 ## When to Use
 
@@ -45,14 +53,13 @@ The skill requires:
 
 ## Example
 
-User:
+### User
 
-"What is the weather in Delhi today?"
+> What is the weather in Delhi today?
 
-Agent:
+### Agent
 
-"The weather in Delhi today is 32°C with partly cloudy
-conditions."
+> The weather in Delhi today is 32°C with partly cloudy conditions.
 
 ## Rules
 
@@ -70,11 +77,13 @@ Return:
 - Weather condition
 - Forecast, if requested
 
+---
 
-Simple way to think about it
+# Simple Way to Think About It
 
-Agent = brain + tools + skills
+**Agent = Brain + Tools + Skills**
 
+```text
 Agent
  │
  ├── Skill: Weather
@@ -88,3 +97,28 @@ Agent
  │
  └── Skill: Customer Support
        └── skill.md
+
+What Does a Skill Do?
+
+A skill gives the agent a specific capability.
+
+
+User
+  │
+  │ "What's the weather in Delhi?"
+  ▼
+AI Agent
+  │
+  │ Identifies that Weather Skill is required
+  ▼
+Weather Skill
+  │
+  │ Gets weather information
+  ▼
+AI Agent
+  │
+  │ Formats the result
+  ▼
+User
+  │
+  └── "Delhi: 32°C, Partly Cloudy"
