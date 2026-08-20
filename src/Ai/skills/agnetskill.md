@@ -122,3 +122,32 @@ AI Agent
 User
   │
   └── "Delhi: 32°C, Partly Cloudy"
+
+Typical Skill Structure
+
+A skill can contain:
+
+skill-name/
+│
+└── skill.md
+
+For example:
+
+weather/
+│
+└── skill.md
+
+
+email/
+│
+└── skill.md
+
+
+database/
+│
+└── skill.md
+
+
+customer-support/
+│
+└── skill.md
