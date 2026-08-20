@@ -69,3 +69,22 @@ Return:
 - Temperature
 - Weather condition
 - Forecast, if requested
+
+
+Simple way to think about it
+
+Agent = brain + tools + skills
+
+Agent
+ │
+ ├── Skill: Weather
+ │     └── skill.md
+ │
+ ├── Skill: Email
+ │     └── skill.md
+ │
+ ├── Skill: Database
+ │     └── skill.md
+ │
+ └── Skill: Customer Support
+       └── skill.md
