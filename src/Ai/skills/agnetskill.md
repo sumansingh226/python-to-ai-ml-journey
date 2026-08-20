@@ -151,3 +151,27 @@ database/
 customer-support/
 │
 └── skill.md
+
+
+
+Each skill.md acts as an instruction manual for that particular capability.
+
+In Short
+
+A skill is a reusable set of instructions that gives an AI agent the knowledge and procedure needed to perform a particular task.
+
+Agent = The system that decides what to do
+
+Skill = Instructions for how to perform a specific task
+
+Tool = The actual external capability used to perform the task
+
+For example:
+
+Agent
+ │
+ ├── Decides: "I need weather information"
+ │
+ ├── Uses: Weather Skill
+ │
+ └── Calls: Weather Tool/API
