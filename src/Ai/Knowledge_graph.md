@@ -8,6 +8,7 @@ If all your AI has is a pile of documents and a vector database, it's in trouble
 
 That's the gap a knowledge graph fills. It's not a fancier database — it's a different way of thinking about what "knowing something" even means.
 
+
 ## The core idea, in one line
 
 A knowledge graph stores information as **things** and **the relationships between them**, instead of rows in a table.
