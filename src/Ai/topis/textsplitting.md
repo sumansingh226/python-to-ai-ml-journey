@@ -294,3 +294,18 @@ that similarity search never actually looks at.
   alone.
 
 ---
+
+## Common Pitfalls
+
+- Using one splitting strategy for every content type in a mixed corpus
+  (code + docs + notes) — each type has a genuinely different "unit of
+  meaning" and deserves its own strategy, as in the table above.
+- Skipping context enrichment — an isolated chunk with no title/section/
+  file prefix underperforms an enriched one on the exact same content.
+- Chasing a fancy strategy (semantic or agentic chunking) on content that
+  already has good structure — header-based splitting on well-formatted
+  Markdown will usually beat semantic splitting on the same document, for
+  a fraction of the cost.
+- Ignoring overlap entirely on prose content — zero overlap means facts
+  sitting exactly at a boundary can become unretrievable from either
+  side of the cut.
