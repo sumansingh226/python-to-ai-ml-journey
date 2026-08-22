@@ -278,3 +278,19 @@ that similarity search never actually looks at.
 | Small, high-value curated corpus | Agentic/LLM-based (#8) | Quality matters more than cost at small scale |
 
 ---
+
+## Chunk Size & Overlap — General Guidance
+
+- **500 characters (~125–150 tokens) with 10–15% overlap** is a common,
+  reasonable default for prose/docs — small enough to stay topically
+  focused, large enough to retain context.
+- **Code chunks should be sized by the language construct, not a target
+  character count** — a function is as long as it needs to be.
+- **Bigger isn't automatically better retrieval** — an oversized chunk
+  dilutes the embedding even if it technically "contains" the answer
+  somewhere inside it.
+- **Always test chunk size empirically against real queries** — the right
+  size depends on your actual content and questions, not a rule of thumb
+  alone.
+
+---
