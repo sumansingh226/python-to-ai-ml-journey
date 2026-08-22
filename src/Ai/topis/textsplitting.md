@@ -246,6 +246,7 @@ idea," including cases that trip up every rule-based approach above
 
 ---
 
+
 ## Context Enrichment (applies on top of any strategy)
 
 Regardless of which splitter you use, prepending context to the chunk
