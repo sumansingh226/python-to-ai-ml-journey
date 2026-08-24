@@ -203,6 +203,3 @@ Log every query → retrieved chunks → final answer → (optional) user feedba
 - **GraphRAG** — build a knowledge graph from your documents (entities + relationships) and retrieve via graph traversal instead of (or alongside) vector similarity — better for multi-hop questions ("who reports to the person who approved X?").
 - **Multi-hop RAG** — chain multiple retrieval steps together to answer questions that require combining facts from different documents.
 
----
-
-*Next step: pair this with a vector embeddings deep-dive doc (what embeddings are, different embedding approaches, sentence vs. word vs. document embeddings) if you want the retrieval half of this pipeline explained from first principles.*
