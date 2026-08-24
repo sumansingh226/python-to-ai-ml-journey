@@ -110,66 +110,57 @@ How you split documents has a bigger impact on RAG quality than most people expe
 
 ---
 
-## 7. Building a Minimal RAG Pipeline — LangChain.js + Node + pgvector
+## 7. Building a Minimal RAG Pipeline — Python + LangChain + pgvector
 
 ```bash
-npm install @langchain/openai @langchain/community langchain pg
+pip install langchain langchain-openai langchain-postgres psycopg
 ```
 
-```js
-// 1. Setup: Postgres + pgvector
-// Run once in your DB: CREATE EXTENSION IF NOT EXISTS vector;
+```python
+# 1. Setup: Postgres + pgvector
+# Run once in your DB: CREATE EXTENSION IF NOT EXISTS vector;
 
-import { PGVectorStore } from "@langchain/community/vectorstores/pgvector";
-import { OpenAIEmbeddings } from "@langchain/openai";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+import os
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_postgres import PGVector
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
-const config = {
-  postgresConnectionOptions: {
-    connectionString: process.env.DATABASE_URL,
-  },
-  tableName: "documents",
-  columns: {
-    idColumnName: "id",
-    vectorColumnName: "embedding",
-    contentColumnName: "content",
-    metadataColumnName: "metadata",
-  },
-};
+connection_string = os.environ["DATABASE_URL"]  # e.g. postgresql+psycopg://user:pass@localhost:5432/db
 
-const vectorStore = await PGVectorStore.initialize(embeddings, config);
+vector_store = PGVector(
+    embeddings=embeddings,
+    collection_name="documents",
+    connection=connection_string,
+)
 
-// 2. Indexing
-const splitter = new RecursiveCharacterTextSplitter({
-  chunkSize: 800,
-  chunkOverlap: 100,
-});
+# 2. Indexing
+splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
 
-const docs = await splitter.createDocuments([rawText]); // rawText = your loaded document
-await vectorStore.addDocuments(docs);
+docs = splitter.create_documents([raw_text])  # raw_text = your loaded document
+vector_store.add_documents(docs)
 
-// 3. Query time
-const retriever = vectorStore.asRetriever({ k: 5 });
+# 3. Query time
+retriever = vector_store.as_retriever(search_kwargs={"k": 5})
 
-const relevantDocs = await retriever.invoke("What is our refund policy?");
+query = "What is our refund policy?"
+relevant_docs = retriever.invoke(query)
 
-const context = relevantDocs.map((d) => d.pageContent).join("\n\n");
+context = "\n\n".join(doc.page_content for doc in relevant_docs)
 
-const prompt = `Answer the question using ONLY the context below. 
+prompt = f"""Answer the question using ONLY the context below.
 If the answer isn't in the context, say you don't know.
 
 Context:
-${context}
+{context}
 
-Question: What is our refund policy?`;
+Question: {query}"""
 
-// 4. Generation
-import { ChatOpenAI } from "@langchain/openai";
-const llm = new ChatOpenAI({ model: "gpt-4o-mini" });
-const answer = await llm.invoke(prompt);
-console.log(answer.content);
+# 4. Generation
+llm = ChatOpenAI(model="gpt-4o-mini")
+answer = llm.invoke(prompt)
+print(answer.content)
 ```
 
 ---
@@ -203,3 +194,27 @@ Log every query → retrieved chunks → final answer → (optional) user feedba
 - **GraphRAG** — build a knowledge graph from your documents (entities + relationships) and retrieve via graph traversal instead of (or alongside) vector similarity — better for multi-hop questions ("who reports to the person who approved X?").
 - **Multi-hop RAG** — chain multiple retrieval steps together to answer questions that require combining facts from different documents.
 
+---
+
+## 11. Types of RAG — A Field Guide
+
+RAG isn't one fixed architecture — it's a family. Here's how the major variants differ:
+
+| Type | How it works | When to use |
+|---|---|---|
+| **Naive RAG** | The basic pipeline from §3: embed → retrieve top-k → stuff into prompt → generate. No re-ranking, no query rewriting. | Prototypes, simple Q&A over a small, clean document set. |
+| **Advanced RAG** | Naive RAG + optimizations: query rewriting, hybrid search, re-ranking, better chunking (see §4–5). | Most real production systems land here. |
+| **Modular RAG** | Treats retrieval, routing, re-ranking, and generation as swappable modules/pipeline stages you can mix, reorder, or run conditionally (e.g. route to different retrievers based on query type). | Systems with multiple data sources or query types (e.g. "search tickets" vs. "search docs"). |
+| **Agentic RAG** | An LLM agent decides when/whether to retrieve, chooses which tool or index to query, and can loop (retrieve → check → retrieve again) until satisfied. | Complex, multi-step, or ambiguous questions; when you have multiple retrievers/tools to choose from. |
+| **Self-RAG** | The model is trained/prompted to critique its own retrieval and output — deciding if retrieval was even necessary, and grading whether the generated answer is actually supported by the retrieved chunks. | High-stakes answers where hallucination control matters more than latency. |
+| **Corrective RAG (CRAG)** | After retrieval, a lightweight evaluator scores the retrieved chunks' relevance. If they're weak, the system falls back to a broader search (e.g. web search) or discards them before generating. | Cases where your index might not have the answer, and you want a fallback instead of a confidently wrong answer. |
+| **GraphRAG** | Retrieval happens over a knowledge graph (entities + relationships) instead of, or in addition to, flat vector chunks. | Multi-hop, relationship-heavy questions ("who approved the vendor that missed the SLA?"). |
+| **Multi-hop / Iterative RAG** | Multiple retrieve→reason cycles, where each step's output informs the next retrieval query. | Questions that need facts stitched together from several different documents. |
+| **CAG (Cache-Augmented Generation)** | Skips runtime retrieval entirely — instead, the relevant knowledge is *preloaded* into the model's context window (or KV-cache) ahead of time, since modern long-context models can hold entire document sets. No vector search at query time. | Small-to-medium, fairly static knowledge bases where long-context models fit the whole corpus, and you want to cut retrieval latency/complexity. Not a fit for large or frequently-changing datasets. |
+| **Hybrid RAG + CAG** | Frequently-used or "core" knowledge is cached in-context (CAG-style) for instant access; RAG kicks in only for the long tail of less common queries or larger corpora that don't fit in context. | Systems wanting the speed of CAG for common queries and the scalability of RAG for everything else. |
+
+**Quick mental model:**
+- **Naive → Advanced → Modular** is a spectrum of *how sophisticated your retrieve-then-generate pipeline is*.
+- **Agentic / Self-RAG / CRAG** are about giving the system *judgment* — deciding whether/how to retrieve, and checking its own work.
+- **GraphRAG / Multi-hop** are about *retrieval structure* — graph traversal or chained retrieval instead of flat top-k similarity.
+- **CAG** is a different bet entirely — skip retrieval, lean on context length instead. Best thought of as a RAG *alternative* for smaller, static corpora rather than a RAG *variant*.
