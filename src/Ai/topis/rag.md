@@ -24,3 +24,18 @@ Cost	Low (embedding + storage)	High (GPU training time)
 Source attribution	Easy (you know which chunk was used)	Hard (baked into weights)
 Hallucination control	Better (model can cite/quote)	Doesn't inherently reduce hallucination
 Best for	Knowledge that changes, private/proprietary data	Teaching a model a style, format, or skill
+
+
+
+Most production systems that need "answer questions about our docs/tickets/codebase" use RAG. Fine-tuning is for changing how the model behaves, not what it knows.
+
+3. The Core RAG Pipeline
+
+RAG has two phases: Indexing (offline, done once/periodically) and Query time (online, happens per user question).
+
+Phase A — Indexing (build the knowledge base)
+Raw documents → Load → Chunk → Embed → Store in vector DB
+Load — pull in PDFs, Notion pages, DB rows, web pages, transcripts, etc.
+Chunk — split large documents into smaller pieces (see §4).
+Embed — convert each chunk into a vector using an embedding model.
+Store — save the vector + original text + metadata in a vector store (pgvector, Pinecone, etc.)
