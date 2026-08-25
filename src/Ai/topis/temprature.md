@@ -21,3 +21,20 @@ The temperature parameter ($T$) is introduced into the Softmax equation by divid
 *   **When $T = 1$:** The probabilities are unchanged. The model samples naturally based on its training.
 *   **When $T < 1$ (e.g., 0.1):** Dividing by a small fraction dramatically amplifies the differences between the logits. The highest-scoring word gets a probability very close to 100%, crushing the chances of all other words. This leads to greedy, deterministic selection.
 *   **When $T > 1$ (e.g., 1.5):** Dividing by a larger number reduces the differences between the logits. The probabilities become more evenly distributed, giving lower-ranked words a higher chance of being selected.
+
+
+## 3. Why Temperature Matters in Agentic AI
+
+Agentic AI refers to autonomous systems that can pursue goals, make decisions, and use tools. In this context, temperature is not a one-size-fits-all setting. Different tasks require different cognitive behaviors from the agent.
+
+### A. Reliability and Tool Use
+When an agent needs to generate a JSON payload to call an external API, write executable Python code, or extract specific data from a document, you need **exactness**. A high temperature might cause the agent to invent a fake JSON key or hallucinate a nonexistent tool.
+*   **Ideal Setting:** `0.0 - 0.2`
+
+### B. Reasoning and Planning
+When an agent is breaking down a complex problem into a step-by-step plan (Chain of Thought), it needs a balance. It must follow logical rules but also have enough flexibility to consider alternative paths if it gets stuck.
+*   **Ideal Setting:** `0.3 - 0.5`
+
+### C. Brainstorming and Persona Simulation
+If the agent's goal is to ideate marketing copy, simulate a human persona in a negotiation game, or generate creative writing, strict determinism is a hindrance. The agent needs the freedom to explore the "long tail" of its vocabulary.
+*   **Ideal Setting:** `0.7 - 1.0`
