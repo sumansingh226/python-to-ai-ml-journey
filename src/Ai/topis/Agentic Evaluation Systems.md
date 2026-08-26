@@ -1,4 +1,5 @@
-#  Agentic Evaluation Systems
+
+# Agentic Evaluation Systems
 
 ## 1. Introduction: The Shift from LLMs to Agents
 As artificial intelligence evolves, we are moving from static Large Language Models (LLMs) that answer single-turn queries (chatbots) to **Autonomous Agents**. Agents can plan, use tools (like web browsers, code interpreters, and APIs), maintain memory, and execute multi-step workflows to achieve complex goals. 
@@ -7,14 +8,12 @@ With this shift, traditional evaluation methods (benchmarks) have become insuffi
 
 ---
 
-
 ## 2. What is an Agentic Eval System?
 An Agentic Eval system is a specialized testing framework designed to assess the performance, reliability, and safety of AI agents operating in dynamic, interactive environments. 
 
 Unlike traditional static benchmarks (like MMLU or GSM8K) which test whether an LLM can select the right multiple-choice answer or solve a math problem in one step, Agentic Evals test **how an agent behaves over time**. They evaluate the agent's *trajectory*—its sequence of thoughts, actions, and observations.
 
 ---
-
 
 ## 3. Why Do We Use Agentic Evals?
 Standard LLM benchmarks fail to capture the complexity of agentic behavior. We use Agentic Evals for several critical reasons:
@@ -25,6 +24,7 @@ Standard LLM benchmarks fail to capture the complexity of agentic behavior. We u
 * **Measuring Efficiency and Cost:** Two agents might both solve a problem, but one might take 5 steps while the other loops for 100 steps, wasting compute and API credits. Evals help measure token usage and latency.
 * **Ensuring Safety and Alignment:** When agents are given autonomy to execute code or send emails, the risk of destructive actions increases. Evals test whether agents stay within defined boundaries and refuse unsafe requests.
 
+---
 
 ## 4. Core Components of an Agentic Eval System
 A robust Agentic Eval system typically consists of four main pillars:
@@ -46,7 +46,7 @@ How do we know if the agent succeeded?
 * **Trajectory Metrics:** Did it take the optimal path? Did it hallucinate tool calls?
 * **Cost/Tokens:** How much computational power was expended?
 
-
+---
 
 ## 5. Notable Agentic Benchmarks and Frameworks
 The AI research community has developed several high-profile agentic eval frameworks:
@@ -55,3 +55,14 @@ The AI research community has developed several high-profile agentic eval framew
 * **WebArena:** A highly realistic simulated web environment (e-commerce sites, forums, CMS) where agents must complete tasks like booking flights or managing inventory.
 * **GAIA:** A benchmark testing general AI assistants on tasks requiring reasoning, multi-modal handling, and tool use, often demanding human-like interaction with the physical and digital world.
 * **AgentBench:** A framework evaluating LLMs as agents across various environments (OS, Database, Knowledge Graph).
+
+---
+
+## 6. Current Challenges in Agentic Evals
+While crucial, building and running these systems is difficult:
+1. **High Cost:** Running an agent through a multi-step task and using an LLM-as-a-judge is computationally expensive.
+2. **Non-Determinism:** Web pages change, APIs update, and LLM outputs vary. Running the same eval twice might yield different results, making reproducibility hard.
+3. **Overfitting:** Just like standard benchmarks, there is a risk that developers train their agents specifically to pass the eval environments rather than creating generally capable agents.
+
+## 7. Conclusion
+As AI transitions from "talking" to "doing," Agentic Evaluation Systems are the necessary guardrails. They are the only way we can confidently deploy autonomous systems into real-world software, robotics, and business workflows, ensuring they are capable, efficient, and safe.
