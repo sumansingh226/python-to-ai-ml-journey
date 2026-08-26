@@ -45,3 +45,13 @@ How do we know if the agent succeeded?
 * **Success Rate:** Did the agent achieve the final goal? (Binary pass/fail).
 * **Trajectory Metrics:** Did it take the optimal path? Did it hallucinate tool calls?
 * **Cost/Tokens:** How much computational power was expended?
+
+
+
+## 5. Notable Agentic Benchmarks and Frameworks
+The AI research community has developed several high-profile agentic eval frameworks:
+
+* **SWE-bench:** Evaluates software engineering agents by giving them real GitHub issues and a codebase. The agent must write a patch that passes unit tests.
+* **WebArena:** A highly realistic simulated web environment (e-commerce sites, forums, CMS) where agents must complete tasks like booking flights or managing inventory.
+* **GAIA:** A benchmark testing general AI assistants on tasks requiring reasoning, multi-modal handling, and tool use, often demanding human-like interaction with the physical and digital world.
+* **AgentBench:** A framework evaluating LLMs as agents across various environments (OS, Database, Knowledge Graph).
