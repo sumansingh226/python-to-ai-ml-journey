@@ -24,3 +24,24 @@ Standard LLM benchmarks fail to capture the complexity of agentic behavior. We u
 * **Assessing Error Recovery:** In the real world, APIs fail and searches return empty results. Good agents recognize errors and try alternative strategies. Static datasets cannot test this resilience.
 * **Measuring Efficiency and Cost:** Two agents might both solve a problem, but one might take 5 steps while the other loops for 100 steps, wasting compute and API credits. Evals help measure token usage and latency.
 * **Ensuring Safety and Alignment:** When agents are given autonomy to execute code or send emails, the risk of destructive actions increases. Evals test whether agents stay within defined boundaries and refuse unsafe requests.
+
+
+## 4. Core Components of an Agentic Eval System
+A robust Agentic Eval system typically consists of four main pillars:
+
+### A. The Environment (Sandbox)
+Agents need a place to act. This is usually a sandboxed execution environment, such as a Docker container, a simulated web browser, or a mock operating system. This ensures that the agent's actions (like deleting files or executing code) are safely contained.
+
+### B. The Dataset (Tasks)
+Instead of Q&A pairs, agent datasets consist of **Goals** and **Initial States**. 
+* *Example Task:* "Find the latest financial report for Apple, extract the Q3 revenue, and plot a bar chart comparing it to Q2."
+
+### C. The Evaluator (The Judge)
+How do we know if the agent succeeded? 
+* **Deterministic Evaluators:** Code scripts that check if a specific file was created, a database row was altered, or a specific string exists.
+* **LLM-as-a-Judge:** Using a more powerful model (like GPT-4) to grade the agent's final output or review its step-by-step reasoning process against a rubric.
+
+### D. Metrics
+* **Success Rate:** Did the agent achieve the final goal? (Binary pass/fail).
+* **Trajectory Metrics:** Did it take the optimal path? Did it hallucinate tool calls?
+* **Cost/Tokens:** How much computational power was expended?
