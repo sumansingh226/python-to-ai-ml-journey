@@ -6,3 +6,7 @@ This guide covers how to architect the perfect metadata strategy: what to includ
 ## 1. Why is Metadata Critical for RAG Accuracy?
 
 Vector similarity search (finding chunks that match the user's query embeddings) is flawed. It struggles with exact keyword matching, temporal filtering (e.g., "reports from 2023"), and domain-specific routing. Metadata solves this by enabling **hybrid search** (Vector Search + Metadata Filtering) and **Self-Querying** (where an LLM translates a user query into a metadata filter).
+
+## 2. What to Include: The "Must-Haves"
+
+A highly accurate RAG system uses a standardized, predictable schema. You should aim to include the following categories:
