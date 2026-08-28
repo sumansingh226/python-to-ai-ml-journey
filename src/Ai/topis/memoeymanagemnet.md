@@ -13,3 +13,18 @@ Without memory, an LLM is purely stateless—it treats every prompt as if it wer
 * **Complex Problem Solving:** For tasks that take hours or days (like writing a software application), the agent must track its progress, remember user preferences, and not repeat mistakes.
 * **Personalization:** Agents interacting with humans need to remember user preferences, names, past purchases, or historical constraints without needing to be re-prompted every session.
 * **Cost Efficiency:** Continuously sending massive context logs to an LLM API is expensive. Good state management retrieves only what is strictly necessary.
+
+
+## 3. Different Types of Agentic Memory
+
+Cognitive architectures for AI agents borrow heavily from human psychology.
+
+### A. Short-Term Memory (Working Memory)
+* **What it is:** The in-context memory. It consists of the immediate chat history and the current prompt.
+* **How it works:** Implemented simply by appending the most recent conversational turns to the API request. 
+* **Limitations:** Bounded by the LLM's context window.
+
+### B. Long-Term Memory (Episodic Memory)
+* **What it is:** The agent's diary. A log of past events, conversations, and experiences.
+* **How it works:** Usually powered by **Vector Databases** (like Pinecone, Milvus, Qdrant) via Retrieval-Augmented Generation (RAG). Past interactions are chunked, embedded, and retrieved when semantically similar to the current situation.
+* **Example:** "Remember when we discussed the Q3 marketing plan last month?"
