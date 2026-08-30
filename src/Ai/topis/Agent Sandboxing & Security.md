@@ -15,3 +15,11 @@ When you give an LLM autonomy and a terminal, you are essentially giving a highl
 * **Destructive Actions:** An agent might make a logic error and execute `rm -rf /` or `DROP TABLE users;` by mistake while trying to clear a temporary directory.
 * **Data Exfiltration:** Malicious actors tricking the agent into querying a private, internal database and summarizing the results via an external, unmonitored API call.
 * 
+---
+
+## 3. Core Mechanisms of Agent Security
+
+### A. Environment Isolation (The Sandbox)
+* **Docker Containers:** Running the agent's code interpreter inside a lightweight, ephemeral Docker container. If the agent crashes the system or deletes files, only the container is destroyed, leaving the host machine untouched.
+* **WebAssembly (Wasm):** Executing untrusted code in a highly restricted browser or server-side Wasm runtime, which offers millisecond startup times and strict memory boundaries.
+* **Network Toggling:** Disabling outbound internet access for the sandbox unless specifically required, preventing the agent from sending data to unauthorized external servers.
