@@ -23,3 +23,14 @@ When you give an LLM autonomy and a terminal, you are essentially giving a highl
 * **Docker Containers:** Running the agent's code interpreter inside a lightweight, ephemeral Docker container. If the agent crashes the system or deletes files, only the container is destroyed, leaving the host machine untouched.
 * **WebAssembly (Wasm):** Executing untrusted code in a highly restricted browser or server-side Wasm runtime, which offers millisecond startup times and strict memory boundaries.
 * **Network Toggling:** Disabling outbound internet access for the sandbox unless specifically required, preventing the agent from sending data to unauthorized external servers.
+
+
+### B. The Principle of Least Privilege
+* **Scoped API Keys:** Giving the agent API tokens that can only "read" data, rather than "write" or "delete". 
+* **Database Views:** Instead of connecting an agent directly to a production SQL database, connecting it to a read-only replica or a restricted view that redacts personally identifiable information (PII).
+
+### C. Human-in-the-Loop (Approval Gates)
+* For high-stakes tools (e.g., sending an email, processing a refund, or executing a database migration), the agent prepares the action but pauses execution. A human must explicitly click "Approve" before the payload is sent.
+
+### D. I/O Sanitization
+* Running secondary, smaller LLMs or classical regex classifiers over the agent's input and output to detect malicious payloads or PII leakage before the action is executed.
