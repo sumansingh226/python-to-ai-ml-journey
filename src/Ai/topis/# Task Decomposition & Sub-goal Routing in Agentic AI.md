@@ -30,3 +30,16 @@ In Agentic AI:
 
 ### C. Semantic Routing
 * Using vector embeddings to route sub-tasks. Instead of asking an LLM to decide where to send a task (which costs time and tokens), the task is embedded and matched against a vector database of available tools or agents. If the vector math shows the task is highly similar to the "Database_Query_Agent" profile, it routes it there instantly.
+
+
+## 4. Pros and Cons
+
+### Pros
+* **Scalability:** Allows AI systems to tackle enterprise-grade problems that take hours or days to complete.
+* **Cost Optimization:** You only use your most expensive, smartest LLM for the initial planning and final review. The bulk of the sub-tasks can be routed to cheaper, faster models (like Llama 3 8B or GPT-4o-mini).
+* **Interpretability:** Because the agent generates an explicit plan before acting, humans can read the plan, understand the agent's logic, and even edit the sub-goals before execution begins.
+
+### Cons
+* **Cascading Failures:** If the Planner creates a flawed plan at step 1, the executors will flawlessly execute the wrong tasks, leading to a completely useless final result.
+* **State Management Complexity:** Tracking the inputs, outputs, and status of 15 different sub-tasks running simultaneously across multiple agents requires robust infrastructure (like LangGraph or temporal state machines).
+* **Latency:** Generating a plan, routing tasks, and waiting for sub-agents to report back takes significantly longer than a direct, single-prompt response.
