@@ -14,3 +14,19 @@ In Agentic AI:
 * **Specialization (Expertise):** Instead of one monolithic "God Model" trying to do everything, you can route tasks to specialized agents (e.g., routing a math sub-task to a Python-executing agent, and a creative writing sub-task to Claude 3.5).
 * **Parallel Execution:** If a plan requires gathering data on three different competitors, task decomposition allows the system to route those three sub-goals to run in parallel, drastically reducing latency.
 * **Deterministic Fallbacks:** If step 3 of a 10-step plan fails, the agent only needs to retry or re-route step 3, rather than starting the entire prompt over from scratch.
+
+
+
+
+## 3. Common Architectures & Methods
+
+### A. Plan-and-Solve (or Plan-and-Execute)
+* **The Planner:** A highly capable LLM (like GPT-4o) evaluates the user's request and generates a step-by-step plan.
+* **The Executor(s):** Smaller, cheaper models or specialized tools execute each step one by one.
+* **The Synthesizer:** Once all steps are complete, the Planner reviews the collected data and formulates the final response to the user.
+
+### B. HuggingGPT Architecture
+* An early and famous example of routing. The LLM acts as a "Controller" that reads a prompt (e.g., "Describe this image and count the dogs"). It decomposes this into two tasks: 1) Image Captioning, 2) Object Detection. It then *routes* these tasks to specific, specialized open-source models on HuggingFace to do the actual work.
+
+### C. Semantic Routing
+* Using vector embeddings to route sub-tasks. Instead of asking an LLM to decide where to send a task (which costs time and tokens), the task is embedded and matched against a vector database of available tools or agents. If the vector math shows the task is highly similar to the "Database_Query_Agent" profile, it routes it there instantly.
