@@ -214,4 +214,4 @@ DELIVERABLE CODE MUST INCLUDE:
 RENDER COMMAND:
 npx remotion render output.mp4 --codec h264 --crf 18
 
-Save the output here /home/admin1/suman/ebook/ytvideos/public/assets
+Save the output here[dir]
