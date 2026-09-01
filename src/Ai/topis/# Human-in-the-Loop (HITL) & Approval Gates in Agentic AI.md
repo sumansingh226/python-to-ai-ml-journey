@@ -43,3 +43,10 @@ The agent operates autonomously until its confidence score drops below a thresho
 * **Breaks Pure Autonomy:** The core promise of Agentic AI is that it works while you sleep. HITL pipelines pause execution, meaning a task might sit idle for hours waiting for a human to wake up and click "Approve."
 * **Human Bottlenecks (Alert Fatigue):** If an agent asks for approval for every minor step, the human operator becomes overwhelmed and might start blindly clicking "Approve," defeating the purpose of the gate.
 * **Complex State Management:** The infrastructure must be able to securely serialize the agent's state, pause it indefinitely, and resume it seamlessly once the human responds.
+
+---
+
+## 5. Real-World Examples
+1. **Infrastructure as Code (IaC):** AI DevOps agents can analyze logs and write Terraform scripts to fix server issues. However, before the script is applied to AWS, an Approval Gate requires a Senior Site Reliability Engineer to sign off.
+2. **Automated Trading:** An agentic system can monitor news sentiment and stock tickers to formulate a trading strategy. Before executing a $100k block trade, it triggers a HITL review for the portfolio manager.
+3. **Outbound Sales Agents:** AI agents research prospects and draft highly personalized cold emails. A human sales representative reviews the queue of drafted emails, edits them if necessary, and authorizes the batch send.
