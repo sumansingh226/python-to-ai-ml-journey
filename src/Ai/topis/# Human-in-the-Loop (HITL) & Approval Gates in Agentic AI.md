@@ -29,3 +29,17 @@ The agent presents a draft or a plan, and the human is allowed to modify it befo
 
 ### C. Exception Escalation
 The agent operates autonomously until its confidence score drops below a threshold or it enters an unrecoverable error state. It then pages a human for intervention.
+
+---
+
+## 4. Pros and Cons
+
+### Pros
+* **Builds Trust:** Users and enterprises are much more willing to adopt AI if they know they have the final say before irreversible actions occur.
+* **Data Collection (RLHF):** Every time a human corrects an agent's plan or rejects an action, that data can be saved and used to fine-tune the model, making it smarter for the next run.
+* **Guaranteed Safety:** It is the ultimate fail-safe against prompt injection attacks and hallucinations.
+
+### Cons
+* **Breaks Pure Autonomy:** The core promise of Agentic AI is that it works while you sleep. HITL pipelines pause execution, meaning a task might sit idle for hours waiting for a human to wake up and click "Approve."
+* **Human Bottlenecks (Alert Fatigue):** If an agent asks for approval for every minor step, the human operator becomes overwhelmed and might start blindly clicking "Approve," defeating the purpose of the gate.
+* **Complex State Management:** The infrastructure must be able to securely serialize the agent's state, pause it indefinitely, and resume it seamlessly once the human responds.
