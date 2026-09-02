@@ -12,6 +12,7 @@ While a single, highly capable AI agent can accomplish many tasks, it often stru
 * **Reduced Hallucinations:** When agents are forced to peer-review each other's work, they catch mistakes that a single agent working in isolation would miss.
 * **Parallel Processing:** If a task involves researching five different companies, a manager agent can spawn five researcher agents to work simultaneously, drastically reducing latency.
 
+---
 
 ## 3. Core Communication Protocols
 How do agents actually talk to one another? Orchestration frameworks use several distinct patterns:
@@ -34,7 +35,6 @@ How do agents actually talk to one another? Orchestration frameworks use several
 
 ---
 
-
 ## 4. Prominent Orchestration Frameworks
 
 Several open-source frameworks have emerged to handle the complex state management required for multi-agent systems:
@@ -45,3 +45,14 @@ Several open-source frameworks have emerged to handle the complex state manageme
 * **ChatDev:** A fascinating research project that simulates an entire software company. It spins up agents acting as the CEO, CTO, Programmer, Tester, and Designer. They use specific communication protocols to design, code, and test a software application autonomously.
 
 ---
+
+## 5. Pros and Cons of Multi-Agent Systems
+
+### Pros
+* **Extremely High Quality:** The peer-review and specialization mechanisms generate outputs far superior to zero-shot LLM prompts.
+* **Modularity:** You can easily swap out an underlying LLM for a specific agent (e.g., using GPT-4o for the Manager, and a cheaper local Llama 3 model for the basic Data Extraction workers).
+
+### Cons
+* **The "Token Multiplier" Cost:** Multi-agent systems consume a massive amount of tokens. An argument between a Coder Agent and a Reviewer Agent can easily burn through 50,000 tokens before a final script is produced.
+* **Infinite Argument Loops:** Without strict stopping conditions, two agents might get stuck in an endless loop (e.g., the Editor rejects the Writer's draft over and over for contradictory reasons).
+* **Latency:** Simulating a team of human workers takes time. Generating a final output can take minutes as agents converse back and forth.
