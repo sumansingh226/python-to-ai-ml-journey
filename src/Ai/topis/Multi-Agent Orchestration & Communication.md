@@ -33,3 +33,15 @@ How do agents actually talk to one another? Orchestration frameworks use several
 * **Best for:** Highly structured, deterministic pipelines where tasks must happen in a strict order.
 
 ---
+
+
+## 4. Prominent Orchestration Frameworks
+
+Several open-source frameworks have emerged to handle the complex state management required for multi-agent systems:
+
+* **AutoGen (Microsoft):** One of the first major frameworks. It treats agent interaction as a "conversation." You define agents with specific roles and tools, and they converse in a group chat or two-way dialogue until the task is resolved or a termination condition is met.
+* **CrewAI:** Built around the concept of "Role-playing." You create a `Crew` of `Agents`, each with a specific `Role`, `Goal`, and `Backstory`. You assign them `Tasks`, and the framework handles the sequential or hierarchical execution smoothly. It is known for being highly developer-friendly.
+* **LangGraph:** A framework by LangChain that models multi-agent workflows as state machines (graphs). Every agent is a node, and the communication paths are edges. This provides immense control over cyclical flows, human-in-the-loop pauses, and precise state management.
+* **ChatDev:** A fascinating research project that simulates an entire software company. It spins up agents acting as the CEO, CTO, Programmer, Tester, and Designer. They use specific communication protocols to design, code, and test a software application autonomously.
+
+---
