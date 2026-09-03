@@ -9,7 +9,6 @@ class User(BaseModel):
     name: str
     age: int
 
-
 # GET request
 @app.get("/")
 def home():
@@ -41,7 +40,6 @@ def create_user(user: User):
         "message": "User created successfully",
         "user": user
     }
-
 
 # DELETE request
 @app.delete("/users/{user_id}")
