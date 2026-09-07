@@ -1,1 +1,1 @@
-### Types of prompt
+### Prompt and Types of prompt
