@@ -17,3 +17,11 @@ As systems scale, managing custom translation layers for every new tool becomes 
 * **The Problem:** Native function calling requires hardcoding tool schemas directly into the application hosting the LLM. 
 * **The MCP Solution:** MCP acts as a universal bridge. Tools are hosted on separate MCP servers, while an MCP client translates the LLM's requests into a protocol-compatible format.
 * **Benefits:** This architecture enables universal compatibility across different models, allowing for an ecosystem where an agent can discover and securely route tasks to external tools without altering the core agent code.
+
+---
+
+## 4. Engineering Example: Knowledge Graph Routing
+Consider an internal organizational brain (like a NerveCenter) designed to aggregate documentation and codebase retrieval. 
+* **The Tools:** You might define a `query_pgvector` tool for semantic search and a `query_graphify` tool for traversing entity relationships. 
+* **The Schema:** A strict JSON schema enforces that the `query_pgvector` tool requires a `search_string` and an optional `similarity_threshold`.
+* **The Execution:** When a user asks for the latest backend architecture changes, the agent evaluates the prompt, selects the `query_pgvector` tool, outputs the exact JSON payload, and waits for the application to return the vector search results before generating the summary.
