@@ -11,3 +11,9 @@ Function calling operates on a strict request-response cycle:
 * **Intent Recognition:** The LLM analyzes the user's prompt and determines if a tool is needed.
 * **Generation:** The model outputs a structured JSON object containing the function name and the necessary arguments.
 * **Execution:** The application (not the LLM) executes the API call using the generated parameters and returns the raw result back to the LLM to synthesize a final answer.
+
+## 3. Standardization with Model Context Protocol (MCP)
+As systems scale, managing custom translation layers for every new tool becomes a bottleneck. The **Model Context Protocol (MCP)** emerged as an open standard to decouple tool implementation from LLM consumption.
+* **The Problem:** Native function calling requires hardcoding tool schemas directly into the application hosting the LLM. 
+* **The MCP Solution:** MCP acts as a universal bridge. Tools are hosted on separate MCP servers, while an MCP client translates the LLM's requests into a protocol-compatible format.
+* **Benefits:** This architecture enables universal compatibility across different models, allowing for an ecosystem where an agent can discover and securely route tasks to external tools without altering the core agent code.
