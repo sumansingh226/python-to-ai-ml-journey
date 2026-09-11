@@ -23,3 +23,10 @@ As of 2026, the OpenTelemetry GenAI Semantic Conventions serve as the definitive
 * **Standard Attributes:** Traces carry uniform attributes such as `gen_ai.request.model`, `gen_ai.agent.id`, and `gen_ai.tool.name` [cite: 1.1.6].
 
 ---
+## 4. Top Production Platforms
+Once traces are captured, they must be ingested into an observability platform capable of querying nested JSON and running evaluations:
+
+* **LangSmith:** Offers a purpose-built database (SmithDB) designed for sub-second performance on deeply nested agent payloads, full-text search, and trajectory queries [cite: 1.1.3].
+* **Langfuse:** A widely adopted open-source (MIT) platform powered by a ClickHouse backend [cite: 1.1.7]. It treats tool calls as a distinct data structure, Highlighting called tools alongside their arguments in a highly visual trace tree [cite: 1.1.1].
+* **MLflow:** Built on an OpenTelemetry-native layer, MLflow provides a full lifecycle platform including tracing, built-in LLM judges, and prompt optimization algorithms [cite: 1.1.5].
+* **Arize AI & Datadog:** Enterprise platforms offering strong drift detection and integration with mature ML operations pipelines [cite: 1.1.6].
