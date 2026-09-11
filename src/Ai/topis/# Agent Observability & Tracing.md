@@ -12,3 +12,14 @@ Traditional Application Performance Monitoring (APM) captures standard request-r
 * **Failures Hide Mid-Trace:** An agent that selects the wrong tool, retrieves a bad document, or loops endlessly on a failing step might still output a plausible-sounding final answer [cite: 1.1.1]. Finding these errors requires inspecting the full execution trace [cite: 1.1.1].
 * **Autonomous Spend:** Unlike traditional software, an agent decides its own compute spend by autonomously choosing how many model and API calls a task requires [cite: 1.1.1]. Cost must be tracked in real-time and attributed per trace [cite: 1.1.1].
 * **Long-Horizon Complexity:** Plan-act-observe loops and subagent delegation can produce traces with hundreds or thousands of observations [cite: 1.1.1]. A single conversation can generate megabytes of deeply nested payload data [cite: 1.1.3].
+
+
+
+## 3. The OpenTelemetry (OTel) GenAI Standard
+As of 2026, the OpenTelemetry GenAI Semantic Conventions serve as the definitive specification for instrumenting AI agents [cite: 1.1.6]. If your stack does not emit OTel-compliant traces, it is on the wrong side of the standard [cite: 1.1.6].
+
+* **Span Trees:** Every action an agent takes emits a span, which nests to form a tree representing the control flow [cite: 1.1.6]. The top-level span is typically `invoke_agent`, with children like `execute_tool` [cite: 1.1.6].
+* **Multi-Layer Capture:** The standard captures data across several layers, including LLM client calls, agent orchestration, Model Context Protocol (MCP) tool calling, and quality evaluation [cite: 1.1.6].
+* **Standard Attributes:** Traces carry uniform attributes such as `gen_ai.request.model`, `gen_ai.agent.id`, and `gen_ai.tool.name` [cite: 1.1.6].
+
+---
