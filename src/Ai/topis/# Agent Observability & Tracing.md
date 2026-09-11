@@ -30,3 +30,10 @@ Once traces are captured, they must be ingested into an observability platform c
 * **Langfuse:** A widely adopted open-source (MIT) platform powered by a ClickHouse backend [cite: 1.1.7]. It treats tool calls as a distinct data structure, Highlighting called tools alongside their arguments in a highly visual trace tree [cite: 1.1.1].
 * **MLflow:** Built on an OpenTelemetry-native layer, MLflow provides a full lifecycle platform including tracing, built-in LLM judges, and prompt optimization algorithms [cite: 1.1.5].
 * **Arize AI & Datadog:** Enterprise platforms offering strong drift detection and integration with mature ML operations pipelines [cite: 1.1.6].
+
+
+
+## 5. Security and Data Privacy in Tracing
+Observability introduces a massive security surface area. By default, the OTel spec keeps content capture turned off to ensure privacy [cite: 1.1.6]. 
+
+The industry standard pattern for shipping safe observability is **Environment-scoped capture**: Content capture is turned on in development and staging environments so engineers can debug full payloads, but it is strictly disabled in production so the trace store never ingests sensitive user input [cite: 1.1.6].
