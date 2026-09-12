@@ -18,3 +18,10 @@ Not all AI systems require full, unconstrained autonomy. As the industry matures
 * **What it is:** This is where the majority of enterprise innovation currently resides [cite: 1.2.4]. The architecture allows AI models to make decisions about their tools and control the execution path within a strictly regulated environment [cite: 1.2.4].
 * **How it works:** The system acts as a "router." It can control the flow of execution, decide which tasks to run, and reflect on its own output, but it is strictly limited by a predefined environment of tools made available upfront [cite: 1.2.4].
 * **Capabilities:** A Level 2 agent can decide to skip a specific task or use a provided tool, but it cannot modify the overarching process itself or invent new tools [cite: 1.2.4].
+
+### Level 3: Autonomous Agents (Process-Level Decisions)
+* **What it is:** The ultimate goal of agentic workflow development [cite: 1.2.4]. 
+* **How it works:** These agents have complete control over the application flow [cite: 1.2.4]. They are not limited to predefined tools; they can write their own code to achieve new objectives and actively seek human feedback when necessary [cite: 1.2.4].
+* **Current State:** While experimental projects (like AI engineers or early autonomous agents) are pushing the industry forward by defining fundamental components, Level 3 agents remain difficult to stabilize for enterprise production [cite: 1.2.4].
+
+---
