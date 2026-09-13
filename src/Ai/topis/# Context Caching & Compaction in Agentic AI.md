@@ -14,3 +14,13 @@ To manage this, enterprise architectures rely on two distinct, yet often conflic
 * **How it works:** You pay a small premium to write the context block to the cache once [cite: 1.2.1]. As long as the prefix remains byte-for-byte identical on the next API call, you pay a fraction of the cost to read it [cite: 1.2.1].
 * **Why it is used:** Without caching, an agent re-sends and re-pays for the entire codebase on every single turn of its loop [cite: 1.2.1]. Caching is currently the single largest cost lever in Agentic AI [cite: 1.2.1].
 * **The Catch:** Caching does *not* increase your context window limit [cite: 1.2.1]. A cached token still occupies space in the context window; it just costs less and processes faster [cite: 1.2.1].
+
+
+## 3. Context Compaction (Controlling Space)
+**What it is:** When the context window is genuinely full, the agent must reduce its size. Compaction is the process of automatically summarizing or extracting the crucial facts from the conversation history to free up tokens.
+
+* **How it works:** Rather than just dropping old messages, the agent triggers a compaction event. A common best practice is to trigger compaction at roughly 70–75% of the context window limit to avoid "context anxiety" where the model lacks the tokens to write a high-quality summary [cite: 1.2.2].
+* **Structured Compaction:** The best architectures use structured templates for compaction, explicitly extracting sections like Active Goals, Key Decisions, and Next Steps, rather than relying on freeform summarization to prevent silent information loss [cite: 1.2.2].
+* **External Memory:** Long-lived facts, such as architectural decisions or user preferences, should be explicitly offloaded to an external memory store on write, rather than relying on the compaction summary to capture them retroactively [cite: 1.2.2].
+
+---
