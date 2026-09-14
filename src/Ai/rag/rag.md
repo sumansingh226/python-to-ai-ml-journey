@@ -1,5 +1,4 @@
 # RAG (Retrieval-Augmented Generation) — Complete Tutorial
-
 A practical, from-scratch guide to understanding and building RAG systems, with examples geared toward a **LangChain + Node.js + React + Postgres + ClickHouse** stack.
 
 ---
@@ -163,6 +162,41 @@ answer = llm.invoke(prompt)
 print(answer.content)
 ```
 
+### Node.js Equivalent (LangChain.js + pgvector)
+
+```javascript
+import { OpenAIEmbeddings, ChatOpenAI } from "@langchain/openai";
+import { PGVectorStore } from "@langchain/community/vectorstores/pgvector";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
+
+const embeddings = new OpenAIEmbeddings({ model: "text-embedding-3-small" });
+
+const vectorStore = await PGVectorStore.initialize(embeddings, {
+  postgresConnectionOptions: { connectionString: process.env.DATABASE_URL },
+  tableName: "documents",
+});
+
+// Indexing
+const splitter = new RecursiveCharacterTextSplitter({ chunkSize: 800, chunkOverlap: 100 });
+const docs = await splitter.createDocuments([rawText]);
+await vectorStore.addDocuments(docs);
+
+// Query
+const retriever = vectorStore.asRetriever({ k: 5 });
+const relevantDocs = await retriever.invoke("What is our refund policy?");
+const context = relevantDocs.map(d => d.pageContent).join("\n\n");
+
+const llm = new ChatOpenAI({ model: "gpt-4o-mini" });
+const answer = await llm.invoke(`Answer using ONLY the context below.
+
+Context:
+${context}
+
+Question: What is our refund policy?`);
+
+console.log(answer.content);
+```
+
 ---
 
 ## 8. Evaluating a RAG System
@@ -174,6 +208,20 @@ RAG failures fall into two buckets — **retrieval failures** (wrong/no chunks f
 - **Tools:** RAGAS, LangSmith (pairs naturally with LangChain), TruLens
 
 Log every query → retrieved chunks → final answer → (optional) user feedback into ClickHouse. This turns "does our RAG system work?" from a guess into a queryable dataset.
+
+**ClickHouse Logging Schema Example:**
+
+```sql
+CREATE TABLE rag_logs (
+  timestamp DateTime,
+  query String,
+  retrieved_chunk_ids Array(String),
+  retrieval_scores Array(Float32),
+  answer String,
+  latency_ms UInt32,
+  user_feedback Int8 -- -1, 0, 1
+) ENGINE = MergeTree() ORDER BY timestamp;
+```
 
 ---
 
@@ -193,6 +241,7 @@ Log every query → retrieved chunks → final answer → (optional) user feedba
 - **Agentic RAG** — instead of a fixed retrieve-then-generate pipeline, the LLM (as an agent) decides *when* and *what* to retrieve, can issue multiple retrieval calls, and can re-query if the first result isn't good enough.
 - **GraphRAG** — build a knowledge graph from your documents (entities + relationships) and retrieve via graph traversal instead of (or alongside) vector similarity — better for multi-hop questions ("who reports to the person who approved X?").
 - **Multi-hop RAG** — chain multiple retrieval steps together to answer questions that require combining facts from different documents.
+- **Cache-Augmented Generation (CAG)** — preload entire small knowledge bases into long-context windows instead of retrieving.
 
 ---
 
@@ -210,11 +259,13 @@ RAG isn't one fixed architecture — it's a family. Here's how the major variant
 | **Corrective RAG (CRAG)** | After retrieval, a lightweight evaluator scores the retrieved chunks' relevance. If they're weak, the system falls back to a broader search (e.g. web search) or discards them before generating. | Cases where your index might not have the answer, and you want a fallback instead of a confidently wrong answer. |
 | **GraphRAG** | Retrieval happens over a knowledge graph (entities + relationships) instead of, or in addition to, flat vector chunks. | Multi-hop, relationship-heavy questions ("who approved the vendor that missed the SLA?"). |
 | **Multi-hop / Iterative RAG** | Multiple retrieve→reason cycles, where each step's output informs the next retrieval query. | Questions that need facts stitched together from several different documents. |
-| **CAG (Cache-Augmented Generation)** | Skips runtime retrieval entirely — instead, the relevant knowledge is *preloaded* into the model's context window (or KV-cache) ahead of time, since modern long-context models can hold entire document sets. No vector search at query time. | Small-to-medium, fairly static knowledge bases where long-context models fit the whole corpus, and you want to cut retrieval latency/complexity. Not a fit for large or frequently-changing datasets. |
+| **CAG (Cache-Augmented Generation)** | Skips runtime retrieval entirely — instead, the relevant knowledge is *preloaded* into the model's context window (or KV-cache) ahead of time, since modern long-context models can hold entire document sets. No vector search at query time. | Small-to-medium, fairly static knowledge bases where long-context models fit the whole corpus, and you want to cut retrieval latency/complexity. |
 | **Hybrid RAG + CAG** | Frequently-used or "core" knowledge is cached in-context (CAG-style) for instant access; RAG kicks in only for the long tail of less common queries or larger corpora that don't fit in context. | Systems wanting the speed of CAG for common queries and the scalability of RAG for everything else. |
 
 **Quick mental model:**
 - **Naive → Advanced → Modular** is a spectrum of *how sophisticated your retrieve-then-generate pipeline is*.
 - **Agentic / Self-RAG / CRAG** are about giving the system *judgment* — deciding whether/how to retrieve, and checking its own work.
 - **GraphRAG / Multi-hop** are about *retrieval structure* — graph traversal or chained retrieval instead of flat top-k similarity.
-- **CAG** is a different bet entirely — skip retrieval, lean on context length instead. Best thought of as a RAG *alternative* for smaller, static corpora rather than a RAG *variant*.
+- **CAG** is a different bet entirely — skip retrieval, lean on context length instead.
+
+---
