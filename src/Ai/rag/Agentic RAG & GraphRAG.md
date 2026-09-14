@@ -15,3 +15,13 @@ Implementation Stack
 Pros and Cons
 Real-World Applications
 Design Checklist for Production
+
+
+1. What is Agentic RAG & GraphRAG?
+Traditional Retrieval-Augmented Generation (RAG) uses vector databases to fetch relevant text chunks for a query based on semantic similarity. It struggles with fragmented data and linking varied data points across documents.
+
+GraphRAG: An advanced version of RAG that incorporates graph-structured data, such as knowledge graphs (KGs). Instead of retrieving only text chunks, GraphRAG indexes data into a graph structure of entities (nodes) and relationships (edges). Retrieval becomes graph traversal, not just vector similarity.
+
+Agentic RAG: Moves beyond passive retrieval to active problem-solving. In Agentic GraphRAG, the agent adopts a goal-oriented approach where it plans, executes multiple graph queries, and intelligently reasons based on the results to replan, validate, or summarize.
+
+In short:
