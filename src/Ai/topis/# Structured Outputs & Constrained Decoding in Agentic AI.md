@@ -220,3 +220,15 @@ Modern engines like vLLM combine speculative decoding (fast) with XGrammar const
 1.  **Post-hoc `json.loads` without constraints:** Wrapping `json.loads(llm_output)` in a try/except and retrying is L2 at best. In production loops, this causes infinite retry storms.
 
 2.  **Allowing `additionalProperties: true`:** Lets the model hallucinate new fields that break downstream code.
+
+3.  **Putting freeform text outside JSON:** "Explain your reasoning, then output JSON" — the explanation will often contain `{` characters that break parsers. Put reasoning *inside* the JSON.
+
+4.  **Using different schemas for indexing vs querying:** Your extraction schema and your query schema must use the same enum definitions, or you get zero matches.
+
+5.  **Not versioning schemas:** Changing a Pydantic model without versioning breaks cached FSMs and historical logs.
+
+---
+
+**Bottom Line:** If your agent takes actions in the real world, freeform text is a liability. Structured Outputs move the guarantee from "the model will *try* to follow instructions" to "the inference engine will *make* it follow instructions." This is the difference between a demo and a production system.
+
+In your curriculum, this module sits directly between Tool Use & Function Calling and Agent Observability — because you cannot trace or evaluate tool calls that are not reliably structured.
