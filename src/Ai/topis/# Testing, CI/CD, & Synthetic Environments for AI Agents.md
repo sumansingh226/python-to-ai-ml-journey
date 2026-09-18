@@ -8,3 +8,16 @@ AI agents, however, are fundamentally stochastic and non-deterministic. An agent
 Testing agents therefore requires shifting from **deterministic unit tests** to **probabilistic assertions, trajectory analysis, and synthetic simulation environments**.
 
 ---
+
+## 2. The Agent Testing Pyramid
+
+A production-grade agent test suite is organized into three distinct tiers:
+
+```
+        /\
+       /  \      Tier 3: End-to-End Simulation (Synthetic Environments)
+      /    \
+     /------\    Tier 2: Component & Integration Evals (LLM-as-a-Judge)
+    /        \
+   /----------\  Tier 1: Deterministic Unit & Schema Tests (Fast, Free)
+```
