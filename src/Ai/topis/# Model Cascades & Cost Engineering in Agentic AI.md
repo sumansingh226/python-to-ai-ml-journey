@@ -1,28 +1,21 @@
+## 4. Cascading Strategies
 
-## 3. Tiered Model Cascades: Designing the Hierarchy
+### A. Fallback Cascading (Speculative Escalation)
+The agent executes the task using a cheap Tier 2 model first. If output validation fails (e.g., JSON schema fails validation, or a unit test fails), the system intercepts the error and escalates the step to a Tier 3 frontier model, passing the failed attempt as negative feedback.
 
-A robust model cascade organizes language models into three functional tiers:
+### B. Router Cascading (Complexity-Based Dispatch)
+A fast classifier or semantic router inspects the incoming sub-task. If the task is labeled low-complexity (e.g., "Extract order status from JSON"), it routes directly to Tier 1/2. If the task requires architectural trade-offs or multi-variable logic, it routes directly to Tier 3.
 
-### Tier 1: Local / Edge SLMs (Sub-second, Minimal Cost)
-* **Models:** Llama 3.2 (1B–3B), Phi-3.5 Mini, Mistral NeMo.
-* **Role:** High-throughput, deterministic tasks:
-  * Input classification & intent detection.
-  * Schema extraction & formatting.
-  * Deterministic regex generation.
-  * Prompt sanitization & PII redaction.
-
-### Tier 2: Mid-Tier Workhorses (Balanced Latency & Reasoning)
-* **Models:** GPT-4o-mini, Claude 3.5 Haiku, Gemini 1.5 Flash.
-* **Role:** Core sub-goal execution:
-  * Tool argument generation.
-  * Data summarization and retrieval parsing.
-  * Peer review and basic reflection.
-
-### Tier 3: Frontier Reasoning Engines (High Compute, Deep Planning)
-* **Models:** Claude 3.5 Sonnet, GPT-4o, OpenAI o1 / o3, Gemini 1.5 Pro.
-* **Role:** High-order cognitive governance:
-  * Initial task decomposition and global planning.
-  * Fallback reasoning when Tier 2 models fail or get stuck.
-  * Final synthesis of multi-agent debates.
+### C. Self-Consistency Verification Cascade
+Multiple cheap models generate candidate answers in parallel. If their outputs agree with high consensus, the answer is accepted. Only when candidate answers diverge is a frontier model engaged as an arbitrator.
 
 ---
+
+## 5. Token Budgeting & Dynamic Halting
+
+To prevent runaway spend, production agents enforce hard token and financial guardrails at the orchestrator level:
+
+* **Trace-Level Token Caps:** Assigning a maximum token ceiling per user goal (e.g., maximum 100,000 tokens total per task).
+* **Step-Count Quotas:** Setting a hard limit on trajectory depth (e.g., maximum 10 tool iterations).
+* **Cost Velocity Throttling:** Monitoring burn rate ($USD per minute). If an agent exceeds expected spend velocity, execution is suspended and escalated to an Approval Gate.
+* **Graceful Degradation:** When an agent reaches 85% of its token budget without completing the goal, it switches from an "exploration" prompt to a "wrap-up" prompt, instructing it to synthesize the best possible partial answer with its remaining budget.
