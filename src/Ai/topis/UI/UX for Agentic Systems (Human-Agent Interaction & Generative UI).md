@@ -13,3 +13,17 @@ Design Patterns for Agentic UX
 Implementation Blueprint
 Pros and Cons
 Production Checklist
+
+
+1. The "Black Box" Problem in Agentic Design
+Traditional UI assumes the user initiates every action and the system responds deterministically. Click button -> API call -> result. The user is the driver.
+
+AI agents reverse this relationship by initiating actions, making decisions, and changing states autonomously. The agent becomes the driver; the user becomes the supervisor.
+
+When developers apply a standard chat interface to an autonomous agent, they create a "black box launch".
+
+Example Failure:
+User: "Reschedule my meeting with Acme to next week"
+
+What agent actually does (10 steps):
+
