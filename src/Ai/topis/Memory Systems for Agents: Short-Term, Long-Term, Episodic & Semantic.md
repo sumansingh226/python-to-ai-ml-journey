@@ -277,4 +277,3 @@ memory.after_task("Refund ORD-12345", result.trace, result.success, user_id="123
 In your curriculum, this module sits after RAG & GraphRAG and before Fine-Tuning, because semantic memory is RAG, episodic memory feeds fine-tuning data, and procedural memory is fine-tuned.
 
 ---
-*Module: Memory Systems for Agents - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
