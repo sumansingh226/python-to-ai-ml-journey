@@ -304,4 +304,3 @@ Use another agent (Red Team Agent) whose goal is to break your agent. It generat
 In your curriculum, this module sits after Guardrails & Policy Engines and MCP/A2A, because those are the layers you harden, and before Testing & CI/CD, because security tests must be part of CI.
 
 ---
-*Module: Security & Threat Modeling for Agentic AI - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
