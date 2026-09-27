@@ -11,3 +11,15 @@ Data Exfiltration & Memory Poisoning
 Defense-in-Depth Architecture
 Implementation Blueprint
 Red Teaming & Continuous Testing
+
+
+1. Why Agent Security is Different from LLM Security
+LLM security: Prevent model from saying disallowed content (toxicity, bias, illegal advice).
+
+Agent security: Prevent model from doing disallowed actions via tools — deleting database, refunding $10K, sending phishing email from your domain, exfiltrating PII to external URL.
+
+Attack surface multiplies:
+
+LLM alone: Input -> Output (text)
+Agent: Input + Tool Outputs (untrusted web pages, docs) + Memory (poisoned past episodes) + MCP Servers (third-party code) + A2A Agents (other agents) -> Actions (API calls, DB writes, emails)
+Each new input is a potential injection vector.
