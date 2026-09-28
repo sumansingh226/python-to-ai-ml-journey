@@ -255,4 +255,3 @@ function SupportChat() {
 In your curriculum, this module sits after Computer-Use & GUI Agents and UI/UX, because vision is required for computer-use and voice requires GenUI for visual feedback.
 
 ---
-*Module: Voice & Multimodal Agents - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
