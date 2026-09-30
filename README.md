@@ -26,5 +26,6 @@ It includes:
 - Explore Machine Learning algorithms
 - Work on real-world AI/ML projects
 - Maintain consistency through daily codingn
+- agentic ai engineer 
 
 
