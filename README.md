@@ -27,5 +27,6 @@ It includes:
 - Work on real-world AI/ML projects
 - Maintain consistency through daily codingn
 - agentic ai engineer 
+- data structure and algorithms 
 
 
