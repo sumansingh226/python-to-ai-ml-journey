@@ -1,0 +1,1 @@
+The algorithm maintains a running list of the shortest known distances from the source to every other node. It iteratively picks the unvisited node with the absolute smallest tentative distance, "finalizes" it, and then updates (relaxes) the distances of its neighboring nodes
