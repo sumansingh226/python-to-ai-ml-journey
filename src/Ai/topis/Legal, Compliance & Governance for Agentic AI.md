@@ -1,1 +1,3 @@
 Legal, Compliance & Governance for Agentic AI
+SOC2, GDPR, Liability, and Audit-Ready Agents
+Core Thesis: An agent that can send emails, refund money, and access PII is not just a feature — it's a regulated actor. When it hallucinates a refund or leaks another user's data, you are liable. Compliance is not a checkbox after building; it's architecture — memory deletion, audit logs, policy versioning, and human-in-the-loop gates that prove to auditors what happened
