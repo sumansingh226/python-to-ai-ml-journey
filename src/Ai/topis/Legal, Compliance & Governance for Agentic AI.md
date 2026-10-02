@@ -209,3 +209,34 @@ def execute_task(task_id, user_id):
 In your curriculum, this module sits after Security & Deployment, because compliance is the final gate before production.
 
 ---
+For **Legal Compliance & Governance for Agentic AI** — here are the official sources to read, by regulation:
+
+### 1. EU AI Act — Official (Applies to Agentic Systems)
+- **Official Text:** EU AI Act Article 9 (risk management as ongoing evidence-based process), Article 12 (automatic tamper-evident logging), Article 13 (transparency), Article 14 (human oversight with kill switch), Article 15 (accuracy/robustness/cybersecurity), Article 50 (AI-generated content labeling)
+- **Key for agents:** Recital 80 directly acknowledges agentic systems — deployer must ensure appropriate human oversight. High-risk agentic systems must have behavioral monitoring and kill switch capability
+- **Enforcement:** Article 50 labeling since Aug 2, 2026, Annex III high-risk obligations since Dec 2, 2027 — penalties up to €15M or 3% global turnover
+- **Read:** `eur-lex.europa.eu` EU AI Act + OWASP crosswalk `genai-security-project/crosswalk agentic-top10/Agentic_EUAIAct.md` which maps ASI risks to EU AI Act articles
+
+### 2. NIST AI Risk Management Framework (AI RMF 1.0)
+- **Official:** Released Jan 26, 2023 by NIST — voluntary framework structured around four functions **GOVERN, MAP, MEASURE, MANAGE** — defines 7 characteristics of trustworthy AI: valid/reliable, safe, secure/resilient, accountable/transparent, explainable/interpretable, privacy-enhanced, fair
+- **For agents:** Companion Generative AI Profile (NIST AI 600-1) July 2024 extends to GenAI risks. Use GOVERN for culture/accountability, MAP for context/risk identification, MEASURE for monitoring, MANAGE for response. Increasingly baseline for US federal AI procurement
+
+### 3. GDPR for Agents — Right to be Forgotten
+- **Official:** Article 15 (Right of Access), Article 17 (Right to Erasure), Article 22 (Automated decision-making)
+- **Agent-specific challenge:** Memory systems store sensitive info across sessions — must support hard deletion not soft delete, including vector DB embeddings where individual deletion is complex. Right to be forgotten means removing memories from all stores including vector DB
+- **Implementation pattern:** GDPR Deletion Handler Lambda that deletes all memories associated with user across all agents, logged as structured JSON for CloudTrail auditing. Externalizing memory into database allows granular deletion of specific records for Article 17 compliance
+
+### 4. SOC2 for AI Agents
+- **Official:** SOC2 requires 1 year audit log retention (vs 7 years for financial), tamper-evident logs, who/what/when for every AI action
+- **For agents:** Immutable governance policies + verifiable audit trails before action reaches data layer. Complete conversation logs for SOC2/HIPAA compliance, automated SOC2/HIPAA exports
+- **Tools:** Agent-ledger for EU AI Act Art 12 + SOC2 ready — generates tamper-proof compliance audit trail, exports SOC2 Type II evidence reports
+
+### 5. OWASP for Governance
+- **OWASP Top 10 for Agentic Applications 2026 (ASI01-ASI10)** released Dec 2025 — covers Agent Goal Hijack, Tool Misuse, Memory/Context Poisoning ASI06, Insecure Inter-Agent Comms ASI07, Cascading Failures, Rogue Agents — extends LLM Top 10 2025
+
+**Start here in order:**
+1. EU AI Act Articles 12, 14, 50 on eur-lex.europa.eu
+2. NIST AI RMF 1.0 Playbook (nist.gov)
+3. OWASP GenAI Security Project — Agentic Top 10 + EU AI Act crosswalk
+4. Your `legal_compliance_governance.md` module — has full GDPR delete code + audit log schema + policy versioning pattern
+
