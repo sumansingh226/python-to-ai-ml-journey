@@ -206,10 +206,8 @@ def execute_task(task_id, user_id):
 
 **Bottom Line:** Agents are regulated actors that store PII, take autonomous financial actions, and generate content you are liable for. Build GDPR deletion that cleans all stores, access control on every memory read, immutable audit logs with policy version pinned, and hard approval gates for high-risk actions. This is how you prove to auditors and courts that you acted responsibly — not just "the LLM did it."
 
-In your curriculum, this module sits after Security & Deployment, because compliance is the final gate before production.
 
 ---
-For **Legal Compliance & Governance for Agentic AI** — here are the official sources to read, by regulation:
 
 ### 1. EU AI Act — Official (Applies to Agentic Systems)
 - **Official Text:** EU AI Act Article 9 (risk management as ongoing evidence-based process), Article 12 (automatic tamper-evident logging), Article 13 (transparency), Article 14 (human oversight with kill switch), Article 15 (accuracy/robustness/cybersecurity), Article 50 (AI-generated content labeling)
