@@ -133,4 +133,3 @@ GROUP BY date
 In your curriculum, this is the final capstone after Legal & Compliance, because you need to prove profitability to get budget for compliance.
 
 ---
-*Module: Agent Economics, Pricing & ROI - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
