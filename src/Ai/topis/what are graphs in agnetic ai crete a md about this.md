@@ -12,3 +12,12 @@ Type 5: Conversation Graphs (Context Graphs)
 GraphRAG: Graphs + RAG for Multi-Hop QA
 Implementation Blueprint with Postgres + pgvector + Neo4j
 Production Checklist
+
+1. Why Graphs?
+Without graphs:
+
+User: "Who is the manager of the team that built feature X?"
+Agent (vector search only): Searches "manager team feature X" -> gets 5 chunks about feature X, but no chunk explicitly says "manager is Alice" because that fact is in another doc about team structure.
+Fails — needs 2-hop reasoning: Feature X -> Team Y -> Manager Alice
+With graphs:
+
