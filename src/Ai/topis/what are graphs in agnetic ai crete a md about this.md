@@ -543,5 +543,4 @@ result = app.invoke({"order_id": "ORD-12345"}, config={"configurable": {"thread_
 **Bottom Line:** Graphs are the data structure for production agents — Knowledge Graphs store facts with relationships for multi-hop QA (Feature X -> Team Y -> Manager Alice), State Graphs (LangGraph) define workflows as nodes + conditional edges (if trust>80 then auto else approval) with loops and human pause/resume, Task DAGs represent dependencies for parallel execution, Agent Collaboration Graphs define who talks to whom, Conversation Graphs handle branching. GraphRAG = KG + vector = best of both for enterprise knowledge bases. Use Postgres for small graphs, Neo4j for large, LangGraph for state graphs with Postgres checkpointer for resume.
 
 ---
-*Module: Graphs in Agentic AI - Knowledge Graphs, State Graphs, and Workflow Graphs - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
-*Reference: LangGraph docs, Microsoft GraphRAG 2024, Neo4j*
+
