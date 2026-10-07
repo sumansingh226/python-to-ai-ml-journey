@@ -15,3 +15,10 @@ Local vs Global Search
 Implementation Blueprint: Postgres + pgvector + Neo4j
 Benchmarks & Cost
 Production Checklist
+
+1. Why Vector RAG Fails
+Example Enterprise Docs:
+
+Doc1 (Feature spec): "Feature X is a new dashboard built by Team Y in Q1 2026. It shows revenue metrics."
+Doc2 (Team page): "Team Y is the Analytics team managed by Alice Smith. Members: Bob, Carol."
+Doc3 (People page): "Alice Smith (alice@company.com) is Senior Manager, Analytics. Reports to CTO."
