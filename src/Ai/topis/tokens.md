@@ -1,0 +1,1 @@
+In artificial intelligence, tokens are the fundamental units of data that a model uses to process, understand, and generate information
