@@ -606,6 +606,3 @@ GROUP BY loop_breaking_temperature
 ---
 **Bottom Line:** Temperature controls randomness — T=0.0 deterministic argmax picks highest probability token, 100% reproducible, 99.9% valid JSON with constrained decoding, 95% tool calling accuracy, best for tool calling JSON policy checks extraction (80% steps). T=0.3-0.5 balanced some creativity focused, 80% valid JSON, best for reasoning Chain-of-Thought evaluation scoring. T=0.7-0.9 creative diverse explores low-probability tokens, 60% valid JSON, best for planning brainstorming diverse thoughts ToT writing friendly loop breaking (breaks 90% loops vs 10% at T=0.0). T=1.0+ chaotic hallucinates dangerous tools, 10% valid JSON, avoid. Production agents use dynamic temperature: Planning T=0.7, Reasoning T=0.4, Tool calling T=0.0 (80% steps) with constrained decoding regex, Loop breaking T=0.7, Evaluation T=0.3, Writing T=0.7. Result 92% success vs 70% with T=0.0 only (stuck) or 60% with T=0.7 only (invalid JSON). Always use constrained decoding for tool calling, monitor success rate by temperature in ClickHouse, and use T=0.7 to break loops.
 
----
-*Module: Temperature in Agentic AI - Complete Production Guide - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
-*Reference: Softmax with temperature, Top-p nucleus sampling, Constrained decoding, Tree-of-Thought Yao et al. 2023*
