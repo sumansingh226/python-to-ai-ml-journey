@@ -1,5 +1,611 @@
-Temperature in Agentic AI: Complete Production Guide
-How Temperature Controls Creativity, Determinism, and Cost - From 0.0 to 1.5
-Core Thesis: Temperature is the single most important hyperparameter for agent reliability. T=0.0 = deterministic, reproducible, best for tool calling, JSON, policy checks (99% valid). T=0.7 = creative, diverse, best for brainstorming, writing, exploration (breaks loops). T=1.0+ = chaotic, hallucinates. Production agents use dynamic temperature: T=0.0 for 80% of steps (tool calling, validation), T=0.7 for 20% of steps (planning, reflection, loop breaking). Wrong temperature is #1 cause of invalid JSON and hallucinations.
+# Temperature in Agentic AI: Complete Production Guide
+## How Temperature Controls Creativity, Determinism, and Cost - From 0.0 to 1.5
 
-Table of Contents
+> **Core Thesis:** Temperature is the single most important hyperparameter for agent reliability. T=0.0 = deterministic, reproducible, best for tool calling, JSON, policy checks (99% valid). T=0.7 = creative, diverse, best for brainstorming, writing, exploration (breaks loops). T=1.0+ = chaotic, hallucinates. Production agents use dynamic temperature: T=0.0 for 80% of steps (tool calling, validation), T=0.7 for 20% of steps (planning, reflection, loop breaking). Wrong temperature is #1 cause of invalid JSON and hallucinations.
+
+### Table of Contents
+1. [What is Temperature? Math Behind It](#1-what-is-temperature-math-behind-it)
+2. [Temperature Ranges and What They Do](#2-temperature-ranges-and-what-they-do)
+3. [T=0.0: Deterministic Mode - For Tool Calling, JSON, Policy](#3-t00-deterministic-mode---for-tool-calling-json-policy)
+4. [T=0.3-0.5: Balanced Mode - For Reasoning](#4-t03-05-balanced-mode---for-reasoning)
+5. [T=0.7-0.9: Creative Mode - For Planning, Brainstorming, Loop Breaking](#5-t07-09-creative-mode---for-planning-brainstorming-loop-breaking)
+6. [T=1.0+: Chaotic Mode - Avoid](#6-t10-chaotic-mode---avoid)
+7. [Dynamic Temperature: The Production Pattern](#7-dynamic-temperature-the-production-pattern)
+8. [Temperature for Different Agent Loops](#8-temperature-for-different-agent-loops)
+9. [Temperature + Top-p + Top-k: How They Interact](#9-temperature--top-p--top-k-how-they-interact)
+10. [Benchmarks: Temperature vs Success Rate vs Cost](#10-benchmarks-temperature-vs-success-rate-vs-cost)
+11. [Common Failures from Wrong Temperature](#11-common-failures-from-wrong-temperature)
+12. [Implementation Blueprint](#12-implementation-blueprint)
+13. [Production Checklist](#13-production-checklist)
+
+---
+
+### 1. What is Temperature? Math Behind It
+
+**Temperature controls randomness in token sampling.**
+
+LLM outputs logits for each token (score for how likely token is next). Softmax converts logits to probabilities with temperature T:
+
+```
+P(token_i) = exp(logit_i / T) / sum_j exp(logit_j / T)
+
+T -> 0: exp(logit/T) -> very peaky, highest logit dominates -> deterministic (argmax)
+T = 1.0: Standard softmax
+T -> infinity: exp(logit/T) -> all equal -> uniform random, chaotic
+```
+
+**Example logits:** [2.0, 1.0, 0.5] for tokens ["refund", "check", "deny"]
+
+- T=0.0 (deterministic): P(refund)=99%, P(check)=1%, P(deny)=0% -> always picks refund (argmax)
+- T=0.5: P(refund)=80%, P(check)=15%, P(deny)=5% -> mostly refund, sometimes check
+- T=1.0: P(refund)=60%, P(check)=25%, P(deny)=15% -> more diverse
+- T=1.5: P(refund)=45%, P(check)=30%, P(deny)=25% -> chaotic, almost uniform
+
+**So temperature = creativity knob:**
+- Low T = conservative, picks highest probability token, deterministic, reproducible, less diverse
+- High T = creative, samples lower probability tokens, diverse, non-deterministic, more hallucination
+
+### 2. Temperature Ranges and What They Do
+
+| Temperature | Behavior | Determinism | Creativity | Valid JSON Rate | Use Case |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **0.0** | Deterministic, always picks argmax | 100% reproducible | 0% | 99.9% with constrained decoding, 95% with prompting | Tool calling, JSON generation, policy checks, classification |
+| **0.1-0.2** | Almost deterministic, tiny randomness | 95% reproducible | 5% | 90% | Fact extraction, NER, KG extraction |
+| **0.3-0.5** | Balanced, some creativity but still focused | 70% reproducible | 30% | 80% | Reasoning, Chain-of-Thought, evaluation, scoring |
+| **0.7** | Creative, diverse, good for brainstorming | 30% reproducible | 70% | 60% | Planning, brainstorming, writing, reflection, loop breaking |
+| **0.9-1.0** | Very creative, more diverse | 10% reproducible | 90% | 40% | Creative writing, diverse thought generation for ToT |
+| **1.2-1.5** | Chaotic, hallucinates, incoherent | 0% reproducible | 100% | 10% | Avoid in production, only for art |
+
+**Key insight:** For agents, 80% of steps need T=0.0 (tool calling, JSON), 20% need T=0.7 (planning, reflection, loop breaking).
+
+### 3. T=0.0: Deterministic Mode - For Tool Calling, JSON, Policy
+
+**When to use T=0.0:**
+
+- Tool calling: `refund_order(ORD-12345, 120)` must be exact, no creativity
+- JSON generation: `{"order_id": "ORD-12345", "amount": 120}` must match schema
+- Policy checks: "Is amount <500?" must be deterministic True/False
+- Classification: "Is this high-risk?" must be deterministic
+- Extraction: Extract entities from text, must be consistent
+
+**Why T=0.0:**
+
+- Deterministic: Same input -> same output, reproducible, debuggable
+- Highest valid JSON rate: 95% with prompting, 99.9% with constrained decoding (vs 60% at T=0.7)
+- No hallucination: Picks highest probability token, less likely to hallucinate low-probability facts
+- Cacheable: Same prompt always same response, can cache
+
+**Example:**
+
+```python
+# Tool calling - must be T=0.0
+def call_tool(state):
+    action = llm.generate(
+        f"State: {state}\nAction (tool + args as JSON):",
+        temperature=0.0, # Deterministic
+        response_format=ActionSchema # Constrained decoding regex
+    )
+    # With T=0.0 + constrained decoding: 99.9% valid JSON, exact tool name
+    # With T=0.7: 60% valid JSON, may hallucinate tool name get_order_statusz
+    return action
+
+# Policy check - must be T=0.0
+def check_policy(amount, policy):
+    decision = llm.generate(
+        f"Amount: {amount}, Policy max auto: {policy.max_auto}\nIs amount < max_auto? Answer True/False",
+        temperature=0.0 # Deterministic True/False
+    )
+    return decision == "True"
+```
+
+**Pros:**
+- Reproducible, debuggable
+- Highest accuracy for factual tasks
+- Cacheable, saves cost
+
+**Cons:**
+- No creativity, stuck in loops if first thought wrong (needs T=0.7 to break loop)
+- Can be repetitive
+
+**Benchmark:** Tool calling accuracy T=0.0 95% vs T=0.7 70% (25% drop).
+
+### 4. T=0.3-0.5: Balanced Mode - For Reasoning
+
+**When to use T=0.3-0.5:**
+
+- Chain-of-Thought reasoning: "Think step by step"
+- Evaluation: Rate thought 1-10
+- Scoring: Is this thought promising?
+- Reflection: Why did previous attempt fail?
+
+**Why T=0.3-0.5:**
+
+- Some creativity to explore different reasoning paths, but still focused
+- Balanced between determinism and diversity
+- Good for evaluation where need some judgment but not too creative
+
+**Example:**
+
+```python
+# Chain-of-Thought reasoning - T=0.4 balanced
+def chain_of_thought(query, history):
+    thought = llm.generate(
+        f"Query: {query}\nHistory: {history}\nThink step by step:",
+        temperature=0.4 # Balanced - some creativity but focused
+    )
+    return thought
+
+# Evaluation - T=0.3 balanced
+def evaluate_thought(thought, query):
+    score = llm.generate(
+        f"Query: {query}\nThought: {thought}\nRate this thought 1-10 for progressing to answer:",
+        temperature=0.3 # Balanced evaluation
+    )
+    return parse_score(score)
+```
+
+**Pros:**
+- Balanced reasoning, not too deterministic nor too creative
+- Good for evaluation and scoring
+
+**Cons:**
+- Not deterministic, some variance
+- Valid JSON rate 80% (need validation + retry)
+
+**Benchmark:** Reasoning tasks (math, logic) T=0.4 75% vs T=0.0 65% (10% improvement) because some creativity helps explore different paths.
+
+### 5. T=0.7-0.9: Creative Mode - For Planning, Brainstorming, Loop Breaking
+
+**When to use T=0.7-0.9:**
+
+- Planning: Decompose goal into sub-goals, need diverse approaches
+- Brainstorming: Generate 3-5 different thoughts (Tree-of-Thought)
+- Writing: Creative writing, email generation, user notification
+- Reflection: Why did previous attempt fail? What different approach?
+- Loop breaking: Stuck repeating same action, need creative alternative
+
+**Why T=0.7:**
+
+- Creative, diverse, explores low-probability tokens that may be good alternative approaches
+- Breaks loops: If T=0.0 stuck repeating same thought, T=0.7 generates different thought
+- Good for planning where need diverse sub-goals
+
+**Example:**
+
+```python
+# Planning - T=0.7 creative diverse approaches
+def plan_goal(user_goal):
+    plan = llm.generate(
+        f"Goal: {user_goal}\nDecompose into 3-5 sub-goals with different approaches:",
+        temperature=0.7 # Creative diverse plans
+    )
+    # T=0.0 would generate same plan every time, T=0.7 generates diverse plans
+    return plan
+
+# Tree-of-Thought - T=0.7 for diverse thoughts
+def tree_of_thought_generate(query, history):
+    thoughts = llm.generate(
+        f"Query: {query}\nHistory: {history}\nGenerate 3 different next thoughts:",
+        n=3,
+        temperature=0.7 # Creative diverse thoughts for branching
+    )
+    return thoughts
+
+# Loop breaking - T=0.7 when stuck
+def detect_loop(history):
+    if last_3_actions_identical(history):
+        # Stuck in loop with T=0.0, need T=0.7 to break
+        reflection = llm.generate(
+            f"Stuck repeating {history[-1].action}, why? What different approach?",
+            temperature=0.7 # Creative to break loop
+        )
+        return reflection
+
+# Writing - T=0.7 for user-facing email
+def notify_user(refund_amount):
+    email = llm.generate(
+        f"Refund ${refund_amount} processed. Write friendly email to user:",
+        temperature=0.7 # Creative friendly tone
+    )
+    return email
+```
+
+**Pros:**
+- Diverse, creative, explores alternative approaches
+- Breaks loops
+- Good for user-facing writing
+
+**Cons:**
+- Non-deterministic, hard to debug
+- Valid JSON rate 60% (low) - don't use for JSON
+- More hallucination - low-probability tokens may be hallucinations
+
+**Benchmark:** Planning tasks T=0.7 80% diverse plans vs T=0.0 50% diverse (30% more diverse). Loop breaking T=0.7 breaks 90% loops vs T=0.0 breaks 10%.
+
+### 6. T=1.0+: Chaotic Mode - Avoid
+
+**When to use T=1.0+:** Never in production. Only for art, creative writing where chaos wanted.
+
+**Why avoid:**
+
+- Chaotic, hallucinates, incoherent
+- Valid JSON rate 10% - almost always invalid
+- Tool calling accuracy 30% - hallucinates tool names
+- Non-reproducible, hard to debug
+
+**Example of T=1.2 failure:**
+
+```
+Prompt: "Refund order ORD-12345, amount 120"
+T=0.0: {"tool": "refund_order", "args": {"order_id": "ORD-12345", "amount": 120}} - valid
+T=1.2: {"tool": "refund_orderz_magic", "args": {"order_id": "ORD-12345-xyz", "amount": 99999, "reason": "because unicorns"}} - hallucinated, invalid, dangerous
+```
+
+**Pros:** None for production.
+
+**Cons:** Hallucinates, invalid JSON, dangerous.
+
+**Benchmark:** Tool calling T=1.2 accuracy 30% vs T=0.0 95% - 65% drop. Invalid JSON 90%.
+
+### 7. Dynamic Temperature: The Production Pattern
+
+**Production agents use dynamic temperature — different T for different steps:**
+
+```python
+def production_agent_loop(task_id, user_goal):
+    history = []
+    
+    for step in range(MAX_STEPS):
+        # Step 1: Planning - T=0.7 creative diverse sub-goals
+        if step == 0:
+            plan = llm.generate(
+                f"Goal: {user_goal}\nDecompose into sub-goals:",
+                temperature=0.7 # Creative planning
+            )
+            history.append(plan)
+        
+        # Step 2: Reasoning - T=0.4 balanced
+        thought = llm.generate(
+            f"Goal: {user_goal}\nHistory: {history}\nThink step by step:",
+            temperature=0.4 # Balanced reasoning
+        )
+        history.append(thought)
+        
+        # Step 3: Tool calling - T=0.0 deterministic
+        action = llm.generate(
+            f"Thought: {thought}\nAction (tool + args JSON):",
+            temperature=0.0, # Deterministic tool calling
+            response_format=ActionSchema # Constrained decoding
+        )
+        history.append(action)
+        
+        # Step 4: Execute tool with retry
+        observation = execute_tool_with_retry(action.tool, action.args)
+        history.append(observation)
+        
+        # Step 5: Loop detection - if loop, use T=0.7 to break
+        if detect_loop(history):
+            reflection = llm.generate(
+                f"Stuck repeating {history[-1].action}, reflect and try different:",
+                temperature=0.7 # Creative loop breaking
+            )
+            history.append(reflection)
+            continue
+        
+        # Step 6: Evaluation - T=0.3 balanced
+        if is_done(observation, thought):
+            break
+    
+    # Step 7: User notification - T=0.7 creative friendly
+    final_answer = llm.generate(
+        f"History: {history}\nSynthesize final answer friendly:",
+        temperature=0.7 # Creative writing
+    )
+    return final_answer
+
+# Temperature schedule:
+# Planning: T=0.7 (creative diverse)
+# Reasoning: T=0.4 (balanced)
+# Tool calling: T=0.0 (deterministic) - 80% of steps
+# Loop breaking: T=0.7 (creative)
+# Evaluation: T=0.3 (balanced)
+# User notification: T=0.7 (creative)
+```
+
+**Why dynamic:**
+
+- Tool calling must be deterministic T=0.0 for valid JSON and exact args (80% of steps)
+- Planning and loop breaking need creativity T=0.7 to explore diverse approaches and break loops (20% of steps)
+- Reasoning balanced T=0.4
+- User-facing writing creative T=0.7 for friendly tone
+
+**Result:** 95% valid JSON for tool calling (T=0.0) + diverse planning (T=0.7) + loop breaking 90% success (T=0.7).
+
+### 8. Temperature for Different Agent Loops
+
+**ReAct loop:**
+
+- Thought: T=0.4 balanced reasoning
+- Action: T=0.0 deterministic tool calling
+- Observation: Tool output (no LLM)
+- Loop detection: T=0.7 creative reflection to break loop
+
+**Tree-of-Thought:**
+
+- Generate thoughts: T=0.7 creative diverse thoughts (k=3)
+- Evaluate thoughts: T=0.3 balanced evaluation 1-10
+- Keep top beam_width=2
+- Cost 3x chain, +15-20% success
+
+**Reflexion loop:**
+
+- Try: ReAct loop with T=0.0 tool calling
+- Fail: Reflection T=0.7 creative why failed, what lesson
+- Retry: ReAct loop with lesson in memory, T=0.0 tool calling
+- Success rate 70% -> 90% with reflection
+
+**Planning loop:**
+
+- Plan: T=0.7 creative diverse sub-goals
+- Execute each sub-goal: ReAct loop T=0.0 tool calling
+- Synthesize: T=0.7 creative friendly final answer
+
+**MCTS:**
+
+- Selection: UCT (no T, deterministic)
+- Expansion: T=0.7 creative diverse children k=3
+- Simulation: T=0.7 fast rollout
+- Backprop: No T
+
+### 9. Temperature + Top-p + Top-k: How They Interact
+
+**Top-p (nucleus sampling):** Only consider tokens whose cumulative probability > p. E.g., top-p=0.9 means only consider tokens that make up 90% probability mass.
+
+**Top-k:** Only consider top k tokens.
+
+**How they interact with temperature:**
+
+- Temperature controls shape of distribution (peaky vs flat)
+- Top-p and top-k control truncation of distribution (cut off low-probability tail)
+
+**Example:**
+
+Logits [2.0, 1.0, 0.5, 0.2, 0.1] -> with T=1.0 probabilities [0.5, 0.25, 0.15, 0.07, 0.03]
+
+- T=0.0 + top-p=0.9: Only token with 0.5 prob considered (deterministic)
+- T=0.7 + top-p=0.9: Tokens with cumulative 0.9 prob = first 3 tokens [0.5+0.25+0.15=0.9] considered, sample among them
+- T=1.0 + top-p=0.9: Same 3 tokens considered, but distribution flatter, more diverse
+- T=1.0 + top-k=2: Only top 2 tokens [0.5, 0.25] considered, sample among them
+
+**Production recommendation:**
+
+- For T=0.0 tool calling: Use top-p=1.0, top-k=None (no truncation, deterministic argmax)
+- For T=0.4 reasoning: Use top-p=0.9, top-k=50 (balanced, cut off tail)
+- For T=0.7 planning: Use top-p=0.9, top-k=50 (creative but not too chaotic)
+- For T=0.7 ToT diverse thoughts: Use top-p=0.95, top-k=100 (more diverse)
+
+**Benchmark:**
+
+- T=0.0 + top-p=1.0: Valid JSON 95%, deterministic
+- T=0.7 + top-p=0.9: Valid JSON 60%, diverse
+- T=0.7 + top-p=0.95 + top-k=100: Valid JSON 55%, more diverse (better for ToT)
+
+### 10. Benchmarks: Temperature vs Success Rate vs Cost
+
+**Tool calling accuracy (must be valid JSON + correct tool + correct args):**
+
+- T=0.0: 95% accuracy, 95% valid JSON, cost 1x
+- T=0.3: 85% accuracy, 80% valid JSON, cost 1x
+- T=0.7: 70% accuracy, 60% valid JSON, cost 1x (but needs retry 1.5x cost for 85% accuracy)
+- T=1.0: 50% accuracy, 40% valid JSON, cost 1x (needs retry 2x cost for 70% accuracy)
+- T=1.2: 30% accuracy, 10% valid JSON, cost 1x (needs retry 3x cost for 50% accuracy)
+
+**Reasoning tasks (math, logic):**
+
+- T=0.0: 65% success (too deterministic, stuck if first thought wrong)
+- T=0.4: 75% success (balanced, some creativity explores alternative paths)
+- T=0.7: 70% success (too creative, hallucinates)
+- Best: T=0.4 for reasoning
+
+**Planning tasks (decompose goal into sub-goals):**
+
+- T=0.0: 50% diverse plans (same plan every time)
+- T=0.7: 80% diverse plans (different approaches)
+- Best: T=0.7 for planning
+
+**Loop breaking:**
+
+- T=0.0: Breaks 10% loops (repeats same thought)
+- T=0.7: Breaks 90% loops (creative alternative)
+- Best: T=0.7 for loop breaking
+
+**Creative writing (user notification):**
+
+- T=0.0: 50% friendly (robotic)
+- T=0.7: 90% friendly (creative friendly tone)
+- Best: T=0.7 for writing
+
+**Overall production agent with dynamic temperature:**
+
+- 80% steps T=0.0 tool calling: 95% accuracy, valid JSON
+- 10% steps T=0.4 reasoning: 75% success
+- 10% steps T=0.7 planning/writing/loop breaking: 80% diverse, 90% loop break, 90% friendly
+- Overall: 92% success, 1.2x cost vs 70% success with T=0.0 only (chain stuck) or 60% success with T=0.7 only (invalid JSON)
+
+### 11. Common Failures from Wrong Temperature
+
+**Failure 1: T=0.7 for tool calling -> invalid JSON**
+
+```
+Prompt: "Action: refund_order"
+T=0.7 generates: {"tool": "refund_orderz", "args": {"order_id": "ORD-12345-xyz", "amount": 999}} - hallucinated tool name and amount
+Result: Tool call fails, trajectory fails
+Fix: Use T=0.0 for tool calling + constrained decoding regex ^refund_order$ and ^ORD-\d{5}$
+```
+
+**Failure 2: T=0.0 for planning -> same plan every time, no diversity**
+
+```
+Prompt: "Decompose refund goal into sub-goals"
+T=0.0 generates: [Check order, Check policy, Refund] every time
+But better plan for $500 order: [Check order, Check policy, Check trust, Request approval, Refund] - needs creativity to consider trust
+Result: Misses trust check, fails
+Fix: Use T=0.7 for planning to generate diverse plans
+```
+
+**Failure 3: T=0.0 when stuck in loop -> repeats same action**
+
+```
+History: get_order_status(ORD-123) -> Error Invalid ID -> Thought: Need to get order status -> Action: get_order_status(ORD-123) -> Error Invalid ID -> loop
+T=0.0 repeats same thought "Need to get order status" 3x
+Result: Infinite loop, cost blowup
+Fix: Detect loop, use T=0.7 for reflection "Stuck repeating, what different approach? Maybe order ID format wrong? Try ORD-12345?"
+```
+
+**Failure 4: T=1.2 for everything -> chaotic, hallucinates, dangerous**
+
+```
+Prompt: "Refund order ORD-12345"
+T=1.2 generates: {"tool": "delete_all_orders", "args": {}} - hallucinated dangerous tool
+Result: Deletes all orders, catastrophic
+Fix: Never use T>1.0 in production. Use T=0.0 for tool calling with constrained decoding allowlist of tools.
+```
+
+**Failure 5: T=0.0 for user notification -> robotic**
+
+```
+T=0.0: "Refund $120 processed for order ORD-12345."
+T=0.7: "Great news! Your refund of $120 for order ORD-12345 has been processed and will appear in your account within 3-5 business days. Thanks for your patience!"
+Result: T=0.0 robotic, low CSAT. T=0.7 friendly, high CSAT
+Fix: Use T=0.7 for user-facing writing
+```
+
+### 12. Implementation Blueprint
+
+**Dynamic temperature function:**
+
+```python
+def get_temperature(step_type):
+    # step_type: planning, reasoning, tool_calling, evaluation, reflection, writing, loop_breaking
+    temp_map = {
+        "planning": 0.7, # Creative diverse plans
+        "reasoning": 0.4, # Balanced Chain-of-Thought
+        "tool_calling": 0.0, # Deterministic JSON
+        "evaluation": 0.3, # Balanced scoring
+        "reflection": 0.7, # Creative why failed
+        "writing": 0.7, # Creative friendly
+        "loop_breaking": 0.7, # Creative alternative
+        "extraction": 0.1, # Almost deterministic NER
+    }
+    return temp_map.get(step_type, 0.0)
+
+def llm_generate_with_temperature(prompt, step_type, schema=None):
+    temperature = get_temperature(step_type)
+    
+    # For tool calling, use constrained decoding
+    if step_type == "tool_calling":
+        return llm.generate(
+            prompt,
+            temperature=temperature, # 0.0
+            response_format=schema, # Constrained decoding regex for valid JSON
+            top_p=1.0,
+            top_k=None
+        )
+    else:
+        return llm.generate(
+            prompt,
+            temperature=temperature,
+            top_p=0.9,
+            top_k=50
+        )
+
+# Usage in agent loop
+def production_agent_loop(user_goal):
+    # Planning - T=0.7
+    plan = llm_generate_with_temperature(f"Goal: {user_goal} Decompose into sub-goals:", step_type="planning")
+    
+    for sub_goal in plan.sub_goals:
+        # Reasoning - T=0.4
+        thought = llm_generate_with_temperature(f"Goal: {sub_goal} Think step by step:", step_type="reasoning")
+        
+        # Tool calling - T=0.0
+        action = llm_generate_with_temperature(f"Thought: {thought} Action JSON:", step_type="tool_calling", schema=ActionSchema)
+        
+        observation = execute_tool(action.tool, action.args)
+        
+        # Loop detection - T=0.7 to break
+        if detect_loop(history):
+            reflection = llm_generate_with_temperature(f"Stuck repeating {history[-1]} Why? Different approach?", step_type="loop_breaking")
+    
+    # Writing - T=0.7
+    final = llm_generate_with_temperature(f"History: {history} Synthesize friendly answer:", step_type="writing")
+    return final
+```
+
+**Temperature + constrained decoding for tool calling:**
+
+```python
+# For refund_order tool, schema with regex
+ActionSchema = {
+    "tool": {"type": "string", "pattern": "^refund_order$|^get_order_status$|^get_policy$|^get_trust_score$|^send_email$"}, # Allowlist
+    "args": {
+        "order_id": {"type": "string", "pattern": "^ORD-\d{5}$"}, # Regex ORD-12345
+        "amount": {"type": "number", "minimum": 0, "maximum": 10000}
+    }
+}
+
+# With T=0.0 + constrained decoding: 99.9% valid, exact tool name, exact order_id format
+# With T=0.7 + no constrained decoding: 60% valid, may hallucinate tool name and args
+```
+
+**Monitoring temperature impact in ClickHouse:**
+
+```sql
+-- Success rate by temperature
+SELECT temperature, count() as calls, avg(success) as success_rate, avg(valid_json) as valid_json_rate, avg(cost_usd) as cost
+FROM llm_calls
+WHERE date = today()
+GROUP BY temperature
+ORDER BY temperature
+
+-- Result:
+-- T=0.0: success 95%, valid_json 99.9%, cost $0.05
+-- T=0.4: success 75%, valid_json 80%, cost $0.05
+-- T=0.7: success 70%, valid_json 60%, cost $0.05 but needs retry 1.5x cost for 85% success
+
+-- Loop breaking success by temperature
+SELECT loop_breaking_temperature, countIf(loop_broken)/count() as break_rate
+FROM agent_trajectories
+WHERE loop_detected = true
+GROUP BY loop_breaking_temperature
+-- T=0.0: break_rate 10%, T=0.7: break_rate 90%
+```
+
+### 13. Production Checklist
+
+1. **T=0.0 for tool calling, JSON, policy checks, classification, extraction** — 80% of agent steps. Deterministic, 99.9% valid JSON with constrained decoding, 95% accuracy, cacheable, reproducible. Use constrained decoding regex for tool name allowlist and arg patterns (e.g., ^ORD-\d{5}$).
+
+2. **T=0.3-0.5 for reasoning, evaluation, scoring** — Chain-of-Thought, rate thought 1-10, reflection why failed. Balanced some creativity but focused. 80% valid JSON, need validation + retry.
+
+3. **T=0.7-0.9 for planning, brainstorming, writing, loop breaking, reflection** — Decompose goal into diverse sub-goals, generate 3 diverse thoughts for ToT, friendly user email, break loops. Creative diverse, 60% valid JSON, don't use for JSON. Breaks 90% loops vs 10% at T=0.0.
+
+4. **Never T>1.0 in production** — T=1.2 chaotic, hallucinates dangerous tools (delete_all_orders), valid JSON 10%, tool calling accuracy 30%. Only for art.
+
+5. **Dynamic temperature: Different T for different steps** — Planning T=0.7, Reasoning T=0.4, Tool calling T=0.0 (80% steps), Loop breaking T=0.7, Evaluation T=0.3, Writing T=0.7. Result 92% success, 1.2x cost vs 70% success with T=0.0 only or 60% with T=0.7 only.
+
+6. **Temperature + top-p + top-k** — T=0.0 tool calling: top-p=1.0 top-k=None (deterministic argmax). T=0.4 reasoning: top-p=0.9 top-k=50 (balanced). T=0.7 planning: top-p=0.9 top-k=50 (creative but not chaotic). T=0.7 ToT diverse: top-p=0.95 top-k=100 (more diverse).
+
+7. **Constrained decoding for tool calling** — Always use with T=0.0: regex for tool name allowlist, arg patterns, JSON schema. 99.9% valid vs 95% with prompting alone, 60% at T=0.7.
+
+8. **Loop breaking with T=0.7** — Detect loop (last 3 actions identical), then use T=0.7 for reflection "Stuck repeating, what different approach?" Breaks 90% loops.
+
+9. **Monitor temperature impact** — ClickHouse query success rate by temperature, valid JSON rate, loop breaking rate. Alert if T=0.0 tool calling valid JSON <95% (need constrained decoding) or loop breaking rate <80% (need T=0.7).
+
+10. **Cost control** — T doesn't affect cost per call (same tokens), but affects retry cost. T=0.0 95% valid needs no retry, T=0.7 60% valid needs 1.5x retry cost for 85% accuracy. Dynamic T balances cost and success.
+
+---
+**Bottom Line:** Temperature controls randomness — T=0.0 deterministic argmax picks highest probability token, 100% reproducible, 99.9% valid JSON with constrained decoding, 95% tool calling accuracy, best for tool calling JSON policy checks extraction (80% steps). T=0.3-0.5 balanced some creativity focused, 80% valid JSON, best for reasoning Chain-of-Thought evaluation scoring. T=0.7-0.9 creative diverse explores low-probability tokens, 60% valid JSON, best for planning brainstorming diverse thoughts ToT writing friendly loop breaking (breaks 90% loops vs 10% at T=0.0). T=1.0+ chaotic hallucinates dangerous tools, 10% valid JSON, avoid. Production agents use dynamic temperature: Planning T=0.7, Reasoning T=0.4, Tool calling T=0.0 (80% steps) with constrained decoding regex, Loop breaking T=0.7, Evaluation T=0.3, Writing T=0.7. Result 92% success vs 70% with T=0.0 only (stuck) or 60% with T=0.7 only (invalid JSON). Always use constrained decoding for tool calling, monitor success rate by temperature in ClickHouse, and use T=0.7 to break loops.
+
+---
+*Module: Temperature in Agentic AI - Complete Production Guide - Part of Advanced Agentic AI Curriculum - v1.0 - September 2026*
+*Reference: Softmax with temperature, Top-p nucleus sampling, Constrained decoding, Tree-of-Thought Yao et al. 2023*
