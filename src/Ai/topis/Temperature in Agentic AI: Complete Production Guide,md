@@ -1,1 +1,5 @@
 Temperature in Agentic AI: Complete Production Guide
+How Temperature Controls Creativity, Determinism, and Cost - From 0.0 to 1.5
+Core Thesis: Temperature is the single most important hyperparameter for agent reliability. T=0.0 = deterministic, reproducible, best for tool calling, JSON, policy checks (99% valid). T=0.7 = creative, diverse, best for brainstorming, writing, exploration (breaks loops). T=1.0+ = chaotic, hallucinates. Production agents use dynamic temperature: T=0.0 for 80% of steps (tool calling, validation), T=0.7 for 20% of steps (planning, reflection, loop breaking). Wrong temperature is #1 cause of invalid JSON and hallucinations.
+
+Table of Contents
