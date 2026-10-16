@@ -1,1 +1,3 @@
-Observability & Reliability
+Observability & Reliability for Agentic AI: Tracing, Logging, Monitoring, Latency, Cost
+Complete Production Guide - OpenTelemetry, LangSmith, ClickHouse, Streaming, Budgeting
+Core Thesis: Agents are non-deterministic black boxes - without observability you cannot debug loops, cost blowups, or policy violations. Tracing with OpenTelemetry + LangSmith/Langfuse gives you full trajectory: Thought->Action->Observation with latency, cost, tokens, tool args. Logging to ClickHouse gives you per-agent per-task per-tool analytics. Latency optimization via streaming, parallel tool calls, speculation cuts 3s to 1.5s (50%). Cost tracking per-agent per-tool with budgeting prevents $1000 runaway. Production: Always trace every LLM call and tool call, log to ClickHouse, stream final answer, parallel independent tools, track cost with circuit breaker, alert if cost > budget or latency > SLA.
