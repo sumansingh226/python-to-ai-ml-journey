@@ -1,1 +1,3 @@
-Product & Business for Agentic AI
+Product & Business for Agentic AI: Pricing, Customer Support, Sales, Coding, Research, Benchmarks
+Complete Production Guide - From Pricing Models to Real-World Agent Case Studies
+Core Thesis: Building agentic products is 20% model, 80% product and business. Pricing per-seat vs per-task vs per-outcome changes incentives. Customer Support refund agent is the canonical end-to-end case study: policy + tools + trust + approval + GraphRAG. Sales agents need personalization and compliance. Coding agents Devin/Cursor/Copilot show MCTS + tool use + testing loops. Research agents need GraphRAG + synthesis + citations. Benchmarks GAIA, SWE-bench, AgentBench, BFCL tell you if your agent actually works. Production: Pick pricing that aligns value, build refund agent first to learn patterns, then expand.
