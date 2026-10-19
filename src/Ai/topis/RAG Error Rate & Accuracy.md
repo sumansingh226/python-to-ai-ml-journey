@@ -1,2 +1,4 @@
 RAG Error Rate & Accuracy: How to Fix Failures and Maintain Accuracy in Production RAG Systems
 Complete Production Guide - From Hallucination to GraphRAG, Evaluation, and Continuous Improvement
+
+Core Thesis: RAG fails 40% in enterprise. Error rate is not one number - it's 6 failure modes: retrieval failure 30%, ranking failure 15%, context overflow 10%, hallucination 20%, citation failure 10%, stale data 5%. Fix with hybrid retrieval vector+BM25+graph, reranking, GraphRAG for multi-hop, constrained decoding for citations, freshness. Accuracy maintenance in prod: eval with RAGAS, monitoring drift, human-in-the-loop feedback, continuous indexing. Production: Always measure RAG error rate with RAGAS faithfulness, answer relevance, context precision/recall, fix with hybrid + rerank + GraphRAG, maintain accuracy with eval + monitoring + feedback loop.
