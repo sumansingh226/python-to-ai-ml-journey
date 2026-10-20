@@ -13,3 +13,15 @@ Production GraphRAG Architecture — Offline + Online
 Implementation Blueprint
 Advanced GraphRAG — Incremental Updates, Hierarchical Communities, Entity Resolution
 Production Checklist
+
+1. Why GraphRAG? Vector RAG 60% Multi-Hop Failure
+Problem: Vector RAG 1-hop only fails multi-hop.
+
+Example refund agent:
+
+Docs:
+
+Doc1: Order ORD-12345 amount $120 status delivered user_id user_123 bundle_id BUNDLE-123
+Doc2: Bundle BUNDLE-123 contains 3 orders ORD-12345 ORD-12346 ORD-12347 promotion_id PROMO-123
+Doc3: Promotion PROMO-123 10% off bundle BUNDLE-123 policy_id POL-123
+Doc4: Policy POL-123 v2.3 max_auto 500 trust_threshold 80 bundle promotion needs approval
