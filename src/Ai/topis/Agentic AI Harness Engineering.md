@@ -1,1 +1,5 @@
 Agentic AI — What is Harness Engineering? Complete Detailed Guide
+From Prompt Engineering to Harness Engineering — Agent = Model + Harness
+Core Thesis: Prompt engineering shapes what agent tries, Context engineering shapes what agent knows, Harness engineering shapes what agent can and cannot do. Term popularized by Mitchell Hashimoto creator of Terraform and Ghostty early 2026 and Addy Osmani Google engineering leader May 2026: "Every time an agent makes a mistake, you don't just tell it to do better next time. You change the system so that specific mistake becomes structurally harder to repeat." Agent = Model + Harness. If you are not the model, you are the harness. Decent model with great harness beats great model with bad harness. LangChain raised accuracy 52.8% to 66.5% by changing only harness same model. OpenAI Codex team shipped 1M lines production code in 5 months with 3 engineers using harness engineering. Production: Harness is body, nervous system, safety rails around brain (model).
+
+Table of Contents
