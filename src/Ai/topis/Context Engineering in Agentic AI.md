@@ -3,3 +3,18 @@ Context Engineering in Agentic AI
 
 What It Is, Why It Replaces Prompt Engineering, 7 Techniques, 12 Failures, Production Stack
 Core Thesis: Prompt Engineering (2022-24) shaped how you ask. Context Engineering (2024-26) shapes what the model knows at inference time. Coined by Andrej Karpathy / popularized by Anthropic, LangChain, OpenAI 2025: Context Engineering is the discipline of building the right context window for the next token prediction — assembling instructions, memory, knowledge, tools, state, history, examples, and constraints into a single, optimal prompt that maximizes probability of correct action. In agentic AI, context is not a static prompt — it is a living, managed, compacted, routed, compressed assembly line. Bad context = agent fails even with GPT-5. Good context = GPT-4o mini beats GPT-5. Context is the #1 performance lever: 60-80% of agent failures are context failures, not model failures.
+
+
+Table of Contents
+What is Context Engineering? Definition vs Prompt vs RAG vs Memory
+Why Context Engineering Became #1 Skill in 2025-26
+The Context Window: Anatomy of What Goes Inside
+The 7 Core Techniques of Context Engineering
+12 Context Failure Modes (Why Agents Hallucinate / Loop / Forget)
+Context Engineering for Agentic Loops — ReAct, Planning, Tool Use
+Context Compaction & Management — The Hardest Problem
+Context Engineering for Long-Horizon Agents — Progress Files, Session Handoff
+Context Routing, Progressive Disclosure, and Just-in-Time Context
+Context Engineering Stack — OpenAI, Anthropic, LangChain, LlamaIndex Patterns
+Measuring Context Quality — Evaluation Metrics
+Production Checklist — Build Context That Scales to 2M Tokens
