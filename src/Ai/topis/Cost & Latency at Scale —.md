@@ -1,2 +1,19 @@
 Cost & Latency at Scale — Speculative Decoding, KV-Cache, Prompt Caching 90% Cut
 Full Production Guide 2026: How to Cut LLM Bills 80-90% and TTFT 40-85% + 2-3x Throughput Without Changing Model
+
+Core Thesis: In 2026 foundation model providers (Anthropic Claude, OpenAI, DeepSeek) and open-weight inference engines (vLLM, SGLang) leverage Key-Value cache state persistence to eliminate redundant compute. By caching compiled prompt prefixes in GPU memory or edge caches engineering teams achieve 50% to 90% cost reductions on input tokens alongside 40% to 85% drop in Time-to-First-Token latency. Top throughput lever? KV cache reuse with PagedAttention plus continuous batching (vLLM default since 2023 refined through 2026). Speculative decoding payoff? 1.5x to 3x throughput when draft model accepts ~70% proposed tokens. Prompt caching cuts input-token costs by 90% or more (OpenAI says cached input can cost up to 95% less than uncached, depending on model). Most developers still are not using it correctly as of Oct 26 2026. GPT-6 Astra, Claude Fable 5.1, Gemini 4 Argon each expose caching layer that can cut input-token costs 90%+ (OpenAI cached input 90% less than uncached, Anthropic cache read tokens billed at 0.1x base input rate 90% reduction while writing to cache costs 1.25x base and cache holds 5-min sliding window by default refreshed on hit). Notion cut its Claude API costs 90% and cut latency up to 85% after restructuring prompts around caching per Anthropic case study. KV cache memory grows with batch size and context length and is primary GPU memory bottleneck. That is the KV cache hit rate Inferoa AI measured during real agentic coding task: for every 100 tokens agent processed only 2.2 were computed from scratch rest were free. Full conversation history: 71.0% task completion 1,480,996 tokens consumed 14.56 hours per run. Pruning to last 5 tool call/response pairs: 79.0% completion 535,274 tokens — less context better agents arXiv 2606.10209. In agentic multi-turn: initial prompt 8000 tokens codebase context schema definitions tool instructions followed by dozens iterative tool calls — traditional engines every single tool turn re-evaluates entire 8000-token prefix from scratch saturating GPU memory bandwidth causing massive queue bottlenecks. SGLang RadixAttention organizes KV cache as radix tree when new request arrives that shares identical system prompt documentation block or previous turn history SGLang reuses existing KV tensor in memory with zero re-computation sub-50ms prefill latency reducing TTFT from 1200ms to under 45ms multi-turn conversations up to 5x higher throughput over standard serving. Three themes dominate June 2026 infrastructure: speculative decoding reaching production maturity, disaggregated serving architectures becoming mainstream, multi-tier KV cache management enabling dramatically higher throughput — DFlash speculative decoding on Blackwell achieving up to 15x inference speedups. This guide gives you full stack to get 90% cost cut.
+
+Table of Contents
+Why Cost & Latency Explode in Agentic AI
+The 4 Latency Components — TTFT, ITL, Prefill, Decode
+Prompt Caching — 90% Bill Cut Provider-Side (Anthropic vs OpenAI 2026)
+KV-Cache Deep Dive — PagedAttention, RadixAttention, Multi-Tier, Quantization
+Speculative Decoding — Draft-Target 2-3x Throughput, 15x on Blackwell
+Disaggregated Serving — Prefill/Decode Separation
+SGLang vs vLLM vs TensorRT-LLM Benchmark Matrix
+90% Cost Cut Playbook — 10 Production Patterns
+Node.js Production Implementation — Prompt Structure, Caching, Batching
+Self-Hosted Stack — vLLM PagedAttention + SGLang RadixTree + LMCache
+Observability — Track cached_tokens, KV Hit Rate, TTFT, ITL, Cost per Task
+Database Schema — Cost Tracking Postgres + ClickHouse
+Anti-Patterns That Kill Cache Hit Rate
