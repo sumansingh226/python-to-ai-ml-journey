@@ -2,8 +2,6 @@
 
 What it is, why it happens, how to spot it, and how to fix or reduce it.
 
----
-
 ## Table of Contents
 
 1. [What is AI hallucination?](#1-what-is-ai-hallucination)
