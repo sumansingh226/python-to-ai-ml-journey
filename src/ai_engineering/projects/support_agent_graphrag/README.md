@@ -63,6 +63,33 @@ Agent additions in the graph: `detect_ticket_need`, `check_duplicate_ticket`, `c
 
 Extra graph schema for assignment: `Team`, `Developer`, with `Feature -OWNED_BY-> Team` and `Team -HAS_MEMBER-> Developer`.
 
+## Tech stack
+
+| Layer | Choice | Role |
+|---|---|---|
+| UI | Next.js + Tailwind CSS | Customer chat, ticket status page, support-agent review queue |
+| API | Python FastAPI | Chat (streaming), tickets, ingestion, auth |
+| Agent | LangChain + LangGraph | Retrieval, routing, ticket tools, human-in-the-loop |
+| Database | PostgreSQL | Tickets, customers, teams/owners, chat history, LangGraph checkpoints (`langgraph-checkpoint-postgres`), doc chunks + embeddings (`pgvector`) |
+| Graph | Neo4j (optional) | Feature/plan/issue relations |
+| ORM / migrations | SQLAlchemy + Alembic | Schema management |
+
+UI screens:
+
+1. Customer chat with streamed answers and clickable source chunks.
+2. Ticket card in chat once a ticket is raised (id, assignee, status).
+3. Support dashboard: ticket list, filters, approve/edit AI-drafted tickets and answers.
+4. Docs admin: upload/sync product docs, trigger re-ingestion.
+
+API endpoints (first cut):
+
+- `POST /chat` streaming answer + citations
+- `GET /tickets`, `GET /tickets/{id}`, `POST /tickets/{id}/approve`, `PATCH /tickets/{id}/assign`
+- `POST /ingest` add or refresh docs
+- `GET /health`
+
+Core Postgres tables: `customers`, `documents`, `chunks` (with `embedding vector`), `tickets`, `ticket_events`, `teams`, `developers`, `feature_owners`, `conversations`, `messages`.
+
 ## Architecture
 
 ```
@@ -78,30 +105,37 @@ user question
 
 Folders:
 
-- `src/support_agent/ingestion/` load, clean, chunk docs and tickets; extract entities and relations
-- `src/support_agent/retrieval/` vector store and hybrid retrieval
-- `src/support_agent/graph/` Neo4j schema, graph build, Cypher / graph retrieval
-- `src/support_agent/agent/` LangGraph state, nodes, edges, compiled graph
-- `data/raw` source files (git-ignored), `data/processed` indexes (git-ignored)
-- `tests/` unit tests and eval runner
+- `backend/src/support_agent/ingestion/` load, clean, chunk docs and tickets; extract entities and relations
+- `backend/src/support_agent/retrieval/` pgvector search and hybrid retrieval
+- `backend/src/support_agent/graph/` Neo4j schema, graph build, Cypher / graph retrieval
+- `backend/src/support_agent/agent/` LangGraph state, nodes, edges, compiled graph
+- `backend/src/support_agent/tickets/` ticket service, duplicate check, assignment rules, ticketing adapter
+- `backend/src/support_agent/db/` SQLAlchemy models and sessions; `backend/migrations/` Alembic
+- `backend/src/support_agent/api/` FastAPI routes (chat, tickets, ingestion, admin)
+- `backend/tests/` unit tests and eval runner
+- `frontend/` Next.js + Tailwind CSS app
+- `data/raw` source files (git-ignored), `data/processed` generated files (git-ignored)
 - `notebooks/` experiments
 - `docs/` design notes and eval results
 
 ## Phases
 
 1. **Foundations**: environment, sample dataset (help-center articles + resolved tickets), eval set of 30-50 questions with reference answers.
-2. **Baseline vector RAG**: chunking, embeddings, Chroma, a simple LangChain retrieval chain. Record baseline eval scores.
+2. **Baseline vector RAG**: chunking, embeddings, pgvector in Postgres, a simple LangChain retrieval chain. Record baseline eval scores.
 3. **Knowledge graph**: define schema (Product, Feature, Plan, Issue, Resolution, Article). Extract entities and relations with an LLM, load into Neo4j, add graph retrieval (Cypher generation + neighbourhood expansion).
 4. **LangGraph agent**: state, intent classifier, router, retrievers, context grader, generator, grounding check, query rewrite loop, human escalation with `interrupt`.
 5. **Memory and personalization**: conversation memory via checkpointer, per-customer context (plan, open tickets).
 6. **Evaluation and tracing**: LangSmith traces, RAG vs GraphRAG vs hybrid comparison on the eval set.
-7. **Serving and guardrails**: FastAPI endpoint, PII redaction, prompt-injection checks, rate and cost limits.
+7. **Tickets and assignment**: ticket tables, duplicate check, owner rules, ticketing tools in the agent, approval step.
+8. **API and UI**: FastAPI routes with streaming; Next.js chat, ticket card and support dashboard.
+9. **Serving and guardrails**: auth, PII redaction, prompt-injection checks, rate and cost limits, Docker deployment.
 
 Each phase ends with a measurable result in `docs/`.
 
 ## Key decisions to make early
 
-- Graph store: Neo4j (default here) vs an in-memory NetworkX graph for a lighter start.
+- Graph store: Neo4j vs modelling relations in Postgres tables (fewer moving parts; the stack is already Postgres).
+- Ticket system: own `tickets` table only, or sync to Jira / Linear / GitHub Issues through the adapter.
 - Graph construction: LLM extraction with a fixed schema (more reliable) vs open extraction.
 - Embedding model and chunk size, chosen by eval results rather than defaults.
 - Which questions truly need the graph; if few do, keep it as a tool, not the main path.
@@ -109,10 +143,18 @@ Each phase ends with a measurable result in `docs/`.
 ## Setup
 
 ```
+cp .env.example .env            # fill in values locally, never commit
+docker compose up -d            # Postgres (pgvector) + Neo4j
+
+cd backend
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cp .env.example .env   # fill in keys locally, never commit
-docker compose up -d   # Neo4j
+alembic upgrade head
+uvicorn support_agent.api.main:app --reload --app-dir src
+
+cd ../frontend
+npx create-next-app@latest . --typescript --tailwind --app
+npm run dev
 ```
 
 ## Related notes
