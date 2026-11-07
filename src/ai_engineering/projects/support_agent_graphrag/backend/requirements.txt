@@ -10,3 +10,12 @@ neo4j
 pydantic
 python-dotenv
 pytest
+fastapi
+uvicorn[standard]
+sqlalchemy
+psycopg[binary]
+alembic
+pgvector
+pydantic-settings
+langgraph-checkpoint-postgres
+httpx

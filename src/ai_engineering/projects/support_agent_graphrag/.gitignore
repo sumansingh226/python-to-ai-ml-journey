@@ -24,3 +24,11 @@ chroma_db/
 .langgraph_api/
 .DS_Store
 .vscode/
+
+node_modules/
+.next/
+out/
+frontend/.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.pgdata/
