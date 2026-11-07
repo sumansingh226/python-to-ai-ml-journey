@@ -10,6 +10,59 @@ A support agent that answers customer questions from help docs, past tickets and
 
 Targets (adjust after the baseline run): faithfulness >= 0.9, answer relevance >= 0.85, correct escalation on out-of-scope questions >= 0.9.
 
+## Requirements
+
+Functional:
+
+1. **Understand the query**: classify it as how-to, feature/plan question, bug report, feature request, billing, or out of scope.
+2. **Search product knowledge**: look through product docs, feature descriptions, changelogs and past tickets (stored as chunks with metadata: product, feature, doc type, version, updated date).
+3. **Answer with sources**: reply in plain language and list the doc chunks used (title, section, link). If the docs do not cover it, say so.
+4. **Relational answers**: use the feature graph for questions like "which plan has X", "does issue Y affect feature Z", "what is the workaround".
+5. **Detect when a ticket is needed**: bug reports, unresolved questions, missing docs, feature requests, or low-confidence answers.
+6. **Create a ticket** with: customer query, summary, type (bug / question / feature request / docs gap), product and feature, severity, steps to reproduce if given, retrieved evidence, the draft answer, and customer identifier.
+7. **Assign the ticket to a developer or team** using rules:
+   - by feature or component owner (from a feature-to-owner map)
+   - by type (bug → engineering, billing → finance/support, docs gap → docs team, feature request → product)
+   - by severity (critical → on-call dev, notify immediately)
+   - fall back to the support lead if no owner matches
+8. **Avoid duplicates**: search open tickets first; link or comment on a matching ticket instead of creating a new one.
+9. **Tell the customer** the ticket number, what happens next, and the expected response time.
+10. **Human-in-the-loop**: for high severity or low confidence, a support agent reviews the ticket and draft answer before it is sent or assigned.
+11. **Track status**: look up an existing ticket by id and report its state when the customer asks.
+
+Non-functional:
+
+1. Every answer cites its sources; no uncited claims.
+2. Ticket creation is idempotent (same conversation does not create two tickets).
+3. PII is redacted in logs and traces; only the ticket carries customer details.
+4. Full trace per conversation (LangSmith) for audit.
+5. Target latency: answer under 8 seconds, ticket creation under 3 seconds.
+6. Ticketing and owner lookup sit behind an interface, so Jira, GitHub Issues, Linear or Zendesk can be swapped in.
+
+Inputs and outputs:
+
+| Input | Output |
+|---|---|
+| Customer query + customer id | Answer with doc-chunk citations |
+| Low-confidence or bug query | Ticket id, assignee, severity, customer message |
+| Ticket id | Current status |
+
+Example flow:
+
+```
+Customer: "Export to CSV fails for my Pro plan since yesterday."
+1. intent = bug report; product = Reports; feature = CSV export
+2. docs: export is supported on Pro (cited chunk); graph: no known issue linked
+3. answer: "CSV export is included in Pro. I could not find a known issue, so I've raised a ticket."
+4. dedupe: no open ticket matches
+5. ticket created: type bug, severity high, owner = Reports team (from feature owner map)
+6. customer told: ticket #1234, assigned to Reports team, reply expected within 1 business day
+```
+
+Agent additions in the graph: `detect_ticket_need`, `check_duplicate_ticket`, `create_ticket`, `assign_ticket`, `notify_customer`, `get_ticket_status`. Ticketing is exposed to the agent as tools with a human approval step before `create_ticket` and `assign_ticket` on high severity.
+
+Extra graph schema for assignment: `Team`, `Developer`, with `Feature -OWNED_BY-> Team` and `Team -HAS_MEMBER-> Developer`.
+
 ## Architecture
 
 ```
