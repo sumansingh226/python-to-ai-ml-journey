@@ -319,4 +319,4 @@ MIT - Feel free to use these notes for your own learning.
 
 **Last Updated:** October 2026
 
-**Modules:** 31/60 completed - See `MASTER_CURRICULUM_INDEX.md` for full curriculum map
+**Modules:** 31/60 completed - See 
