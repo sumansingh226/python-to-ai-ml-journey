@@ -540,4 +540,3 @@ SELECT id FROM items ORDER BY embedding <=> '[...]' LIMIT 5;
 --  <+>  L1      <~>  hamming     <%>  jaccard
 ```
 
-**Docs:** https://github.com/pgvector/pgvector
