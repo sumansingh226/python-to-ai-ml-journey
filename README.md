@@ -303,17 +303,6 @@ This is a personal learning journey, but feedback welcome! If you spot improveme
 
 MIT - Feel free to use these notes for your own learning.
 
----
-
-## 🌟 Acknowledgments
-
-- Microsoft GraphRAG paper 2024
-- Tree-of-Thoughts Yao et al. 2023
-- ReAct Yao et al. 2022
-- Reflexion Shinn et al. 2023
-- LangGraph, LlamaIndex, OpenAI Tools docs
-
----
 
 **Maintained with daily consistency** - From Python basics to production Agentic AI systems.
 
